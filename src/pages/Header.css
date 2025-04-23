@@ -1,0 +1,11 @@
+#header {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.desktop-only {
+  @media screen and (max-width: 767px) {
+    display: none;
+    appearance: none;
+    visibility: hidden;
+  }
+}
