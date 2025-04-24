@@ -34,7 +34,7 @@ export default function Article({ content, className = '', id = '' }: ArticlePro
       <article
         id={id}
         title={title}
-        className={`max-w-none sm:text-md md:text-lg sm:pr-2 leading-8 article ${className}`}
+        className={`max-w-none sm:text-md md:text-lg sm:pr-2 leading-8 article bg-none text-gray-700 dark:text-gray-300 ${className}`}
         dangerouslySetInnerHTML={{ __html: `${styledHeading}\n${html}` }}
       />
     </Layout>

@@ -49,3 +49,21 @@ export function enhanceList(html: string): string {
 
   return doc.body.innerHTML;
 }
+
+export function addClassToSVG(svgString: string, className: string): string {
+  const doc = new DOMParser().parseFromString(svgString, 'image/svg+xml');
+  const svg = doc.querySelector('svg');
+
+  if (!svg) return svgString;
+
+  // Add or merge class names
+  const existingClass = svg.getAttribute('class') || '';
+  svg.setAttribute('class', `${existingClass} ${className}`.trim());
+
+  // Make sure the SVG uses currentColor so Tailwind text color works
+  if (!svg.hasAttribute('fill')) {
+    svg.setAttribute('fill', 'currentColor');
+  }
+
+  return svg.outerHTML;
+}
