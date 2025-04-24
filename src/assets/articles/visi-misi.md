@@ -1,3 +1,8 @@
+<!--
+ - Initial Concept and Written by Nuryadani.
+ - Edited by Dhefa Gusni Azzahra (Ryuu Mitsuki)
+ -->
+
 # Visi & Misi
 
 <table>

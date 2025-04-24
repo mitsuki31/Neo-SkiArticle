@@ -1,3 +1,8 @@
+<!--
+ - Initial Concept and Written by Nuryadani.
+ - Edited by Dhefa Gusni Azzahra (Ryuu Mitsuki)
+ -->
+
 # Tentang Sekolah
 
 **SMK Sukamandi** adalah lebih dari sekadar institusi pendidikan — ini adalah tempat tumbuh dan berkembangnya generasi masa depan yang **siap menghadapi dunia kerja dan tantangan global**. Di sinilah potensi siswa diasah menjadi keahlian nyata yang bernilai tinggi, melalui pendekatan pembelajaran yang relevan, inovatif, dan berorientasi pada dunia industri.
