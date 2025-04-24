@@ -12,7 +12,6 @@ export default function Hero() {
             <TypeAnimation
               sequence={[ 'Selamat Datang di', 2000, '', ]}
               wrapper="span"
-              speed={250}
               repeat={Infinity}
             />
             <br />
