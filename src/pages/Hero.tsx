@@ -1,3 +1,4 @@
+import { TypeAnimation } from 'react-type-animation';
 import logoSki from '@/assets/logo_ski.png'
 
 export default function Hero() {
@@ -6,8 +7,15 @@ export default function Hero() {
       <section className="w-full py-20 bg-gradient-to-b from-sky-100 to-white dark:from-background dark:to-gray-500/40 text-center">
         <img src={logoSki} alt='Logo SMK Sukamandi' className='w-50 mx-auto mb-12' />
         <div className="container px-4 mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-5 dark:text-white">
-            Selamat Datang di{" "}
+          <h1 className="text-4xl md:text-5xl font-bold mb-5 dark:text-white font-inter">
+            <br />
+            <TypeAnimation
+              sequence={[ 'Selamat Datang di', 2000, '', ]}
+              wrapper="span"
+              speed={250}
+              repeat={Infinity}
+            />
+            <br />
             <span className="bg-gradient-to-r from-red-600 to-orange-400 bg-clip-text text-transparent">
               Artikel SMK Sukamandi
             </span>

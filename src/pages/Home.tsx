@@ -1,9 +1,10 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 import { enhanceTable } from "@/lib/utils";
 import { GradientButton, Section } from "@/lib/motion-anim";
 import Article from "@/lib/Article";
+import FocusableCard from "@/lib/FocusableCard";
 import { parseMarkdown } from "@/lib/markparser";
 
 import Hero from './Hero';
@@ -14,7 +15,7 @@ import sejarahSingkat from '@/assets/articles/sejarah-singkat.md?raw';
 import visiMisi from '@/assets/articles/visi-misi.md?raw';
 import saranaFasilitas from '@/assets/articles/sarana-fasilitas.md?raw';
 
-// WARNING: DO NOT MESS UP IF YOU DO NOT KNOW WHAT YOU'RE DOING
+// ! WARNING: DO NOT MESS UP IF YOU DO NOT KNOW WHAT YOU'RE DOING
 const articlesTable = [
   { id: 'profil-sekolah', content: parseMarkdown(profilSekolah) },
   { id: 'sejarah-singkat', content: parseMarkdown(sejarahSingkat) },
@@ -22,9 +23,23 @@ const articlesTable = [
   { id: 'sarana-fasilitas', content: parseMarkdown(saranaFasilitas) },
 ];
 
+const featuredArticles = [
+  {
+    title: 'Program Keahlian',
+    category: ['Program Keahlian', 'TKJ', 'TKR', 'TP'],
+    description: 'Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.'
+  },
+];
+
 export default function Home() {
+  const badgeCardHoverClass =
+    'hover:shadow-xl hover:shadow-orange-400/50 hover:ring-2 hover:ring-orange-500/40 '
+    + 'focus:shadow-xl focus:shadow-orange-400/50 focus:ring-2 focus:ring-orange-500/40 focus:outline-none'
+    + 'active:shadow-xl active:shadow-orange-400/50 active:ring-2 active:ring-orange-500/40'
+  ;
+
   return (
-    <div className="bg-white-800 dark:bg-background text-gray-900">
+    <div className="bg-white-700 dark:bg-background text-gray-900 dark:text-white/80">
       <Hero />
 
       {/* Featured Articles Section */}
@@ -33,31 +48,36 @@ export default function Home() {
           <div className="container px-4">
             <h2 className="text-3xl text-white font-semibold mb-8 text-center">Artikel Unggulan</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
+            {featuredArticles.map((article) => (
               <motion.div
-                key={i}
+                key={article.title.replace(/\s+/g, '-').toLowerCase()}
                 whileHover={{ scale: 1.03 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 15 }} 
+                transition={{ type: 'spring', stiffness: 300, damping: 15 }}
               >
-                <Card className="h-full bg-white/10 dark:bg-background border-none transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-orange-400/50 hover:ring-2 hover:ring-orange-500/40 focus:shadow-xl focus:shadow-orange-400/50 focus:ring-2 focus:ring-orange-500/40">
-                  {/* FIXME: Add actual featured articles */}
+                <FocusableCard className={`h-full bg-white/10 dark:bg-background border-none transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
+                  {/* Featured Article */}
                   <CardContent className="p-5">
                     {/* Category */}
-                    <Badge variant="secondary" className="mb-2 mr-2 bg-[#0F1221] text-white/80">Kategori A</Badge>
-                    <Badge variant="secondary" className="mb-2 mr-2 bg-[#0F1221] text-white/80">Kategori B</Badge>
-                    <Badge variant="secondary" className="mb-2 bg-[#0F1221] text-white/80">Kategori C</Badge>
+                    <div className="flex items-center mb-2">
+                      {article.category.map((cat, i) => (
+                        <Badge
+                          key={i}
+                          className="mr-2 text-gray-300 dark:bg-orange-400/80"
+                          onClick={() => alert('Sorry, this feature is not available yet.')}
+                        >
+                          {cat}
+                        </Badge>
+                      ))}
+                    </div>
                     {/* Title */}
-                    <h3 className="text-xl text-white font-semibold mb-2">Judul Artikel {i}</h3>
+                    <h3 className="text-xl text-white font-semibold mb-2">{article.title}</h3>
                     {/* Description */}
-                    <p className="text-gray-700 text-white/80 text-sm mb-4">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquet cursus magna sit amet pellentesque.
-                      Vestibulum posuere quis erat sit amet semper. Duis convallis aliquam pulvinar. Sed efficitur tempus suscipit.
-                    </p>
+                    <p className="text-gray-300 dark:text-white/80 text-sm mb-4">{article.description}</p>
                     <GradientButton className="mx-auto text-sm text-white">
                       Baca Selengkapnya
                     </GradientButton>
                   </CardContent>
-                </Card>
+                </FocusableCard>
               </motion.div>
             ))}
             </div>
