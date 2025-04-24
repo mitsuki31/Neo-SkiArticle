@@ -12,7 +12,7 @@ export default function About() {
 
   return (
     <div className="bg-white-800 dark:bg-background text-gray-900">
-      <Section id="about" className="bg-background">
+      <Section id="about" className="bg-none">
         <Article id='tentang-sekolah' content={content} />
       </Section>
     </div>
