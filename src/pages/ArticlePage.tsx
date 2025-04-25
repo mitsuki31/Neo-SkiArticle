@@ -12,15 +12,20 @@ export default function ArticlePage() {
   const { slug } = useParams();
   const [content, setContent] = useState<Awaited<ReturnType<typeof getMarkdownContent>> | null>(null);
   const [error, setError] = useState<{ errno: number; message: string } | null>(null);
-  
+
   useEffect(() => {
     if (!slug) return;
-    getMarkdownContent(slug)
-      .then((data) => setContent(data))
-      .catch((err) => {
+
+    async function fetchContent() {
+      try {
+        const data = await getMarkdownContent(slug!);
+        setContent(data);
+      } catch (err) {
         console.error(err);
         setError({ errno: 404, message: 'Artikel tidak ditemukan' });
-      });
+      }
+    }
+    fetchContent();
   }, [slug]);
 
   if (error) {
