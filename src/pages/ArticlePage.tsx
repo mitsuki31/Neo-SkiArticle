@@ -4,7 +4,6 @@ import { getMarkdownContent } from '@/lib/markparser';
 import CreateErrorPage from '@/layout/ErrorPage';
 import Article from '@/lib/Article';
 
-import Home from '@/layout/Home';
 import Header from '@/layout/Header';
 import Footer from '@/layout/Footer';
 import { Section } from '@/lib/motion-anim';
@@ -32,8 +31,7 @@ export default function ArticlePage() {
     />;
   }
 
-  // if (!content) return <div className="p-4">Mempersiapkan artikel...</div>;
-  const { data, content: html } = content || {};
+  const { content: html } = content || {};
 
   return (
     <>
@@ -43,7 +41,7 @@ export default function ArticlePage() {
         <Section className='bg-none'>
           <Article
             id={slug}
-            content={html}
+            content={html || ''}
             className='prose prose-h2:font-bold dark:prose-h2:text-white'
             titleClassName='text-4xl'
           />

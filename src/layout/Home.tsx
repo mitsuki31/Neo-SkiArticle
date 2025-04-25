@@ -29,7 +29,7 @@ const featuredArticles = [
     title: 'Program Keahlian',
     category: ['Program Keahlian', 'TKJ', 'TKR', 'TP'],
     description: 'Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.',
-    src: '/articles/program-keahlian'
+    src: '/a/program-keahlian'
   },
 ];
 
