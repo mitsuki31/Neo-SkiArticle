@@ -26,7 +26,10 @@ function extractFirstHeading(html: string): { title: string, content: string } |
 }
 
 export default function Article({ content, className = '', titleClassName = '', id = '' }: ArticleProps) {
-  const { title, content: html } = extractFirstHeading(parseMarkdown(content))!;
+  const parsedMarkdownn = extractFirstHeading(parseMarkdown(content));
+  if (!parsedMarkdownn) return <></>;
+
+  const { title, content: html } = parsedMarkdownn;
   // Styled <h2> to inject at the top of the article
   const styledHeading = `<h2 class="text-2xl font-bold mb-6 dark:text-white ${titleClassName}">${title}</h2>`;
 

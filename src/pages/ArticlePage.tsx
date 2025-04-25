@@ -31,7 +31,7 @@ export default function ArticlePage() {
     />;
   }
 
-  const { content: html } = content || {};
+  const { content: html } = content || { content: null };
 
   return (
     <>
