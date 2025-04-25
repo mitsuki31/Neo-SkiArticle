@@ -2,7 +2,7 @@ import { Section } from "@/lib/motion-anim";
 import Article from "@/lib/Article";
 import { parseMarkdown } from "@/lib/markparser";
 
-import tentangSekolah from '@articles/tentang-sekolah.md?raw';
+import tentangSekolah from '@articles/home/tentang-sekolah.md?raw';
 
 export default function About() {
   const html = parseMarkdown(tentangSekolah);

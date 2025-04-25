@@ -13,7 +13,7 @@ export async function getMarkdownContent(slug: string): Promise<{
   data: Record<string, string>;
   content: string;
 }> {
-  const filePath = `/src/articles/${slug}.md`;
+  const filePath = `/articles/${slug}.md`;
   const response = await fetch(filePath);
 
   if (!response.ok) {
