@@ -4,6 +4,7 @@ import Layout from "./Layout";
 type ArticleProps = {
   content: string;
   className?: string;
+  titleClassName?: string;
   id?: string;
 };
 
@@ -24,10 +25,10 @@ function extractFirstHeading(html: string): { title: string, content: string } |
   return null;
 }
 
-export default function Article({ content, className = '', id = '' }: ArticleProps) {
+export default function Article({ content, className = '', titleClassName = '', id = '' }: ArticleProps) {
   const { title, content: html } = extractFirstHeading(parseMarkdown(content))!;
   // Styled <h2> to inject at the top of the article
-  const styledHeading = `<h2 class="text-2xl font-bold mb-6 dark:text-white">${title}</h2>`;
+  const styledHeading = `<h2 class="text-2xl font-bold mb-6 dark:text-white ${titleClassName}">${title}</h2>`;
 
   return (
     <Layout>

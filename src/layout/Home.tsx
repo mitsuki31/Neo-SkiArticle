@@ -6,6 +6,7 @@ import { GradientButton, Section } from "@/lib/motion-anim";
 import Article from "@/lib/Article";
 import FocusableCard from "@/lib/FocusableCard";
 import { parseMarkdown } from "@/lib/markparser";
+import { Link } from 'react-router-dom';
 
 import Hero from './Hero';
 
@@ -27,7 +28,8 @@ const featuredArticles = [
   {
     title: 'Program Keahlian',
     category: ['Program Keahlian', 'TKJ', 'TKR', 'TP'],
-    description: 'Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.'
+    description: 'Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.',
+    src: '/articles/program-keahlian'
   },
 ];
 
@@ -60,11 +62,7 @@ export default function Home() {
                     {/* Category */}
                     <div className="flex items-center mb-2">
                       {article.category.map((cat, i) => (
-                        <Badge
-                          key={i}
-                          className="mr-2 text-gray-300 dark:bg-orange-400/80"
-                          onClick={() => alert('Sorry, this feature is not available yet.')}
-                        >
+                        <Badge key={i} className="mr-2 text-gray-300 dark:bg-orange-400/80">
                           {cat}
                         </Badge>
                       ))}
@@ -74,7 +72,7 @@ export default function Home() {
                     {/* Description */}
                     <p className="text-gray-300 dark:text-white/80 text-sm mb-4">{article.description}</p>
                     <GradientButton className="mx-auto text-sm text-white">
-                      Baca Selengkapnya
+                      <Link to={article.src}>Baca Selengkapnya</Link>
                     </GradientButton>
                   </CardContent>
                 </FocusableCard>

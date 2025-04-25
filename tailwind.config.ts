@@ -40,12 +40,17 @@ const config: Config = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' },
+        },
       },
       animation: {
         slide: "slide 2s linear infinite",
 				slidein: "slidein 1s ease var(--slidein-delay, 0) forwards",
         'spin-slow': 'spin 10s linear infinite',
         'spin-once': 'spin-once 600ms ease-in-out',
+        blink: 'blink 1s steps(2, start) infinite',
       },
     },
   },

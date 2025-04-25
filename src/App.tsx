@@ -1,18 +1,17 @@
-import { SpeedInsights } from "@vercel/speed-insights/react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from "@/pages/Home";
-import Header from "@/pages/Header";
-import About from "@/pages/About";
-import Footer from "@/pages/Footer";
+import HomePage from '@/pages/Home';
+import ArticlePage from '@/pages/ArticlePage';
+import CreateErrorPage from '@/layout/ErrorPage';
 
 export default function App() {
   return (
-    <>
-      <Header />
-      <Home />
-      <About />
-      <Footer />
-      <SpeedInsights />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/articles/:slug" element={<ArticlePage />} />
+        <Route path="*" element={<CreateErrorPage />} />
+      </Routes>
+    </Router>
   );
 }

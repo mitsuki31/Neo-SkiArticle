@@ -63,7 +63,6 @@ export function GradientButton({ children, className = '' }: Omit<ElementProps, 
       whileTap={{ scale: 0.97 }}
       transition={{ type: 'spring', stiffness: 400, damping: 13 }}
       className={`cursor-pointer font-semibold rounded-xl px-4 py-2 shadow-md focus:outline-none ${gradientColorClass} ${className}`}
-      onClick={() => alert('Sorry this feature is currently in development!')}
     >
       {children}
     </motion.button>
