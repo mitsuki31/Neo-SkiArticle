@@ -10,10 +10,10 @@ import { parseMarkdown } from "@/lib/markparser";
 import Hero from './Hero';
 
 // Articles
-import profilSekolah from '@/assets/articles/profil-sekolah.md?raw';
-import sejarahSingkat from '@/assets/articles/sejarah-singkat.md?raw';
-import visiMisi from '@/assets/articles/visi-misi.md?raw';
-import saranaFasilitas from '@/assets/articles/sarana-fasilitas.md?raw';
+import profilSekolah from '@articles/home/profil-sekolah.md?raw';
+import sejarahSingkat from '@articles/home/sejarah-singkat.md?raw';
+import visiMisi from '@articles/home/visi-misi.md?raw';
+import saranaFasilitas from '@articles/home/sarana-fasilitas.md?raw';
 
 // ! WARNING: DO NOT MESS UP IF YOU DO NOT KNOW WHAT YOU'RE DOING
 const articlesTable = [

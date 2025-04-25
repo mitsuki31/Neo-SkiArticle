@@ -8,7 +8,7 @@ import {
 import ThemeToggle from '@/lib/ThemeToggle';
 import MobileNav from './MobileNav';
 
-export default function Header() {
+export default function Header({ className = '' }: { className?: string }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const closeTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
     // NOTE: For now I have no idea, so the header I kept it gradient with one color (sky)
-    <header className="bg-gradient-to-b from-sky-200 to-sky-100 dark:from-background dark:to-background p-2 border-none" id="header">
+    <header className={`bg-gradient-to-b from-sky-200 to-sky-100 dark:from-background dark:to-background p-2 border-none ${className}`} id="header">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-4 sm:space-x-10 mt-1 ml-3 2xl:ml-0">
           <img src={logoSki} alt="SMK Sukamandi Logo" className="w-10 h-10" />
