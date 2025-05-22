@@ -30,18 +30,18 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Navigasi</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="#tentang" className="hover:underline">Tentang Sekolah</a></li>
-            <li><a href="#program" className="hover:underline">Program Keahlian</a></li>
-            <li><a href="#fasilitas" className="hover:underline">Fasilitas</a></li>
+            <li><a href="/#about" className="hover:underline">Tentang Sekolah</a></li>
+            <li><a href="/a/program-keahlian" className="hover:underline">Program Keahlian</a></li>
+            {/* <li><a href="#fasilitas" className="hover:underline">Fasilitas</a></li> */}
           </ul>
         </div>
 
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Lainnya</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:underline">Berita</a></li>
-            <li><a href="#" className="hover:underline">Galeri</a></li>
-            <li><a href="#" className="hover:underline">PPDB</a></li>
+            {/* <li><a href="#" className="hover:underline">Berita</a></li> */}
+            {/* <li><a href="#" className="hover:underline">Galeri</a></li> */}
+            <li><a href="https://smksukamandi.online" target="_blank" className="hover:underline">PPDB</a></li>
           </ul>
         </div>
 
@@ -80,6 +80,11 @@ export default function Footer() {
 
       <div className="text-center pt-3 pb-6 text-xs text-gray-600 dark:text-gray-400">
         © {new Date().getFullYear()} SMK Sukamandi & CV. DR2E. All rights reserved.
+        <br />
+        <span className="text-gray-500 dark:text-gray-400 italic">
+          Developed by{' '}
+          <a href="https://github.com/mitsuki31">Dhefa Gusni A. (Ryuu Mitsuki)</a>
+        </span>
       </div>
     </footer>
   );
