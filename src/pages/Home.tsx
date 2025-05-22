@@ -1,4 +1,3 @@
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 import HomeLayout from "@/layout/Home";
@@ -17,7 +16,6 @@ export default function Home() {
         <HomeLayout />
         <About />
         <Footer />
-        <SpeedInsights />
       </div>
     </HelmetProvider>
   );
