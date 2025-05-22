@@ -1,4 +1,4 @@
-import { parseMarkdown } from "@/lib/markparser";
+import { extractFirstHeading, parseMarkdown } from "@/lib/markparser";
 import Layout from "./Layout";
 
 type ArticleProps = {
@@ -7,23 +7,6 @@ type ArticleProps = {
   titleClassName?: string;
   id?: string;
 };
-
-function extractFirstHeading(html: string): { title: string, content: string } | null {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-
-  for (let i = 1; i <= 6; i++) {
-    const heading = doc.body.querySelector(`h${i}`);
-    if (heading && heading.textContent) {
-      const title = heading.textContent.trim();
-      heading.parentNode?.removeChild(heading);
-      const content = doc.body.innerHTML.trim();
-      return { title, content };
-    }
-  }
-
-  return null;
-}
 
 export default function Article({ content, className = '', titleClassName = '', id = '' }: ArticleProps) {
   const parsedMarkdownn = extractFirstHeading(parseMarkdown(content));

@@ -9,7 +9,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/a/:slug" element={<ArticlePage />} />
+        <Route path="/a/:slug" element={<ArticlePage key={location.pathname} />} />
         <Route path="*" element={<CreateErrorPage />} />
       </Routes>
     </Router>
