@@ -22,16 +22,16 @@ const config: Config = {
         gugi: ['Gugi', ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
-        slide: {
+        'slide-left': {
 					"0%": { transform: "translateX(0)" },
-					"100%": { transform: "translateX(-100%)" },
+					"100%": { transform: "translateX(100%)" },
 				},
         slidein: {
-					from: {
-						opacity: "0",
+					"0%": {
+						// opacity: "0",
 						transform: "translateY(-10px)",
 					},
-					to: {
+					"100%": {
 						opacity: "1",
 						transform: "translateY(0)",
 					},
@@ -46,7 +46,7 @@ const config: Config = {
         },
       },
       animation: {
-        slide: "slide 2s linear infinite",
+        slide: "slide 2s linear forwards",
 				slidein: "slidein 1s ease var(--slidein-delay, 0) forwards",
         'spin-slow': 'spin 10s linear infinite',
         'spin-once': 'spin-once 600ms ease-in-out',

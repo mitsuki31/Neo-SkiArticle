@@ -44,3 +44,20 @@ export async function getMarkdownContent(slug: string): Promise<{
   return { data: frontmatter, content: sanitizedHtml };
 }
 
+export function extractFirstHeading(html: string): { title: string, content: string } | null {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  for (let i = 1; i <= 6; i++) {
+    const heading = doc.body.querySelector(`h${i}`);
+    if (heading && heading.textContent) {
+      const title = heading.textContent.trim();
+      heading.parentNode?.removeChild(heading);
+      const content = doc.body.innerHTML.trim();
+      return { title, content };
+    }
+  }
+
+  return null;
+}
+
