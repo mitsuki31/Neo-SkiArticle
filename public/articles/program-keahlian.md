@@ -1,7 +1,7 @@
 ---
 title: Program Keahlian
 date: 2023-11-30
-category: Program Keahlian
+category: Program Keahlian, TKJ, TKR, TP
 ---
 
 # Program Keahlian
