@@ -30,7 +30,7 @@ export default function CreateErrorPage({
 }: ErrorPageProps) {
   return (
     <>
-      <Header className="bg-none bg-gray-100 dark:bg-background" />
+      <Header className="bg-none bg-white dark:bg-background" sticky scrollThreshold={0} />
       {createErrorBody(errno, message, description)}
       <Footer />
     </>
