@@ -7,19 +7,28 @@ import Article from "@/lib/Article";
 import FocusableCard from "@/lib/FocusableCard";
 import { parseMarkdown } from "@/lib/markparser";
 import { Link } from 'react-router-dom';
-
 import Hero from './Hero';
+import { Flame } from "lucide-react";
 
 // Articles
 import profilSekolah from '@articles/home/profil-sekolah.md?raw';
 import sejarahSingkat from '@articles/home/sejarah-singkat.md?raw';
 import visiMisi from '@articles/home/visi-misi.md?raw';
 import saranaFasilitas from '@articles/home/sarana-fasilitas.md?raw';
+import igPosts from '@/assets/ig-posts.json';
+import ArticleBackground from "./ArticleBackground";
+import InstagramEmbed from "./InstagramEmbed";
+
+type ArticleTable = Array<{
+  id: string;
+  content: string;
+  bgVariant?: Parameters<typeof ArticleBackground>[0]['variant'];
+}>;
 
 // ! WARNING: DO NOT MESS UP IF YOU DO NOT KNOW WHAT YOU'RE DOING
-const articlesTable = [
-  { id: 'profil-sekolah', content: parseMarkdown(profilSekolah) },
-  { id: 'sejarah-singkat', content: parseMarkdown(sejarahSingkat) },
+const articlesTable: ArticleTable = [
+  { id: 'profil-sekolah', content: parseMarkdown(profilSekolah), bgVariant: 'gradient' },
+  { id: 'sejarah-singkat', content: parseMarkdown(sejarahSingkat), bgVariant: 'dots' },
   { id: 'visi-misi', content: parseMarkdown(visiMisi) },
   { id: 'sarana-fasilitas', content: parseMarkdown(saranaFasilitas) },
 ];
@@ -31,7 +40,34 @@ const featuredArticles = [
     description: 'Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.',
     src: '/a/program-keahlian'
   },
+  {
+    title: 'Pelatihan Vokasi 2025',
+    category: ['Keterampilan', 'TP'],
+    description: 'Dengan semangat belajar tinggi, peserta pelatihan vokasi pengelasan dan pemesinan telah menyelesaikan program ini dengan sukses. Sebuah langkah awal menuju karier gemilang!',
+    src: '/a/pelatihan-vokasi-2025'
+  }
 ];
+
+
+function InstagramPosts({ urls }: { urls: string[] }) {
+  if (urls.length === 0) return null;
+  return (
+    <ArticleBackground variant="geometric" containerSize="8xl">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-8 flex justify-center items-center gap-3 md:gap-4">
+          <Flame color="#FF4500" size="35" />
+          <span className="bg-gradient-to-r from-pink-600 to-orange-400 bg-clip-text text-transparent">
+            Instagram Post
+          </span>
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[600px] lg:max-h-[400px] overflow-y-auto p-4 bg-white/10 rounded-md">
+          {/* Instagram Embeds */}
+          {urls.map(u => <InstagramEmbed url={u} withCaption />)}
+        </div>
+      </div>
+    </ArticleBackground>
+  );
+}
 
 export default function Home() {
   const badgeCardHoverClass =
@@ -50,38 +86,40 @@ export default function Home() {
           <div className="container px-4">
             <h2 className="text-3xl text-white font-semibold mb-8 text-center">Artikel Unggulan</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredArticles.map((article) => (
-              <motion.div
-                key={article.title.replace(/\s+/g, '-').toLowerCase()}
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-              >
-                <FocusableCard className={`h-full bg-white/10 dark:bg-background border-none transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
-                  {/* Featured Article */}
-                  <CardContent className="p-5">
-                    {/* Category */}
-                    <div className="flex items-center mb-2">
-                      {article.category.map((cat, i) => (
-                        <Badge key={i} className="mr-2 text-gray-300 dark:bg-orange-400/80">
-                          {cat}
-                        </Badge>
-                      ))}
-                    </div>
-                    {/* Title */}
-                    <h3 className="text-xl text-white font-semibold mb-2">{article.title}</h3>
-                    {/* Description */}
-                    <p className="text-gray-300 dark:text-white/80 text-sm mb-4">{article.description}</p>
-                    <GradientButton className="mx-auto text-sm text-white">
-                      <Link to={article.src}>Baca Selengkapnya</Link>
-                    </GradientButton>
-                  </CardContent>
-                </FocusableCard>
-              </motion.div>
-            ))}
+              {featuredArticles.map((article) => (
+                <motion.div
+                  key={article.title.replace(/\s+/g, '-').toLowerCase()}
+                  whileHover={{ scale: 1.03 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                >
+                  <FocusableCard className={`h-full bg-white/10 dark:bg-background border-none transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
+                    {/* Featured Article */}
+                    <CardContent className="p-5">
+                      {/* Category */}
+                      <div className="flex items-center mb-2">
+                        {article.category.map((cat, i) => (
+                          <Badge key={i} className="mr-2 text-gray-300 dark:bg-orange-400/80">
+                            {cat}
+                          </Badge>
+                        ))}
+                      </div>
+                      {/* Title */}
+                      <h3 className="text-xl text-white font-semibold mb-2">{article.title}</h3>
+                      {/* Description */}
+                      <p className="text-gray-300 dark:text-white/80 text-sm mb-4">{article.description}</p>
+                      <GradientButton className="mx-auto text-sm text-white">
+                        <Link to={article.src}>Baca Selengkapnya</Link>
+                      </GradientButton>
+                    </CardContent>
+                  </FocusableCard>
+                </motion.div>
+              ))}
             </div>
           </div>
         </Section>
       </div>
+
+      <InstagramPosts urls={igPosts} />
 
       {/* Main Articles */}
       {articlesTable.map(article => {
