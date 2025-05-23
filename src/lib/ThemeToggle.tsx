@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export default function ThemeToggle({ size = 18, className = '' }: {
-  size?: number, className?: string
+export default function ThemeToggle({ size = 18, className = '', id = '' }: {
+  size?: number, className?: string, id?: string
 }) {
   const [isDark, setIsDark] = useState(false);
 
@@ -27,7 +27,7 @@ export default function ThemeToggle({ size = 18, className = '' }: {
   }
 
   return (
-    <Button variant="outline" size="icon" title='Toggle theme' type='button' onClick={toggleTheme} className={className}>
+    <Button variant="outline" size="icon" title='Toggle theme' type='button' onClick={toggleTheme} className={className} id={id}>
       {isDark ? <Sun size={size} /> : <Moon size={size} />}
     </Button>
   );

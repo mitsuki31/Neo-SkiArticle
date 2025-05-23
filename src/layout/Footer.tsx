@@ -79,11 +79,11 @@ export default function Footer() {
       </div>
 
       <div className="text-center pt-3 pb-6 text-xs text-gray-600 dark:text-gray-400">
-        © {new Date().getFullYear()} SMK Sukamandi & CV. DR2E. All rights reserved.
+        © {new Date().getFullYear()} SMK Sukamandi & DR2E Group. All rights reserved.
         <br />
         <span className="text-gray-500 dark:text-gray-400 italic">
           Developed by{' '}
-          <a href="https://github.com/mitsuki31">Dhefa Gusni A. (Ryuu Mitsuki)</a>
+          <a href="https://github.com/mitsuki31" target="_blank" rel="noopener noreferrer" className='hover:underline'>Dhefa Gusni A. (Ryuu Mitsuki)</a>
         </span>
       </div>
     </footer>
