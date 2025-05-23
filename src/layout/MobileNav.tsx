@@ -8,6 +8,7 @@ import {
   youtube as youtubeUrl,
   instagram as instagramUrl,
 } from '@/assets/global-urls.json';
+import { hovercls } from '@/lib/utils';
 
 const navLinks = [
   { name: 'Beranda', href: '/', logoClass: 'bx bxs-home' },
@@ -17,8 +18,8 @@ const navLinks = [
     name: 'Sosial',
     logoClass: 'bx bxs-group',
     submenu: [
-      { name: 'YouTube', href: youtubeUrl, logoClass: 'bx bxl-youtube' },
-      { name: 'Instagram', href: instagramUrl, logoClass: 'bx bxl-instagram-alt' },
+      { name: 'YouTube', href: youtubeUrl, logoClass: 'bx bxl-youtube', hoveredClass: hovercls('text-red-600 bg-gray-300') },
+      { name: 'Instagram', href: instagramUrl, logoClass: 'bx bxl-instagram-alt', hoveredClass: hovercls('text-pink-600 bg-gray-300') },
     ],
   },
 ];
@@ -27,6 +28,9 @@ const navLinks = [
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+
+  const hoveredItemClass =
+    `${hovercls('bg-gray-100 text-orange-600')} ${hovercls('bg-zinc-600 text-orange-400', { dark: true })}`;
   
   useEffect(() => {
     // Close the mobile nav when user press Escape key
@@ -64,7 +68,7 @@ export default function MobileNav() {
   });
 
   return (
-    <div className="sm:hidden z-50">
+    <div className="md:hidden z-50">
       {/* Top Navbar */}
       <div className="flex items-center justify-between p-4 bg-none">
         <button
@@ -94,7 +98,7 @@ export default function MobileNav() {
                 <X className="cursor-pointer w-7 h-7 animate-spin-once" />
               </button>
             </div>
-            <nav className="flex flex-col p-4 space-y-3" id='mobile-nav'>
+            <nav className="flex flex-col p-4 space-y-2" id='mobile-nav'>
               {navLinks.map((link) => (
                 <div
                   key={link.name}
@@ -111,7 +115,7 @@ export default function MobileNav() {
                   {link.href ? (
                       <a
                         href={link.href}
-                        className="flex items-center text-base font-medium px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 hover:text-orange-600 dark:hover:text-orange-400 transition-all"
+                        className={`flex items-center text-base font-medium px-3 py-[0.65rem] rounded-lg transition-all ${hoveredItemClass}`}
                         onClick={() => setOpen(false)}
                       >
                         <i className={`${link.logoClass} mr-4 text-[1.25rem]`}></i>
@@ -122,7 +126,7 @@ export default function MobileNav() {
                       <div
                         role="button"
                         tabIndex={0}
-                        className="text-base font-medium flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 cursor-pointer transition-all"
+                        className={`text-base font-medium flex items-center justify-between px-3 py-[0.65rem] mb-0 rounded-lg cursor-pointer transition-all ${hoveredItemClass}`}
                       >
                         <span><i className={`${link.logoClass} mr-4 text-[1.3rem]`}></i>{link.name}</span>
                         <ChevronDown
@@ -136,13 +140,13 @@ export default function MobileNav() {
                             animate={{ opacity: 1, height: "auto" }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="pl-4 space-y-1 overflow-hidden"
+                            className="pl-4 mb-0 space-y-1 overflow-hidden"
                           >
                             {link.submenu.map((subItem) => (
                               <a
                                 key={subItem.name}
                                 href={subItem.href}
-                                className="flex items-center text-sm font-medium px-3 pr-2 py-2 my-3 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 hover:text-orange-600 dark:hover:text-orange-400 transition-all"
+                                className={`flex items-center text-sm font-medium px-3 pr-2 py-[0.7rem] my-3 rounded-lg transition-all ${hoveredItemClass} ${subItem.hoveredClass}`}
                                 onClick={() => setOpen(false)}
                                 target="_blank"
                                 rel="noopener noreferrer"

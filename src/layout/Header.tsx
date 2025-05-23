@@ -7,6 +7,7 @@ import {
 import ThemeToggle from '@/lib/ThemeToggle';
 import MobileNav from './MobileNav';
 import { ChevronDown } from 'lucide-react';
+import { hovercls } from "@/lib/utils";
 
 const SCROLL_THRESHOLD = 680; // px
 
@@ -33,7 +34,7 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
     }
   `;
 
-  const navMenuItemsHoveredClass = `cursor-pointer focus:outline-none ${scrollState === 'top' ? 'hover:bg-sky-300/30' : 'hover:bg-gray-200'} dark:hover:bg-gradient-to-r dark:hover:from-orange-400 dark:hover:to-gray-800 p-2 px-[0.9rem] hover:rounded-sm`;
+  const navMenuItemsHoveredClass = `p-2 px-[0.9rem] cursor-pointer ${hovercls('outline-none rounded-sm')} ${hovercls(scrollState === 'top' ? 'bg-sky-300/30' : 'bg-gray-200')} ${hovercls('bg-zinc-600 text-orange-400', { dark: true })}`;
 
   const handleMouseEnter = () => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
@@ -68,14 +69,14 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
 
   return (
     // NOTE: For now I have no idea, so the header I kept it gradient with one color (sky)
-    <header className={`bg-gradient-to-b from-sky-200 to-sky-100 dark:from-background dark:to-background p-2 border-none ${sticky ? stickyHeaderClass : ''} ${className}`} id="header">
+    <header className={`bg-gradient-to-b from-sky-200 to-sky-100 dark:from-background dark:to-background md:p-2 border-none ${sticky ? stickyHeaderClass : ''} ${className}`} id="header">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-4 sm:space-x-10 mt-1 ml-3 2xl:ml-0">
           <img src={logoSki} alt="SMK Sukamandi Logo" className="w-10 h-10" />
           <span className="text-xl lg:text-2xl mt-1 font-gugi font-bold tracking-[0.3rem] sm:tracking-[0.6rem] text-gray-800 dark:text-white">NeoSKI</span>
         </div>
         <nav id="navbar">
-          <ul className="space-x-2 text-black dark:text-white hidden sm:flex">
+          <ul className="space-x-2 text-black dark:text-white hidden md:flex">
             <li className={`mt-1 ${navMenuItemsHoveredClass}`}><a href="/" className="font-bold"><i className="bx bxs-home mr-2 text-md"></i>Beranda</a></li>
             <li className={`mt-1 ${navMenuItemsHoveredClass}`}><a href="#about" className="font-bold"><i className="bx bx-info-circle mr-2 text-md"></i>Tentang</a></li>
             <li
@@ -92,9 +93,9 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
                   />
                 </button>
                 {isDropdownOpen && (
-                  <ul className="absolute top-full left-0 mt-1 bg-white text-gray-800 rounded-md shadow-lg w-48">
-                    <li><a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:font-semibold hover:bg-gradient-to-r hover:from-orange-600 hover:to-white-800 hover:rounded-sm"><i className="bx bxl-instagram-alt mr-2"></i>Instagram</a></li>
-                    <li><a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="block px-4 py-2 hover:font-semibold hover:bg-gradient-to-r hover:from-orange-600 hover:to-white-800 hover:rounded-sm"><i className="bx bxl-youtube mr-2"></i>YouTube</a></li>
+                  <ul className="absolute top-full left-0 mt-1 bg-white/80 dark:bg-white/20 text-gray-800 dark:text-gray-100 rounded-md shadow-lg w-48">
+                    <li><a href={instagramUrl} target="_blank" rel="noopener noreferrer" className={`block px-4 py-2 hover:font-semibold ${hovercls('text-pink-600 bg-gray-300')} ${hovercls('text-gray-100', { dark: true })} dark:hover:bg-gradient-to-r dark:hover:from-pink-600 dark:hover:to-gray-600 hover:rounded-sm`}><i className="bx bxl-instagram-alt mr-2"></i>Instagram</a></li>
+                    <li><a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className={`block px-4 py-2 hover:font-semibold ${hovercls('text-red-600 bg-gray-300')} ${hovercls('text-gray-100', { dark: true })} dark:hover:bg-gradient-to-r dark:hover:from-red-600 dark:hover:to-gray-600 hover:rounded-sm`}><i className="bx bxl-youtube mr-2"></i>YouTube</a></li>
                   </ul>
                 )}
               </div>
