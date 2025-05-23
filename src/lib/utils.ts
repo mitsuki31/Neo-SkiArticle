@@ -67,3 +67,30 @@ export function addClassToSVG(svgString: string, className: string): string {
 
   return svg.outerHTML;
 }
+
+/**
+ * Generates a list of Tailwind utility classes prefixed with common pseudo-states
+ * like `hover:`, `focus-visible:`, and `active:` for each class provided.
+ *
+ * @param className - A space-separated string of Tailwind classes (e.g. `"text-red-500 font-bold"`).
+ * @param options - Optional configuration object.
+ * @param options.attrs - An array of pseudo-state prefixes (default: ['hover', 'focus-visible', 'active']).
+ * @param options.dark - If `true`, wraps each result with `dark:` prefix (default: false).
+ *
+ * @returns A string of composed Tailwind classes with state prefixes applied.
+ *
+ * @example
+ * ```javascript
+ * hovercls("text-red-500", { dark: true });
+ * // Returns:
+ * // "dark:hover:text-red-500 dark:focus-visible:text-red-500 dark:active:text-red-500"
+ * ```
+ */export function hovercls(
+  className: string,
+  { attrs = ['hover', 'focus-visible', 'active'], dark = false } = {}
+): string {
+  const result = attrs.map((attr) => {
+    return className.split(' ').map((cls) => `${attr}:${cls}`).join(' ')
+  });
+  return (dark ? result.map((cls) => `dark:${cls}`) : result).join(' ');
+}
