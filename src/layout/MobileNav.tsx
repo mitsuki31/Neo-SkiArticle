@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react'; // or use any SVG icon
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '@/lib/ThemeToggle';
@@ -10,32 +10,71 @@ import {
 } from '@/assets/global-urls.json';
 
 const navLinks = [
-  { name: 'Beranda', href: '/' },
-  { name: 'Tentang', href: '/#about' },
+  { name: 'Beranda', href: '/', logoClass: 'bx bxs-home' },
+  { name: 'Tentang', href: '/#about', logoClass: 'bx bx-info-circle' },
   // { name: 'Artikel', href: '/artikel' },
   {
     name: 'Sosial',
+    logoClass: 'bx bxs-group',
     submenu: [
-      { name: 'YouTube', href: youtubeUrl },
-      { name: 'Instagram', href: instagramUrl },
+      { name: 'YouTube', href: youtubeUrl, logoClass: 'bx bxl-youtube' },
+      { name: 'Instagram', href: instagramUrl, logoClass: 'bx bxl-instagram-alt' },
     ],
   },
 ];
 
+
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  
+  useEffect(() => {
+    // Close the mobile nav when user press Escape key
+    const closeMobileNavWhenEsc = (e: KeyboardEvent) => {
+      if (open && e.key === 'Escape') {
+        e.preventDefault();
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', closeMobileNavWhenEsc);
+
+    // Close the mobile nav when user clicks outside of it
+    const closeMobileNavWhenClickOutside = (e: MouseEvent) => {
+      const mobileNav = document.getElementById('mobile-nav');
+      const mobileNavButton = document.getElementById('mobile-nav-button');
+      const mobileNavThemeToggler = document.getElementById('mobile-nav-theme-toggler');
+
+      if (
+        open &&
+        [mobileNav, mobileNavButton, mobileNavThemeToggler].every((el) =>
+          el && !el.contains(e.target as Node))
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('click', closeMobileNavWhenClickOutside);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      document.removeEventListener('keydown', closeMobileNavWhenEsc);
+      document.removeEventListener('click', closeMobileNavWhenClickOutside);
+    }
+  });
 
   return (
     <div className="sm:hidden z-50">
       {/* Top Navbar */}
       <div className="flex items-center justify-between p-4 bg-none">
         <button
+          id="mobile-nav-button"
+          type="button"
           onClick={() => setOpen(true)}
           aria-label="Open Menu"
           className="cursor-pointer shadow-none ring-0 border-0 focus:outline-none hover:brightness-110 transition"
         >
-          <Menu className="w-6 h-6 text-zinc dark:text-white" />
+          <Menu className="w-8 h-8 text-zinc dark:text-white" />
         </button>
       </div>
 
@@ -47,34 +86,45 @@ export default function MobileNav() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 right-0 w-64 h-screen bg-white dark:bg-zinc-700 dark:text-white/80 shadow-lg z-50 rounded-l-xl flex flex-col"
+            className="fixed top-0 right-0 w-70 h-fit bg-white dark:bg-zinc-700 dark:text-white/80 shadow-lg z-50 rounded-l-xl flex flex-col"
           >
             <div className="flex items-center justify-between p-4 border-b dark:border-neutral-700">
-              <div className="text-lg font-major-mono font-bold dark:text-white">NeoSKI</div>
-              <button onClick={() => setOpen(false)} aria-label="Close Menu">
-                <X className="cursor-pointer w-6 h-6 animate-spin-once" />
+              <div className="text-[1.3rem] font-major-mono font-bold dark:text-white mt-1">NeoSKI</div>
+              <button onClick={() => setOpen(false)} aria-label="Close Menu" type="button" className="mr-1 mt-1">
+                <X className="cursor-pointer w-7 h-7 animate-spin-once" />
               </button>
             </div>
-            <nav className="flex flex-col p-4 space-y-3 flex-grow">
+            <nav className="flex flex-col p-4 space-y-3" id='mobile-nav'>
               {navLinks.map((link) => (
                 <div
                   key={link.name}
-                  className="w-full"
+                  className="w-full inline-block"
                   onMouseEnter={() => setHoveredItem(link.name)}
                   onMouseLeave={() => setHoveredItem(null)}
+                  onKeyDown={(e) => {
+                    if ([' ', 'Enter'].includes(e.key)) {
+                      if (e.key === ' ') e.preventDefault();  // Prevent page scroll on Space
+                      setHoveredItem((prev) => (prev === link.name ? null : link.name));
+                    }
+                  }}
                 >
                   {link.href ? (
-                    <a
-                      href={link.href}
-                      className="block text-base font-medium px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 hover:text-orange-600 dark:hover:text-orange-400 transition-all"
-                      onClick={() => setOpen(false)}
-                    >
-                      {link.name}
-                    </a>
+                      <a
+                        href={link.href}
+                        className="flex items-center text-base font-medium px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 hover:text-orange-600 dark:hover:text-orange-400 transition-all"
+                        onClick={() => setOpen(false)}
+                      >
+                        <i className={`${link.logoClass} mr-4 text-[1.25rem]`}></i>
+                        {link.name}
+                      </a>
                   ) : link.submenu ? (
                     <div className="space-y-2">
-                      <div className="text-base font-medium flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 cursor-pointer transition-all">
-                        <span>{link.name}</span>
+                      <div
+                        role="button"
+                        tabIndex={0}
+                        className="text-base font-medium flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 cursor-pointer transition-all"
+                      >
+                        <span><i className={`${link.logoClass} mr-4 text-[1.3rem]`}></i>{link.name}</span>
                         <ChevronDown
                           className={`w-4 h-4 transition-transform ${hoveredItem === link.name ? "rotate-180" : ""}`}
                         />
@@ -92,11 +142,12 @@ export default function MobileNav() {
                               <a
                                 key={subItem.name}
                                 href={subItem.href}
-                                className="block text-sm font-medium px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 hover:text-orange-600 dark:hover:text-orange-400 transition-all"
+                                className="flex items-center text-sm font-medium px-3 pr-2 py-2 my-3 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-600 hover:text-orange-600 dark:hover:text-orange-400 transition-all"
                                 onClick={() => setOpen(false)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
+                                <i className={`${subItem.logoClass} mr-4 text-[1.3rem]`}></i>
                                 {subItem.name}
                               </a>
                             ))}
@@ -109,7 +160,7 @@ export default function MobileNav() {
               ))}
             </nav>
             <div className="p-4 border-t dark:border-neutral-700">
-              <ThemeToggle />
+              <ThemeToggle id="mobile-nav-theme-toggler" className='mr-5 mt-[0.3rem] cursor-pointer bg-inherit dark:bg-background border-none hover:bg-black hover:text-background dark:hover:bg-white dark:hover:text-background' />
             </div>
           </motion.aside>
         )}
