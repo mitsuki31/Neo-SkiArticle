@@ -79,7 +79,7 @@ export default function Footer() {
       </div>
 
       <div className="text-center pt-3 pb-6 text-xs text-gray-600 dark:text-gray-400">
-        © {new Date().getFullYear()} SMK Sukamandi & CV. DR2E. All rights reserved.
+        © {new Date().getFullYear()} SMK Sukamandi & DR2E Group. All rights reserved.
         <br />
         <span className="text-gray-500 dark:text-gray-400 italic">
           Developed by{' '}
