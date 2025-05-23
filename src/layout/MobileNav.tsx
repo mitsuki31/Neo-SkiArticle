@@ -8,7 +8,6 @@ import {
   youtube as youtubeUrl,
   instagram as instagramUrl,
 } from '@/assets/global-urls.json';
-import { hovercls } from '@/lib/utils';
 
 const navLinks = [
   { name: 'Beranda', href: '/', logoClass: 'bx bxs-home' },
@@ -18,8 +17,8 @@ const navLinks = [
     name: 'Sosial',
     logoClass: 'bx bxs-group',
     submenu: [
-      { name: 'YouTube', href: youtubeUrl, logoClass: 'bx bxl-youtube', hoveredClass: hovercls('text-red-600 bg-gray-300') },
-      { name: 'Instagram', href: instagramUrl, logoClass: 'bx bxl-instagram-alt', hoveredClass: hovercls('text-pink-600 bg-gray-300') },
+      { name: 'YouTube', href: youtubeUrl, logoClass: 'bx bxl-youtube', hoveredClass: 'hover:text-red-600 hover:bg-gray-300 focus-visible:text-red-600 focus-visible:bg-gray-300 active:text-red-600 active:bg-gray-300' },
+      { name: 'Instagram', href: instagramUrl, logoClass: 'bx bxl-instagram-alt', hoveredClass: 'hover:text-pink-600 hover:bg-gray-300 focus-visible:text-pink-600 focus-visible:bg-gray-300 active:text-pink-600 active:bg-gray-300' },
     ],
   },
 ];
@@ -30,7 +29,8 @@ export default function MobileNav() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const hoveredItemClass =
-    `${hovercls('bg-gray-100 text-orange-600')} ${hovercls('bg-zinc-600 text-orange-400', { dark: true })}`;
+    'hover:bg-gray-100 hover:text-orange-600 focus-visible:bg-gray-100 focus-visible:text-orange-600 active:bg-gray-100 active:text-orange-600 '
+    + 'dark:hover:bg-zinc-600 dark:hover:text-orange-400 dark:focus-visible:bg-zinc-600 dark:focus-visible:text-orange-400 dark:active:bg-zinc-600 dark:active:text-orange-400';
   
   useEffect(() => {
     // Close the mobile nav when user press Escape key
