@@ -12,6 +12,7 @@ export function parseMarkdown(markdown: string, beautify: boolean = true): strin
 export async function getMarkdownContent(slug: string): Promise<{
   data: Record<string, string>;
   content: string;
+  raw: string;
 }> {
   const filePath = `/articles/${slug}.md`;
   const response = await fetch(filePath);
@@ -41,7 +42,7 @@ export async function getMarkdownContent(slug: string): Promise<{
   const html = marked.parse(content);
   const sanitizedHtml = DOMPurify.sanitize(typeof html === 'string' ? html : '');
 
-  return { data: frontmatter, content: sanitizedHtml };
+  return { data: frontmatter, content: sanitizedHtml, raw };
 }
 
 export function extractFirstHeading(html: string): { title: string, content: string } | null {
