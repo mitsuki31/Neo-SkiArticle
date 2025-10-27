@@ -16,6 +16,7 @@ import sejarahSingkat from '@articles/home/sejarah-singkat.md?raw';
 import visiMisi from '@articles/home/visi-misi.md?raw';
 import saranaFasilitas from '@articles/home/sarana-fasilitas.md?raw';
 import igPosts from '@/assets/ig-posts.json';
+import featuredArticles from '@/articles/featured-articles.json';
 import ArticleBackground from "./ArticleBackground";
 import InstagramEmbed from "./InstagramEmbed";
 
@@ -31,21 +32,6 @@ const articlesTable: ArticleTable = [
   { id: 'sejarah-singkat', content: parseMarkdown(sejarahSingkat), bgVariant: 'dots' },
   { id: 'visi-misi', content: parseMarkdown(visiMisi) },
   { id: 'sarana-fasilitas', content: parseMarkdown(saranaFasilitas) },
-];
-
-const featuredArticles = [
-  {
-    title: 'Program Keahlian',
-    category: ['Program Keahlian', 'TKJ', 'TKR', 'TP'],
-    description: 'Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.',
-    src: '/a/program-keahlian'
-  },
-  {
-    title: 'Pelatihan Vokasi 2025',
-    category: ['Keterampilan', 'TP'],
-    description: 'Dengan semangat belajar tinggi, peserta pelatihan vokasi pengelasan dan pemesinan telah menyelesaikan program ini dengan sukses. Sebuah langkah awal menuju karier gemilang!',
-    src: '/a/pelatihan-vokasi-2025'
-  }
 ];
 
 
