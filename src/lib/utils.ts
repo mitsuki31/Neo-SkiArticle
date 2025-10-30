@@ -13,11 +13,11 @@ export function enhanceTable(html: string): string {
 
   tables.forEach((table) => {
     table.classList.add(
-      'table-auto', 
-      'border-collapse', 
-      'border', 
-      'border-gray-300', 
-      'w-full', 
+      'table-auto',
+      'border-collapse',
+      'border',
+      'border-gray-300',
+      'w-full',
       'text-left',
       'dark:text-white'
     );

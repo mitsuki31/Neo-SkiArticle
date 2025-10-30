@@ -122,8 +122,12 @@
 
 html {
   scroll-behavior: smooth;
-  transition: background-color 1.5s,
-              color 1.5s;
+  /* transition: background-color 1.5s,
+              color 1.5s; */
+}
+
+* {
+  @apply transition-colors duration-300 ease-in-out;
 }
 
 .article p {

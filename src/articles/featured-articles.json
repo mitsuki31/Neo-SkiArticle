@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Program Keahlian",
+    "category": ["Program Keahlian", "TKJ", "TKR", "TP"],
+    "description": "Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.",
+    "src": "/a/program-keahlian"
+  },
+  {
+    "title": "Pelatihan Vokasi 2025",
+    "category": ["Vokasi", "Keterampilan", "Industri 4.0"],
+    "description": "Dengan semangat belajar tinggi, peserta pelatihan vokasi pengelasan dan pemesinan telah menyelesaikan program ini dengan sukses. Sebuah langkah awal menuju karier gemilang!",
+    "src": "/a/pelatihan-vokasi-2025"
+  }
+]
