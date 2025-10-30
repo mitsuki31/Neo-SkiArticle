@@ -58,7 +58,7 @@ export default function ArticlePage() {
   }
 
   const { data, content: html } = content || { };
-  const readTime = content?.raw ? calcReadTime(content.raw) : undefined;
+  const readTime = content?.raw ? calcReadTime(content.raw, 100) : undefined;
   return (
     <>
       <HelmetProvider>
