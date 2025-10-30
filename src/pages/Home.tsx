@@ -12,7 +12,7 @@ export default function Home() {
         <title>Home · NeoSKI</title>
       </Helmet>
       <div className="bg-white-800 dark:bg-background text-gray-900">
-        <Header />
+        <Header className="bg-none bg-transparent" />
         <HomeLayout />
         <About />
         <Footer />
