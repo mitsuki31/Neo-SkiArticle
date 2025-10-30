@@ -16,6 +16,16 @@ export default function Footer() {
   const instagramIconHoverClass = 'hover:text-pink-600 focus:text-pink-600 active:text-pink-600';
   const youtubeIconHoverClass = 'hover:text-red-600 focus:text-red-600 active:text-red-600';
   const githubIconHoverClass = 'hover:text-black focus:text-black active:text-black dark:hover:text-white dark:focus:text-white dark:active:text-white';
+  const underlineCls = `
+    hover:underline hover:underline-offset-4
+    focus:underline focus:underline-offset-4
+    active:underline active:underline-offset-4
+    hover:font-bold focus:font-bold active:font-bold
+    dark:hover:decoration-orange-400
+    dark:focus:decoration-orange-400
+    dark:active:decoration-orange-400
+    hover:decoration-2 focus:decoration-2 active:decoration-2
+  `.replace(/[\n\s]+/g, ' ').trim();
 
   return (
     <footer className="bg-gray-300 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-8 px-5">
@@ -30,9 +40,10 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Navigasi</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/#about" className="hover:underline">Tentang Sekolah</a></li>
-            <li><a href="/a/program-keahlian" className="hover:underline">Program Keahlian</a></li>
-            {/* <li><a href="#fasilitas" className="hover:underline">Fasilitas</a></li> */}
+            <li><a href="/#about" className={underlineCls}>Tentang Sekolah</a></li>
+            <li><a href="/a/program-keahlian" className={underlineCls}>Program Keahlian</a></li>
+            {/* <li><a href="#fasilitas" className={underlineCls}>Fasilitas</a></li> */}
+            <li><a href="/a/pelatihan-vokasi-2025" className={underlineCls}>Pelatihan Vokasi 2025</a></li>
           </ul>
         </div>
 
@@ -41,7 +52,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             {/* <li><a href="#" className="hover:underline">Berita</a></li> */}
             {/* <li><a href="#" className="hover:underline">Galeri</a></li> */}
-            <li><a href="https://smksukamandi.online" target="_blank" className="hover:underline">PPDB</a></li>
+            <li><a href="https://smksukamandi.online" target="_blank" rel="noopener noreferrer" className={underlineCls}>PPDB</a></li>
           </ul>
         </div>
 
