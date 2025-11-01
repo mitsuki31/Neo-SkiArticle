@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar" {
+  nocompatible: true;
+  preferredStrategy: 'pseudoelements';
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -132,6 +136,14 @@ html {
   transition: background-color 0.8s ease, color 0.8s ease;
 }
 
+.custom-scrollbar {
+  @apply scrollbar-thin
+    scrollbar-track-gray-100 dark:scrollbar-track-gray-600/70
+    scrollbar-thumb-orange-600/60
+    hover:scrollbar-thumb-orange-500 active:scrollbar-thumb-orange-500
+    scrollbar-thumb-rounded-full scrollbar-track-rounded-full
+  ;
+}
 
 .prose img {
   @apply rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105;
