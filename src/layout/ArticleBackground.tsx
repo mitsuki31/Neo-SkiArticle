@@ -97,7 +97,7 @@ export default function ArticleBackground({
       )}
 
       {/* Content container */}
-      <div className={`relative z-10 mx-auto max-w-${containerSize} px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20`}>
+      <div className={`relative z-10 mx-auto max-w-${containerSize} px-4 sm:px-6 lg:px-8 my-12 sm:my-16 lg:my-20`}>
         <div
           className={cn("bg-white/80 dark:bg-background backdrop-blur-sm rounded-xl shadow-xl", "p-6 sm:p-8 lg:p-10")}
         >
