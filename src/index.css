@@ -120,21 +120,25 @@
   }
 }
 
+/* ========= */
+
+:root {
+  --header-height: 68px;
+  --scroll-margin-top: calc(var(--header-height) + 8px);
+}
+
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  @apply transition-colors duration-300 ease-in-out;
-}
-
-.theme-transition {
-  @apply transition-colors duration-300 ease-in-out;
+  transition: background-color 0.8s ease, color 0.8s ease;
 }
 
 
 .prose img {
   @apply rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply scroll-mt-[--scroll-margin-top];
 }
 
 
