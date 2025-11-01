@@ -4,6 +4,7 @@ import {
   youtube as youtubeUrl,
   github_repo as githubUrl,
 } from '@/assets/global-urls.json';
+import logoSki from '@/assets/logo_ski.png';
 
 // Icons
 import instagramIcon from '@icons/instagram.svg?raw';
@@ -29,12 +30,18 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-300 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-8 px-5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 xs:pt-2 pb-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h2 className="text-xl font-bold mb-4">SMK Sukamandi</h2>
-          <p className="text-sm">
-            Tempat membangun masa depan dengan pendidikan kejuruan berkualitas dan karakter unggul.
-          </p>
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 xs:pt-2 pb-4 grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-items-center-safe">
+        <div className="flex gap-2">
+          {/* This logo will appear on smaller screens and larger screens, but will hidden on medium screens */}
+          <img src={logoSki} alt="Logo SMK Sukamandi" className='w-20 h-20 lg:w-24 lg:h-24 my-auto mr-6 xs:block md:hidden lg:block' />
+          <div>
+            {/* This logo will appear only on medium screens */}
+            <img src={logoSki} alt="Logo SMK Sukamandi" className='w-20 h-20 ml-2 mb-4 block xs:hidden md:block lg:hidden' />
+            <h2 className="text-xl font-bold mb-4">SMK Sukamandi</h2>
+            <p className="text-sm">
+              Tempat membangun masa depan dengan pendidikan kejuruan berkualitas dan karakter unggul.
+            </p>
+          </div>
         </div>
 
         <div>
