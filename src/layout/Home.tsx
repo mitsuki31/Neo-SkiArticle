@@ -122,9 +122,9 @@ function InstagramPosts({ urls }: { urls: string[] }) {
             Instagram Post
           </span>
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[600px] lg:max-h-[400px] overflow-y-auto p-4 bg-white/10 rounded-md">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 max-h-[60svh] lg:max-h-[70svh] justify-items-center sm:justify-items-between overflow-y-auto p-4 bg-white/10 rounded-md">
           {/* Instagram Embeds */}
-          {urls.map(u => <InstagramEmbed url={u} withCaption />)}
+          {urls.map(u => <InstagramEmbed key={u.split('/').pop()} url={u} withCaption />)}
         </div>
       </div>
     </ArticleBackground>
