@@ -1,6 +1,6 @@
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
-import { unified } from 'unified';
+import { type Processor, unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeSanitize from 'rehype-sanitize';
@@ -13,6 +13,7 @@ import { type Heading, remarkSlugFromHeading } from './plugins/remark/remark-slu
 import addHeadingIds from './plugins/dom/add-heading-ids';
 import { enhanceList, enhanceTable } from './utils';
 import articles from '@/utils/articleLoader';
+import type { Compatible } from 'vfile';
 
 export type ParsedMarkdown<T> = {
   data?: T;
@@ -21,11 +22,37 @@ export type ParsedMarkdown<T> = {
   raw: string;
 };
 
+export const markdownProcessor = unified()
+  .use(remarkParse)
+  .use(remarkGfm)
+  .use(remarkSlugFromHeading)
+  .use(remarkHeadings)
+  .use(remarkFrontmatter, { type: 'yaml', marker: '-' })
+  .use(remarkRehype, { clobberPrefix: '' })
+  .use(rehypeSanitize)
+  .use(rehypeStringify)
+;
+
 export function parseMarkdown(markdown: string, beautify: boolean = true): string {
   const rawHtml = marked.parse(markdown);
   // HACK: In case the parser return a promise, but I think it would never
   const sanitizedHtml = DOMPurify.sanitize(typeof rawHtml === 'string' ? rawHtml : '');
   return beautify ? enhanceList(enhanceTable(sanitizedHtml)) : sanitizedHtml;
+}
+
+/**
+ * Unify a markdown file into a unified processor tree.
+ *
+ * @param file - Markdown file to unify
+ * @param processor- Optional `unified` processor to use, defaults to {@link markdownProcessor}
+ */
+export async function unify(
+  file: Compatible,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  processor?: Processor<any, any, any, any, any>
+) {
+  if (!processor) processor = markdownProcessor;
+  return await processor.process(file);
 }
 
 export async function getMarkdownContent<T>(slug: string, rawOnly: true): Promise<Pick<ParsedMarkdown<T>, "raw">>;
@@ -39,17 +66,7 @@ export async function getMarkdownContent<T>(slug: string, rawOnly?: boolean): Pr
   const { content: raw } = article;
   if (rawOnly) return { raw };
 
-  const file = await unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkSlugFromHeading)
-    .use(remarkHeadings)
-    .use(remarkFrontmatter, { type: 'yaml', marker: '-' })
-    .use(remarkRehype, { clobberPrefix: '' })
-    .use(rehypeSanitize)
-    .use(rehypeStringify)
-    .process(raw)
-  ;
+  const file = await unify(raw);
   return {
     data: (matterParse(raw) ?? {}) satisfies T,
     content: addHeadingIds(String(file), (file.data.headings ?? []) as Heading[]),
