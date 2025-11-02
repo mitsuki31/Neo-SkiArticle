@@ -7,6 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 
+export function sleep(ms: number) {
+  return new Promise<void>((res) => setTimeout(res, ms));
+}
 
 export function enhanceTable(html: string): string {
   const doc = new DOMParser().parseFromString(html, 'text/html');
