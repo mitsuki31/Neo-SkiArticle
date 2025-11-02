@@ -1,5 +1,5 @@
 ---
-title: Pelatihan Vokasi 2025
+title: Analisis Pelatihan Vokasi Tahun 2025
 date: 2025-07-21
 category: [Vokasi, Keterampilan, Industri 4.0]
 ---
