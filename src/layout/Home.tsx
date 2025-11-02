@@ -1,21 +1,30 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Flame } from "lucide-react";
+import { motion } from "framer-motion";
+import { unified } from 'unified';
 import { CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
-import { enhanceTable, useTheme } from "@/lib/utils";
+import { useTheme } from "@/lib/utils";
 import { GradientButton, Section } from "@/lib/motion-anim";
 import Article from "@/lib/Article";
 import FocusableCard from "@/lib/FocusableCard";
-import { parseMarkdown } from "@/lib/markparser";
-import { Link } from 'react-router-dom';
+import { unify } from "@/lib/markparser";
+import { remarkSlugFromHeading, type Heading } from "@/lib/plugins/remark/remark-slug-from-heading";
+import { extractSections } from '@/utils/article';
 import Hero from './Hero';
-import { Flame } from "lucide-react";
+import CreateErrorPage from './ErrorPage';
+
+// Remark plugins
+import remarkParse from 'remark-parse';
+import remarkGfm from 'remark-gfm';
+import remarkHeadings from '@vcarl/remark-headings';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
 
 // Articles
-import profilSekolah from '@articles/home/profil-sekolah.md?raw';
-import sejarahSingkat from '@articles/home/sejarah-singkat.md?raw';
-import visiMisi from '@articles/home/visi-misi.md?raw';
-import saranaFasilitas from '@articles/home/sarana-fasilitas.md?raw';
-import tentangSekolah from '@articles/home/tentang-sekolah.md?raw';
+import homeArticle from '@/articles/home/index.md?raw';
 
 // Instagram
 import igPosts from '@/assets/ig-posts.json';
@@ -25,21 +34,80 @@ import InstagramEmbed from "./InstagramEmbed";
 import featuredArticles from '@/articles/featured-articles.json';
 import ArticleBackground from "./ArticleBackground";
 
-type ArticleTable = {
-  id: string;
-  content: string;
-  bgVariant?: Parameters<typeof ArticleBackground>[0]['variant'];
-};
+const ARTICLE_PROSE_CLASS =
+  'prose prose-indigo dark:prose-invert ' +
+  'prose-a:text-blue-700 dark:prose-a:text-blue-400 prose-a:no-underline prose-a:hover:underline prose-a:hover:underline-offset-4 ' +
+  'prose-ul:list-disc prose-ol:list-decimal ' +
+  'prose-ul:marker:text-gray-700 dark:prose-ul:marker:text-white/80 prose-ol:marker:text-gray-700 dark:prose-ol:marker:text-white/80 ' +
+  'prose-ul:text-gray-700 dark:prose-ul:text-white/80 prose-ol:text-gray-700 dark:prose-ol:text-white/80 ' +
+  'prose-ol:pl-10 prose-ul:pl-10';
 
-// ! WARNING: DO NOT MESS UP IF YOU DO NOT KNOW WHAT YOU'RE DOING
-const articleTables: ArticleTable[] = [
-  { id: 'profil-sekolah', content: parseMarkdown(profilSekolah), bgVariant: 'gradient' },
-  { id: 'sejarah-singkat', content: parseMarkdown(sejarahSingkat), bgVariant: 'dots' },
-  { id: 'visi-misi', content: parseMarkdown(visiMisi) },
-  { id: 'sarana-fasilitas', content: parseMarkdown(saranaFasilitas) },
-  { id: 'tentang-sekolah', content: parseMarkdown(tentangSekolah) }
-];
+function HomeArticle() {
+  const [sections, setSections] = useState<string[] | null>(null);
+  const [headingIds, setHeadingIds] = useState<string[]>([]);
+  const [error, setError] = useState<Error | null>(null);
 
+  useEffect(() => {
+    let mounted = true;
+    const processor = unified()
+      .use(remarkParse)
+      .use(remarkGfm)
+      .use(remarkSlugFromHeading)
+      .use(remarkHeadings)
+      .use(remarkFrontmatter, { type: 'yaml', marker: '-' })
+      .use(remarkRehype, { clobberPrefix: '', allowDangerousHtml: true })
+      .use(rehypeStringify, { allowDangerousHtml: true })
+      // ! WARNING: No HTNL sanitize here, dangerous HTML is allowed
+      // !          make sure double check the used markdown file
+    ;
+
+    (async () => {
+      try {
+        const file = await unify(homeArticle, processor);
+        const headings = (file.data?.headings ?? []) as Heading[];
+        const headingsList = headings.map(h => h.data?.id).filter(Boolean) as string[];
+        const secs = extractSections(String(file)) as string[];
+
+        if (!mounted) return;
+        setSections(secs);
+        setHeadingIds(headingsList);
+      } catch (err) {
+        if (!mounted) return;
+        setError(err as Error);
+      }
+    })();
+
+    return () => { mounted = false; };
+  }, []);
+
+  if (error) {
+    return <CreateErrorPage
+      errno={500}
+      message="Gagal memuat artikel"
+      description={error.message}
+    />
+  }
+
+  // No loading animation, because the content are loaded in prebuild
+  // In other words, it will never be empty
+  if (!sections) return null;
+
+  return (
+    <>
+      {sections.map((section, i) => {
+        const id = headingIds[i] ?? undefined;
+        return (
+          <Section
+            key={id ?? `sec-${i}`}
+            className={`${i === 0 ? 'pt-10 lg:pt-30' : ''} ${i === sections.length - 1 ? 'pb-20 lg:pb-40' : ''}`}
+          >
+            <Article id={id} content={section} className={ARTICLE_PROSE_CLASS} />
+          </Section>
+        );
+      })}
+    </>
+  );
+}
 
 function InstagramPosts({ urls }: { urls: string[] }) {
   const theme = useTheme();
@@ -123,29 +191,7 @@ export default function Home() {
       <InstagramPosts urls={igPosts} />
 
       {/* Main Articles */}
-      {articleTables.map((article, i) => {
-        article.content = enhanceTable(article.content);
-        return (
-          <Section
-            key={`section-${article.id}`}
-            id={article.id === 'tentang-sekolah' ? 'about' : ''}
-            className={`${i === 0 ? 'pt-[6rem]' : i === articleTables.length - 1 ? 'pt-[4rem] pb-[6rem]' : 'pt-[4rem]'}`}
-          >
-            <Article
-              id={article.id}
-              content={article.content}
-              className={
-                'prose prose-indigo dark:prose-invert '
-                + 'prose-a:text-blue-700 dark:prose-a:text-blue-400 prose-a:no-underline prose-a:hover:underline prose-a:hover:underline-offset-4 '
-                + 'prose-ul:list-disc prose-ol:list-decimal '
-                + 'prose-ul:marker:text-gray-700 dark:prose-ul:marker:text-white/80 prose-ol:marker:text-gray-700 dark:prose-ol:marker:text-white/80 '
-                + 'prose-ul:text-gray-700 dark:prose-ul:text-white/80 prose-ol:text-gray-700 dark:prose-ol:text-white/80 '
-                + 'prose-ol:pl-10 prose-ul:pl-10'
-              }
-            />
-          </Section>
-        );
-      })}
+      <HomeArticle />
     </div>
   );
 }
