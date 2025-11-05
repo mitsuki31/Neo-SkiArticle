@@ -71,7 +71,9 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
     <header className={`bg-gradient-to-b from-sky-200 to-sky-100 dark:from-background dark:to-background md:p-2 border-none ${sticky ? stickyHeaderClass : ''} ${className}`} id="header">
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-5 mt-1 ml-8">
-          <img src={logoSki} alt="SMK Sukamandi Logo" className="w-10 h-10" />
+          <a href="/" className="cursor-pointer">
+            <img src={logoSki} alt="SMK Sukamandi Logo" className="w-10 h-10" />
+          </a>
           <span className="text-xl lg:text-2xl mt-1 font-gugi font-bold tracking-[0.3rem] sm:tracking-[0.6rem] text-gray-800 dark:text-white">NeoSKI</span>
         </div>
         <nav id="navbar">

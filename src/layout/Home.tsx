@@ -139,22 +139,22 @@ export default function Home() {
   ;
 
   return (
-    <div className="bg-white-700 dark:bg-background text-gray-900 dark:text-white/80">
+    <div className="bg-[#D7FFFE]/10 dark:bg-background text-gray-900 dark:text-white/80">
       <Hero />
 
       {/* Featured Articles Section */}
       <div className="max-w-screen bg-white/90 dark:bg-[#0F1221] pb-30 pt-15 mt-0">
         <Section id="featured-articles">
-          <div className="container px-4">
-            <h2 className="text-3xl text-gray-900 dark:text-white font-semibold mb-8 text-center">Artikel Unggulan</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="container px-4 mx-auto">
+            <h2 className="text-3xl text-gray-900 dark:text-white font-bold mb-8 text-center">Artikel Unggulan</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-6 justify-center">
               {featuredArticles.map((article) => (
                 <motion.div
                   key={article.title.replace(/\s+/g, '-').toLowerCase()}
                   whileHover={{ scale: 1.03 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                 >
-                  <FocusableCard className={`h-full dark:bg-white/10 bg-[#0F1221] border-none transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
+                  <FocusableCard className={`h-full bg-gradient-to-br from-[#FFEFA0]/20 via-[#AFDFDE]/20 to-[#D7FFFE]/20 dark:from-white/10 dark:to-gray-900 shadow-lg dark:shadow-none border-none transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
                     {/* Featured Article */}
                     <CardContent className="p-5">
                       {/* Category */}
@@ -166,9 +166,9 @@ export default function Home() {
                         ))}
                       </div>
                       {/* Title */}
-                      <h3 className="text-xl text-white font-semibold mb-2">{article.title}</h3>
+                      <h3 className="text-xl text-gray-900 dark:text-white font-semibold mb-2">{article.title}</h3>
                       {/* Description */}
-                      <p className="text-gray-300 dark:text-white/80 text-sm mb-4">
+                      <p className="text-gray-600 dark:text-white/80 text-sm mb-4">
                         {Array.isArray(article.description)
                           ? article.description.map(a => a.trim()).join(' ')
                           : typeof article.description === 'string'
