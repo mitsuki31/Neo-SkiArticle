@@ -46,12 +46,12 @@ export function parseMarkdown(markdown: string, beautify: boolean = true): strin
  * @param file - Markdown file to unify
  * @param processor- Optional `unified` processor to use, defaults to {@link markdownProcessor}
  */
-export async function unify(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function unify<T extends Processor<any, any, any, any, any>>(
   file: Compatible,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  processor?: Processor<any, any, any, any, any>
+  processor?: T
 ) {
-  if (!processor) processor = markdownProcessor;
+  if (!processor) processor = markdownProcessor as T;
   return await processor.process(file);
 }
 
@@ -66,7 +66,18 @@ export async function getMarkdownContent<T>(slug: string, rawOnly?: boolean): Pr
   const { content: raw } = article;
   if (rawOnly) return { raw };
 
-  const file = await unify(raw);
+  // This ensure it always a new instance whenever hot reloading
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkSlugFromHeading)
+    .use(remarkHeadings)
+    .use(remarkFrontmatter, { type: 'yaml', marker: '-' })
+    .use(remarkRehype, { clobberPrefix: '' })
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+  ;
+  const file = await unify(raw, processor);
   return {
     data: (matterParse(raw) ?? {}) satisfies T,
     content: addHeadingIds(String(file), (file.data.headings ?? []) as Heading[]),
