@@ -44,6 +44,6 @@ export function useScrollSpy(ids: string[], offset: number = 100): string | unde
  */
 export function extractSections(markdown: string): string[] {
   const sections = markdown.split('=== [SECTION START] ===').filter(Boolean);
-  let filteredSections = sections.map(section => section.replace('=== [SECTION END] ===', ''));
+  const filteredSections = sections.map(section => section.replace('=== [SECTION END] ===', ''));
   return filteredSections.map(section => section.replace(/^<p>/, '').replace(/^<\/p>/, '').trim()).filter(Boolean);
 }
