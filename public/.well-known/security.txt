@@ -1,0 +1,4 @@
+Contact: mailto:dhefam31@proton.me
+Policy: https://neoski.vercel.app/security
+Preferred-Languages: en, id
+Canonical: https://neoski.vercel.app/.well-known/security.txt
