@@ -318,7 +318,7 @@ export function SecurityPage() {
                 </h3>
                 <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">{t.privateReportDesc}</p>
                 <a
-                  href={securityReports.public}
+                  href={securityReports.private}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex gap-2 justify-center items-center px-4 py-2 bg-transparent dark:bg-inherit border border-gray-500 dark:not-hover:border-gray-300 hover:border-orange-400 hover:text-orange-400 focus:border-2 focus:border-orange-400 focus:text-orange-400 rounded-md text-sm"
