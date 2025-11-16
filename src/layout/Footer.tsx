@@ -3,6 +3,7 @@ import {
   instagram as instagramUrl,
   youtube as youtubeUrl,
   github_repo as githubUrl,
+  main_web as mainWebUrl,
   code_of_conduct as codeOfConduct,
   security_policy as securityPolicy,
   privacy_policy as privacyPolicy,
@@ -53,6 +54,7 @@ export default function Footer() {
             <li><a href="/#about" className={underlineCls}>Tentang Sekolah</a></li>
             <li><a href="/a/program-keahlian" className={underlineCls}>Program Keahlian</a></li>
             <li><a href="/a/pelatihan-vokasi-2025" className={underlineCls}>Pelatihan Vokasi 2025</a></li>
+            <li><a href={mainWebUrl} target="_blank" rel="noopener noreferrer" className={underlineCls}>PPDB</a></li>
           </ul>
         </div>
 
