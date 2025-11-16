@@ -3,6 +3,9 @@ import {
   instagram as instagramUrl,
   youtube as youtubeUrl,
   github_repo as githubUrl,
+  code_of_conduct as codeOfConduct,
+  security_policy as securityPolicy,
+  privacy_policy as privacyPolicy,
 } from '@/assets/global-urls.json';
 import logoSki from '@/assets/logo_ski.png';
 
@@ -49,17 +52,16 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li><a href="/#about" className={underlineCls}>Tentang Sekolah</a></li>
             <li><a href="/a/program-keahlian" className={underlineCls}>Program Keahlian</a></li>
-            {/* <li><a href="#fasilitas" className={underlineCls}>Fasilitas</a></li> */}
             <li><a href="/a/pelatihan-vokasi-2025" className={underlineCls}>Pelatihan Vokasi 2025</a></li>
           </ul>
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase mb-3">Lainnya</h3>
+          <h3 className="text-sm font-semibold uppercase mb-3">Informasi Legal</h3>
           <ul className="space-y-2 text-sm">
-            {/* <li><a href="#" className="hover:underline">Berita</a></li> */}
-            {/* <li><a href="#" className="hover:underline">Galeri</a></li> */}
-            <li><a href="https://smksukamandi.online" target="_blank" rel="noopener noreferrer" className={underlineCls}>PPDB</a></li>
+            <li><a href={securityPolicy.internal} className={underlineCls}>Keamanan</a></li>
+            <li><a href={privacyPolicy.internal} className={underlineCls}>Kebijakan Privasi</a></li>
+            <li><a href={codeOfConduct.internal} className={underlineCls}>Kode Etik</a></li>
           </ul>
         </div>
 
