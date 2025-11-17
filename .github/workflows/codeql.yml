@@ -69,11 +69,9 @@ jobs:
           set -euo pipefail
           # prefer npm ci when lockfile exists
           if [[ -f package-lock.json || -f pnpm-lock.yaml || -f yarn.lock ]]; then
-            npm ci
-          elif [ -f bun.lock ]; then
-            bun i
+            npm ci --legacy-peer-deps
           else
-            npm i
+            npm i --legacy-peer-deps
           fi
 
           # build if a build script exists (Vite builds static assets)
