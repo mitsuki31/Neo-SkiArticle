@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
+@plugin "tailwind-scrollbar" {
+  nocompatible: true;
+  preferredStrategy: 'pseudoelements';
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -120,27 +124,33 @@
   }
 }
 
+/* ========= */
+
+:root {
+  --header-height: 68px;
+  --scroll-margin-top: calc(var(--header-height) + 8px);
+}
+
 html {
   scroll-behavior: smooth;
-  /* transition: background-color 1.5s,
-              color 1.5s; */
+  transition: background-color 0.8s ease, color 0.8s ease;
 }
 
-* {
-  @apply transition-colors duration-300 ease-in-out;
-}
-
-.article p {
-  @apply text-gray-700;
-  @apply dark:text-white/80
-}
-
-.article p:not(:last-child) {
-  margin-bottom: 1.2em;
+.custom-scrollbar {
+  @apply scrollbar-thin
+    scrollbar-track-gray-100 dark:scrollbar-track-gray-600/70
+    scrollbar-thumb-orange-600/60
+    hover:scrollbar-thumb-orange-500 active:scrollbar-thumb-orange-500
+    scrollbar-thumb-rounded-full scrollbar-track-rounded-full
+  ;
 }
 
 .prose img {
   @apply rounded-xl shadow-lg transition-transform duration-300 ease-in-out hover:scale-105;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply scroll-mt-[--scroll-margin-top];
 }
 
 

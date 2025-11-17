@@ -23,15 +23,16 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const stickyHeaderClass = `
-    fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ease-in-out
+    fixed top-0 left-0 right-0 h-17 w-full z-50 transition-all duration-300 ease-in-out
+    backdrop-blur-[4px] bg-transparent
     ${
       scrollState === 'scrolled'
-        ? 'translate-y-0 shadow-xl from-white to-white'
+        ? 'translate-y-0 shadow-xl'
         : scrollState === 'top'
           ? 'translate-y-0 shadow-none'
           : '-translate-y-full'
     }
-  `;
+  `.replace(/[\n\s]+/g, ' ').trim();
 
   const navMenuItemsHoveredClass = `p-2 px-[0.9rem] cursor-pointer hover:outline-none hover:rounded-sm focus-visible:outline-none focus-visible:rounded-sm active:outline-none active:rounded-sm ${scrollState === 'top' ? 'hover:bg-sky-300/30 focus-visible:bg-sky-300/30 active:bg-sky-300/30' : 'hover:bg-gray-200 focus-visible:bg-gray-200 active:bg-gray-200'} dark:hover:bg-zinc-600 dark:hover:text-orange-400 dark:focus-visible:bg-zinc-600 dark:focus-visible:text-orange-400 dark:active:bg-zinc-600 dark:active:text-orange-400`;
 
@@ -71,15 +72,15 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
     <header className={`bg-gradient-to-b from-sky-200 to-sky-100 dark:from-background dark:to-background md:p-2 border-none ${sticky ? stickyHeaderClass : ''} ${className}`} id="header">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-4 sm:space-x-10 mt-1 ml-3 2xl:ml-0">
-          <img src={logoSki} alt="SMK Sukamandi Logo" className="w-10 h-10" />
+          <img src={logoSki} alt="SMK Sukamandi Logo" className="w-10 h-10 ml-3" />
           <span className="text-xl lg:text-2xl mt-1 font-gugi font-bold tracking-[0.3rem] sm:tracking-[0.6rem] text-gray-800 dark:text-white">NeoSKI</span>
         </div>
         <nav id="navbar">
           <ul className="space-x-2 text-black dark:text-white hidden md:flex">
-            <li className={`mt-1 ${navMenuItemsHoveredClass}`}><a href="/" className="font-bold"><i className="bx bxs-home mr-2 text-md"></i>Beranda</a></li>
-            <li className={`mt-1 ${navMenuItemsHoveredClass}`}><a href="#about" className="font-bold"><i className="bx bx-info-circle mr-2 text-md"></i>Tentang</a></li>
+            <li className={`mt-1 ${navMenuItemsHoveredClass} !duration-100`}><a href="/" className="font-bold"><i className="bx bxs-home mr-2 text-md"></i>Beranda</a></li>
+            <li className={`mt-1 ${navMenuItemsHoveredClass} !duration-100`}><a href="/#about" className="font-bold"><i className="bx bx-info-circle mr-2 text-md"></i>Tentang</a></li>
             <li
-              className={`relative mt-1 ${navMenuItemsHoveredClass}`}
+              className={`relative mt-1 ${navMenuItemsHoveredClass} !duration-100`}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -88,7 +89,7 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
                   <i className="bx bxs-group mr-2 text-md"></i>
                   <span className='mr-3'>Sosial</span>
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform ${hoveredItem === 'sosial' ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 transform transition-transform duration-200 ${hoveredItem === 'sosial' ? "-rotate-180" : ""}`}
                   />
                 </button>
                 {isDropdownOpen && (

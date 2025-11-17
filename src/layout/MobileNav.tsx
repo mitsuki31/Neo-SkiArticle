@@ -26,7 +26,7 @@ const navLinks = [
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [openedSubmenu, setOpenedSubmenu] = useState<string | null>(null);
 
   const hoveredItemClass =
     'hover:bg-gray-100 hover:text-orange-600 focus-visible:bg-gray-100 focus-visible:text-orange-600 active:bg-gray-100 active:text-orange-600 '
@@ -68,108 +68,7 @@ export default function MobileNav() {
   });
 
   return (
-    <div className="md:hidden z-50">
-      {/* Top Navbar */}
-      <div className="flex items-center justify-between p-4 bg-none">
-        <button
-          id="mobile-nav-button"
-          type="button"
-          onClick={() => setOpen(true)}
-          aria-label="Open Menu"
-          className="cursor-pointer shadow-none ring-0 border-0 focus:outline-none hover:brightness-110 transition"
-        >
-          <Menu className="w-8 h-8 text-zinc dark:text-white" />
-        </button>
-      </div>
-
-      {/* Slide-in Drawer Menu */}
-      <AnimatePresence>
-        {open && (
-          <motion.aside
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 right-0 w-70 h-fit bg-white dark:bg-zinc-700 dark:text-white/80 shadow-lg z-50 rounded-l-xl flex flex-col"
-          >
-            <div className="flex items-center justify-between p-4 border-b dark:border-neutral-700">
-              <div className="text-[1.3rem] font-major-mono font-bold dark:text-white mt-1">NeoSKI</div>
-              <button onClick={() => setOpen(false)} aria-label="Close Menu" type="button" className="mr-1 mt-1">
-                <X className="cursor-pointer w-7 h-7 animate-spin-once" />
-              </button>
-            </div>
-            <nav className="flex flex-col p-4 space-y-2" id='mobile-nav'>
-              {navLinks.map((link) => (
-                <div
-                  key={link.name}
-                  className="w-full inline-block"
-                  onMouseEnter={() => setHoveredItem(link.name)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  onKeyDown={(e) => {
-                    if ([' ', 'Enter'].includes(e.key)) {
-                      if (e.key === ' ') e.preventDefault();  // Prevent page scroll on Space
-                      setHoveredItem((prev) => (prev === link.name ? null : link.name));
-                    }
-                  }}
-                >
-                  {link.href ? (
-                      <a
-                        href={link.href}
-                        className={`flex items-center text-base font-medium px-3 py-[0.65rem] rounded-lg transition-all ${hoveredItemClass}`}
-                        onClick={() => setOpen(false)}
-                      >
-                        <i className={`${link.logoClass} mr-4 text-[1.25rem]`}></i>
-                        {link.name}
-                      </a>
-                  ) : link.submenu ? (
-                    <div className="space-y-2">
-                      <div
-                        role="button"
-                        tabIndex={0}
-                        className={`text-base font-medium flex items-center justify-between px-3 py-[0.65rem] mb-0 rounded-lg cursor-pointer transition-all ${hoveredItemClass}`}
-                      >
-                        <span><i className={`${link.logoClass} mr-4 text-[1.3rem]`}></i>{link.name}</span>
-                        <ChevronDown
-                          className={`w-4 h-4 transition-transform ${hoveredItem === link.name ? "rotate-180" : ""}`}
-                        />
-                      </div>
-                      <AnimatePresence>
-                        {hoveredItem === link.name && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="pl-4 mb-0 space-y-1 overflow-hidden"
-                          >
-                            {link.submenu.map((subItem) => (
-                              <a
-                                key={subItem.name}
-                                href={subItem.href}
-                                className={`flex items-center text-sm font-medium px-3 pr-2 py-[0.7rem] my-3 rounded-lg transition-all ${hoveredItemClass} ${subItem.hoveredClass}`}
-                                onClick={() => setOpen(false)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <i className={`${subItem.logoClass} mr-4 text-[1.3rem]`}></i>
-                                {subItem.name}
-                              </a>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : null}
-                </div>
-              ))}
-            </nav>
-            <div className="p-4 border-t dark:border-neutral-700">
-              <ThemeToggle id="mobile-nav-theme-toggler" className='mr-5 mt-[0.3rem] cursor-pointer bg-inherit dark:bg-background border-none hover:bg-black hover:text-background dark:hover:bg-white dark:hover:text-background' />
-            </div>
-          </motion.aside>
-        )}
-      </AnimatePresence>
-
+    <>
       {/* Backdrop */}
       <AnimatePresence>
         {open && (
@@ -178,10 +77,112 @@ export default function MobileNav() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black dark:bg-white/10 z-40"
+            className="absolute inset-0 h-[100vh] bg-black z-40"
+            aria-hidden="true"
           />
         )}
       </AnimatePresence>
-    </div>
+      <div className="md:hidden z-50">
+        {/* Top Navbar */}
+        <div className="flex items-center justify-between p-4 mr-2 bg-none">
+          <button
+            id="mobile-nav-button"
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Open Menu"
+            className="cursor-pointer shadow-none ring-0 border-0 focus:outline-none hover:brightness-110 transition"
+          >
+            <Menu className="w-8 h-8 text-zinc dark:text-white" />
+          </button>
+        </div>
+
+        {/* Slide-in Drawer Menu */}
+        <AnimatePresence>
+          {open && (
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="fixed top-0 right-0 w-70 h-fit bg-white dark:bg-zinc-700 dark:text-white/80 shadow-lg z-50 rounded-l-xl flex flex-col"
+            >
+              <div className="flex items-center justify-between p-4 border-b dark:border-neutral-700">
+                <div className="text-[1.3rem] font-major-mono font-bold dark:text-white mt-1">NeoSKI</div>
+                <button onClick={() => setOpen(false)} aria-label="Close Menu" type="button" className="mr-1 mt-1">
+                  <X className="cursor-pointer w-7 h-7 animate-spin-once" />
+                </button>
+              </div>
+              <nav className="flex flex-col p-4 space-y-2" id='mobile-nav'>
+                {navLinks.map((navEntry) => (
+                  <div
+                    key={navEntry.name}
+                    className="w-full inline-block"
+                    onKeyDown={(e) => {
+                      if ([' ', 'Enter'].includes(e.key)) {
+                        if (e.key === ' ') e.preventDefault();  // Prevent page scroll on Space
+                        setOpenedSubmenu((prev) => (prev === navEntry.name ? null : navEntry.name));
+                      }
+                    }}
+                    onClick={() => setOpenedSubmenu(prev => prev !== navEntry.name ? navEntry.name : null)}
+                  >
+                    {navEntry.href ? (
+                        <a
+                          href={navEntry.href}
+                          className={`flex items-center text-base font-medium px-3 py-[0.65rem] rounded-lg transition-all ${hoveredItemClass}`}
+                          onClick={() => setOpen(false)}
+                        >
+                          <i className={`${navEntry.logoClass} mr-4 text-[1.25rem]`}></i>
+                          {navEntry.name}
+                        </a>
+                    ) : navEntry.submenu ? (
+                      <div className="space-y-2">
+                        <div
+                          role="button"
+                          tabIndex={0}
+                          className={`text-base font-medium flex items-center justify-between px-3 py-[0.65rem] mb-0 rounded-lg cursor-pointer transition-all ${hoveredItemClass}`}
+                        >
+                          <span><i className={`${navEntry.logoClass} mr-4 text-[1.3rem]`}></i>{navEntry.name}</span>
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform ${openedSubmenu === navEntry.name ? "-rotate-180" : ""}`}
+                          />
+                        </div>
+                        <AnimatePresence>
+                          {openedSubmenu === navEntry.name && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="pl-4 mb-0 space-y-1 overflow-hidden"
+                            >
+                              {navEntry.submenu.map((subItem) => (
+                                <a
+                                  key={subItem.name}
+                                  href={subItem.href}
+                                  className={`flex items-center text-sm font-medium px-3 pr-2 py-[0.7rem] my-3 rounded-lg transition-all ${hoveredItemClass} ${subItem.hoveredClass}`}
+                                  onClick={() => setOpen(false)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <i className={`${subItem.logoClass} mr-4 text-[1.3rem]`}></i>
+                                  {subItem.name}
+                                </a>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : null}
+                  </div>
+                ))}
+              </nav>
+              <div className="p-4 border-t dark:border-neutral-700">
+                <ThemeToggle id="mobile-nav-theme-toggler" className='mr-5 mt-[0.3rem] cursor-pointer bg-inherit dark:bg-background border-none hover:bg-black hover:text-background dark:hover:bg-white dark:hover:text-background' />
+              </div>
+            </motion.aside>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   )
 }

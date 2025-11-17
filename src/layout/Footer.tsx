@@ -4,6 +4,7 @@ import {
   youtube as youtubeUrl,
   github_repo as githubUrl,
 } from '@/assets/global-urls.json';
+import logoSki from '@/assets/logo_ski.png';
 
 // Icons
 import instagramIcon from '@icons/instagram.svg?raw';
@@ -16,23 +17,40 @@ export default function Footer() {
   const instagramIconHoverClass = 'hover:text-pink-600 focus:text-pink-600 active:text-pink-600';
   const youtubeIconHoverClass = 'hover:text-red-600 focus:text-red-600 active:text-red-600';
   const githubIconHoverClass = 'hover:text-black focus:text-black active:text-black dark:hover:text-white dark:focus:text-white dark:active:text-white';
+  const underlineCls = `
+    hover:underline hover:underline-offset-4
+    focus:underline focus:underline-offset-4
+    active:underline active:underline-offset-4
+    hover:font-bold focus:font-bold active:font-bold
+    dark:hover:decoration-orange-400
+    dark:focus:decoration-orange-400
+    dark:active:decoration-orange-400
+    hover:decoration-2 focus:decoration-2 active:decoration-2
+  `.replace(/[\n\s]+/g, ' ').trim();
 
   return (
     <footer className="bg-gray-300 dark:bg-gray-900 text-gray-700 dark:text-gray-300 pt-8 px-5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 xs:pt-2 pb-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-          <h2 className="text-xl font-bold mb-4">SMK Sukamandi</h2>
-          <p className="text-sm">
-            Tempat membangun masa depan dengan pendidikan kejuruan berkualitas dan karakter unggul.
-          </p>
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 xs:pt-2 pb-4 grid grid-cols-1 md:grid-cols-4 gap-8 md:justify-items-center-safe">
+        <div className="flex gap-2">
+          {/* This logo will appear on smaller screens and larger screens, but will hidden on medium screens */}
+          <img src={logoSki} alt="Logo SMK Sukamandi" className='w-20 h-20 lg:w-24 lg:h-24 my-auto mr-6 xs:block md:hidden lg:block' />
+          <div>
+            {/* This logo will appear only on medium screens */}
+            <img src={logoSki} alt="Logo SMK Sukamandi" className='w-20 h-20 ml-2 mb-4 block xs:hidden md:block lg:hidden' />
+            <h2 className="text-xl font-bold mb-4">SMK Sukamandi</h2>
+            <p className="text-sm">
+              Tempat membangun masa depan dengan pendidikan kejuruan berkualitas dan karakter unggul.
+            </p>
+          </div>
         </div>
 
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Navigasi</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/#about" className="hover:underline">Tentang Sekolah</a></li>
-            <li><a href="/a/program-keahlian" className="hover:underline">Program Keahlian</a></li>
-            {/* <li><a href="#fasilitas" className="hover:underline">Fasilitas</a></li> */}
+            <li><a href="/#about" className={underlineCls}>Tentang Sekolah</a></li>
+            <li><a href="/a/program-keahlian" className={underlineCls}>Program Keahlian</a></li>
+            {/* <li><a href="#fasilitas" className={underlineCls}>Fasilitas</a></li> */}
+            <li><a href="/a/pelatihan-vokasi-2025" className={underlineCls}>Pelatihan Vokasi 2025</a></li>
           </ul>
         </div>
 
@@ -41,7 +59,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             {/* <li><a href="#" className="hover:underline">Berita</a></li> */}
             {/* <li><a href="#" className="hover:underline">Galeri</a></li> */}
-            <li><a href="https://smksukamandi.online" target="_blank" className="hover:underline">PPDB</a></li>
+            <li><a href="https://smksukamandi.online" target="_blank" rel="noopener noreferrer" className={underlineCls}>PPDB</a></li>
           </ul>
         </div>
 

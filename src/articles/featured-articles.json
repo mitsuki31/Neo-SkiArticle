@@ -1,14 +1,21 @@
 [
   {
-    "title": "Program Keahlian",
+    "title": "Program Keahlian Unggulan SMK Sukamandi",
     "category": ["Program Keahlian", "TKJ", "TKR", "TP"],
-    "description": "Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.",
+    "description": [
+      "Jelajahi tiga program keahlian unggulan di SMK Sukamandi: TP, TKR, dan TKJ. Dapatkan keterampilan praktis, pengetahuan",
+      "mendalam, dan sertifikasi industri yang akan membuka lebar pintu karir Anda di sektor manufaktur, otomotif modern, hingga", "dunia IT dan teknologi digital yang terus berkembang.",
+      "Siapkan diri menjadi tenaga ahli profesional dan siap kerja!"
+    ],
     "src": "/a/program-keahlian"
   },
   {
-    "title": "Pelatihan Vokasi 2025",
+    "title": "Vokasi Jabar 2025: Strategi Komprehensif Menuju Tenaga Kerja Kompeten Industri 4.0",
     "category": ["Vokasi", "Keterampilan", "Industri 4.0"],
-    "description": "Dengan semangat belajar tinggi, peserta pelatihan vokasi pengelasan dan pemesinan telah menyelesaikan program ini dengan sukses. Sebuah langkah awal menuju karier gemilang!",
+    "description": [
+      "Peta jalan Vokasi Jabar 2025. Fokus pada Otomasi Industri 4.0 (Bekasi) dan Agroindustri Digital (Bandung Barat).",
+      "Disoroti sinergi Disdik dan BLK Subang dalam mencetak tenaga kerja siap rekrutmen."
+    ],
     "src": "/a/pelatihan-vokasi-2025"
   }
 ]

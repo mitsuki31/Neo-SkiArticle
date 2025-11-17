@@ -34,7 +34,7 @@ export function Section({ children, className = '', id = '' }: SectionProps) {
         hidden: { opacity: 0, y: 60 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.865 } },
       }}
-      className={`px-4 py-12 max-w-5xl mx-auto ${className}`}
+      className={`px-4 py-4 max-w-5xl mx-auto ${className}`}
       id={id}
     >
       {children}

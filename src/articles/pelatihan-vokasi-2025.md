@@ -1,10 +1,10 @@
 ---
 title: Pelatihan Vokasi 2025
 date: 2025-07-21
-category: Vokasi, Keterampilan, Industri 4.0
+category: [Vokasi, Keterampilan, Industri 4.0]
 ---
 
-=== [SECTION START] ===
+=== SECTION START ===
 # Analisis Komprehensif dan Peta Jalan Pelatihan Vokasi Jawa Barat Tahun 2025
 > **Mencetak Tenaga Kerja Kompeten untuk Era Industri 4.0 dan Ekonomi Digital**
 
@@ -23,9 +23,9 @@ Ekosistem pelatihan vokasi di Jawa Barat dijalankan oleh arsitektur yang terbagi
 Pilar pertama adalah Unit Pelaksana Teknis (UPT) di bawah [**Kementerian Ketenagakerjaan** (Kemnaker) Republik Indonesia](https://kemnaker.go.id/). UPT ini diwakili oleh [**Balai Besar Pelatihan Vokasi dan Produktivitas** (BBPVP) Bekasi](https://sippn.menpan.go.id/instansi/balai-besar-pelatihan-vokasi-dan-produktivitas-bekasi-1885567)  dan [**Balai Pelatihan Vokasi dan Produktivitas** (BPVP) Bandung Barat][BPVP Bandung Barat]. [BBPVP Bekasi][BPVP Bekasi], berlokasi di [Jalan Guntur Raya No. 1, Bekasi Selatan](https://www.google.com/maps/place/BBPVP+BEKASI+-+Kemnaker+RI/@-6.234773,106.9891488,18z/data=!3m1!4b1!4m6!3m5!1s0x2e698c3c3b70ae9d:0x736ea7de53e58ba2!8m2!3d-6.234773!4d106.9904389!16s%2Fg%2F11f__78p17?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D), berperan sebagai pusat keunggulan regional yang fokus pada sektor-sektor kritis Industrial 4.0. Sementara itu, [BPVP Bandung Barat][BPVP Bandung Barat] fokus pada pengembangan kompetensi yang menopang sektor agroindustri, perikanan, dan pariwisata di wilayah Jabar tengah dan selatan. Pembagian fokus ini mencerminkan klasterisasi ekonomi Jawa Barat, di mana Bekasi yang merupakan sentra manufaktur utama memerlukan fokus pada kejuruan padat modal/teknologi (seperti Welding dan Otomasi), sementara Bandung Barat berfokus pada Agribisnis dan Layanan.
 
 Pilar kedua adalah Unit Pelaksana Teknis Daerah (UPTD) yang berada di bawah Disnakertrans Provinsi Jawa Barat, yaitu BLK Kompetensi Jabar (berlokasi di [Jl. KH. Agus Salim No. 206](https://www.google.com/maps/place/Balai+Latihan+Kerja+Kompetensi/@-6.2261479,107.0157467,18z/data=!4m6!3m5!1s0x2e698ea1790942e1:0xe99bec54b6845f23!8m2!3d-6.2259961!4d107.0162675!16s%2Fg%2F1hm4zqf8d?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D) dan [Balai Latihan Kerja Mandiri (BLK Mandiri)](https://www.jabarprov.go.id/layanan/pelatihanketenagakerjaan). Selain itu, terdapat BLK di tingkat Kabupaten/Kota, seperti UPTD BLK Kabupaten Subang, yang menunjukkan fleksibilitas tinggi dalam merespons kebutuhan industri lokal spesifik.
-=== [SECTION END] ===
+=== SECTION END ===
 
-=== [SECTION START] ===
+=== SECTION START ===
 ## Peta Program Vokasi Unggulan 2025 Berbasis Kompetensi (PBK)
 
 ### Program Unggulan BBPVP Bekasi: Pusat Keunggulan Manufaktur dan TIK 4.0
@@ -57,9 +57,9 @@ BLK di tingkat kabupaten menunjukkan kemampuan adaptasi yang sangat tinggi terha
 Untuk tahun 2025, [BLK Kabupaten Subang menyiapkan program strategis](https://reformasibangsa.co.id/balai-pelatihan-kerja-kabupaten-subang-siapkan-tenaga-kerja-kompeten-untuk-industri-baru/) yang akan dilaksanakan pada Agustus 2025, dengan pendaftaran dibuka pada Juli 2025. Kejuruan yang difokuskan meliputi **Operator Instrumen dan Kontrol**, **Logistik Administrator Officer**, **Bahasa Mandarin**, **Operator Forklift**, dan **Tenaga Security**. Pemilihan kejuruan seperti Logistik Administrator Officer dan Bahasa Mandarin adalah respons langsung terhadap kebutuhan tenaga kerja industri baru di kawasan Subang (kemungkinan terkait investasi asing). Pelatihan ini secara khusus dirancang untuk link and match, dan Kepala Disnaker Subang menyatakan bahwa para lulusan dijamin akan ditempatkan di pekerjaan melalui proses rekrutmen yang dilakukan oleh perusahaan mitra.
 
 Selain BLK, **Dinas Pendidikan Jawa Barat** (Disdik Jabar) juga turut berperan dengan menyelenggarakan pelatihan vokasi yang menargetkan siswa SMK (program hulu). Pelatihan ini, yang dilaksanakan di SMKN 1 Subang pada April hingga Mei 2025, secara spesifik mencakup kejuruan **Teknik Otomotif**, **Teknik Elektro Industri**, **Teknik Pemesinan**, **Teknik Welding** (Pengelasan), dan **Teknik Otomasi Industri**. [Program ini menargetkan lebih dari 1000 siswa](https://bipol.co/2025/04/22/pelatihan-vokasi-129252.html) dengan tujuan utama meningkatkan kualitas pendidikan agar selaras dengan kebutuhan industri. Hal ini menunjukkan upaya sinergis dari hulu ke hilir untuk mempersiapkan tenaga kerja.
-=== [SECTION END] ===
+=== SECTION END ===
 
-=== [SECTION START] ===
+=== SECTION START ===
 ## Sinergi _Link and Match_ dan Aksesibilitas Program
 
 ### Kemitraan Industri dan Model Pelatihan Berbasis Penempatan (PBP)
@@ -75,9 +75,9 @@ Untuk menjamin kualitas dan relevansi, **Dinas Pendidikan Jawa Barat** (Disdik J
 Setelah menyelesaikan pelatihan berbasis kompetensi, lulusan memiliki peluang untuk melanjutkan ke program penempatan atau pemagangan. Jalur pemagangan global, [khususnya ke Jepang](https://jepang.magangln.id/index.php/home/program_magang), dipersiapkan melalui balai-balai vokasi. Program pemagangan ini memiliki persyaratan teknis yang ketat, termasuk minimal lulusan SLTA, lulus tes matematika, kesamaptaan tubuh, ketahanan fisik, wawancara, dan tes bahasa Jepang. Lokasi persiapan, seperti Gedung Pusat Pemagangan Kemnaker RI, juga berada di Bekasi, menunjukkan integrasi regional. BPVP Bandung Barat secara proaktif menyertakan pelatihan Bahasa Jepang (N5) dalam kejuruan Bisnis Manajemen untuk memfasilitasi jalur ini.
 
 Secara umum, semua program pelatihan di BLK/BPVP Jawa Barat berbasis **Standar Kompetensi Kerja Nasional Indonesia** (SKKNI). Peserta memiliki peluang untuk mengikuti uji kompetensi setelah pelatihan guna memperoleh sertifikat kompetensi yang diakui secara nasional dari [**Badan Nasional Sertifikasi Profesi** (BNSP)](https://bnsp.go.id/). Sertifikasi ini sangat penting untuk meningkatkan daya saing lulusan di pasar kerja.
-=== [SECTION END] ===
+=== SECTION END ===
 
-=== [SECTION START] ===
+=== SECTION START ===
 ## Kesimpulan
 
 ### Ringkasan Temuan Utama dan Evaluasi Kesiapan Vokasi Jabar 2025
@@ -96,7 +96,7 @@ Kinerja di Kabupaten Subang menjadi model sinergi yang komprehensif. Upaya _link
     BLK Kabupaten Subang merespons investasi baru dengan membuka kejuruan _**Tailor-Made Training**_ seperti **Logistik Administrator Officer** dan **Bahasa Mandarin**, yang lulusannya dijamin akan langsung direkrut oleh perusahaan mitra.
 
 Model Subang ini efektif dalam memastikan pasokan tenaga kerja terampil di sektor manufaktur dan teknis (melalui Disdik Jabar) selaras dengan permintaan spesifik industri logistik dan asing (melalui BLK Subang), sehingga menciptakan jalur penempatan kerja yang lebih terjamin bagi angkatan kerja muda.
-=== [SECTION END] ===
+=== SECTION END ===
 
 
 [BPVP Bekasi]: https://bbpvpbekasi.kemnaker.go.id/
