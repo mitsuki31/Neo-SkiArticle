@@ -101,7 +101,7 @@ export function useActiveHeading(headingIds: readonly string[], headerHeight: nu
  * @returns An array of section strings.
  */
 export function extractSections(markdown: string): string[] {
-  const sections = markdown.split('=== [SECTION START] ===').filter(Boolean);
-  const filteredSections = sections.map(section => section.replace('=== [SECTION END] ===', ''));
+  const sections = markdown.split('=== SECTION START ===').filter(Boolean);
+  const filteredSections = sections.map(section => section.replace('=== SECTION END ===', ''));
   return filteredSections.map(section => section.replace(/^<p>/, '').replace(/^<\/p>/, '').trim()).filter(Boolean);
 }
