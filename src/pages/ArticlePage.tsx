@@ -50,10 +50,9 @@ export function ArticleLoading() {
 }
 
 function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: Required<ParsedMarkdown<ArticleFrontMatter>> }) {
-  const { data: matterData, raw, content: html } = parsedMarkdown ?? {};
+  const { data, raw, content: html } = parsedMarkdown ?? {};
   const readTime = calcReadTime(raw, 150);
   const sections = extractSections(html);
-  const { attributes: data } = matterData;
 
   return (
     <>
@@ -83,7 +82,8 @@ function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: R
               + 'prose-ul:list-disc prose-ol:list-decimal '
               + 'prose-ul:marker:text-gray-700 dark:prose-ul:marker:text-white/80 prose-ol:marker:text-gray-700 dark:prose-ol:marker:text-white/80 '
               + 'prose-ul:text-gray-700 dark:prose-ul:text-white/80 prose-ol:text-gray-700 dark:prose-ol:text-white/80 '
-              + 'prose-ol:pl-10 prose-ul:pl-10'
+              + 'prose-ol:pl-10 prose-ul:pl-10 '
+              + 'prose-hr:my-8'
             }
             titleClassName='text-3xl md:text-4xl'
             preserveHeading
@@ -117,8 +117,7 @@ export default function ArticlePage() {
   useEffect(() => {
     if (!slug) return;
 
-    function updateDocumentTitle(matterData?: NonNullable<typeof content>['data']): void {
-      const { attributes: data } = matterData ?? {};
+    function updateDocumentTitle(data?: NonNullable<typeof content>['data']): void {
       // Set the document title based on the article title
       if (data && Object.keys(data).length > 0 && data.title) {
         setTitle(data.title);

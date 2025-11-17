@@ -8,14 +8,14 @@ import remarkHeadings from '@vcarl/remark-headings';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import rehypeStringify from 'rehype-stringify';
-import matter, { type FrontMatterResult } from 'front-matter';
+import { parse as matterParse } from 'hexo-front-matter';
 import { type Heading, remarkSlugFromHeading } from './plugins/remark/remark-slug-from-heading';
 import addHeadingIds from './plugins/dom/add-heading-ids';
 import { enhanceList, enhanceTable } from './utils';
 import articles from '@/utils/articleLoader';
 
 export type ParsedMarkdown<T> = {
-  data?: FrontMatterResult<T>;
+  data?: T;
   content?: string;
   headings?: Heading[];
   raw: string;
@@ -28,12 +28,9 @@ export function parseMarkdown(markdown: string, beautify: boolean = true): strin
   return beautify ? enhanceList(enhanceTable(sanitizedHtml)) : sanitizedHtml;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getMarkdownContent<T = any>(slug: string, rawOnly: true): Promise<Pick<ParsedMarkdown<T>, "raw">>;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getMarkdownContent<T = any>(slug: string, rawOnly?: false): Promise<Required<ParsedMarkdown<T>>>;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getMarkdownContent<T = any>(slug: string, rawOnly?: boolean): Promise<ParsedMarkdown<T>> {
+export async function getMarkdownContent<T>(slug: string, rawOnly: true): Promise<Pick<ParsedMarkdown<T>, "raw">>;
+export async function getMarkdownContent<T>(slug: string, rawOnly?: false): Promise<Required<ParsedMarkdown<T>>>;
+export async function getMarkdownContent<T>(slug: string, rawOnly?: boolean): Promise<ParsedMarkdown<T>> {
   const article = articles[slug];
   if (!article) {
     throw new Error(`No article found with slug ${slug}`);
@@ -54,11 +51,11 @@ export async function getMarkdownContent<T = any>(slug: string, rawOnly?: boolea
     .process(raw)
   ;
   return {
-    data: matter<T>(raw),
+    data: (matterParse(raw) ?? {}) satisfies T,
     content: addHeadingIds(String(file), (file.data.headings ?? []) as Heading[]),
     headings: (file.data.headings ?? []) as Heading[],
     raw,
-  };
+  } satisfies ParsedMarkdown<T>;
 }
 
 export function extractFirstHeading(html: string): { title: string, content: string } | null {
