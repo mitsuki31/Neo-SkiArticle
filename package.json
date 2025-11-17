@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "npm run lint:ts && npm run lint:md",
     "lint:ts": "eslint .",
-    "lint:md": "remark src/articles public/articles",
+    "lint:md": "remark src/articles",
     "preview": "vite preview"
   },
   "remarkConfig": {
