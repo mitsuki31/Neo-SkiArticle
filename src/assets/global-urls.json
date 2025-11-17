@@ -1,6 +1,37 @@
 {
-  "main_web": "https://smksukamandi.com",
+  "main_web": "https://smksukamandi.online",
   "instagram": "https://instagram.com/officialstmski72",
   "youtube": "https://youtube.com/@ski72",
-  "github_repo": "https://github.com/mitsuki31/Neo-SkiArticle"
+  "github_repo": "https://github.com/mitsuki31/Neo-SkiArticle",
+  "github_issues": "https://github.com/mitsuki31/Neo-SkiArticle/issues",
+
+  "reports": {
+    "general": "https://github.com/mitsuki31/Neo-SkiArticle/issues/new",
+    "security": {
+      "public": "https://github.com/mitsuki31/Neo-SkiArticle/issues/new?template=SECURITY.yml",
+      "private": "/.well-known/security.txt"
+    }
+  },
+
+  "privacy_policy": {
+    "internal": "/privacy",
+    "external": {
+      "en": "https://github.com/mitsuki31/Neo-SkiArticle/blob/master/PRIVACY.md",
+      "id": "https://github.com/mitsuki31/Neo-SkiArticle/blob/master/PRIVACY_ID.md"
+    }
+  },
+
+  "security_policy": {
+    "internal": "/security",
+    "external": {
+      "en": "https://github.com/mitsuki31/Neo-SkiArticle/blob/master/SECURITY.md"
+    }
+  },
+
+  "code_of_conduct": {
+    "internal": "/code-of-conduct",
+    "external": {
+      "en": "https://github.com/mitsuki31/Neo-SkiArticle/blob/master/CODE_OF_CONDUCT.md"
+    }
+  }
 }

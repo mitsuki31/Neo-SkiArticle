@@ -1,0 +1,114 @@
+name: "Security Vulnerability Report"
+description: "Report a potential security issue or vulnerability in the project."
+title: "[Security] ..."
+labels: ["security-report", "help wanted"]
+
+assignees:
+  - mitsuki31
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **Important:** Please report critical vulnerabilities privately.  
+        If the issue could expose sensitive information, compromise builds, or critical issues, contact the maintainer directly via the method listed in [security.txt](https://neoski.vercel.app/.well-known/security.txt) instead of opening a public issue.
+
+        For all other issues, use this form to report the problem responsibly.  
+        See the full [Security Policy](https://neoski.vercel.app/security) for more details.
+
+  - type: input
+    id: summary
+    attributes:
+      label: "Summary"
+      description: "Provide a concise description of the potential vulnerability."
+      placeholder: "Describe what you found and where."
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: "Details and Steps to Reproduce"
+      description: "Provide detailed information and reproduction steps (if applicable)."
+      placeholder: |
+        1. Go to...
+        2. Click on...
+        3. Observe...
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment"
+      description: 'List relevant environment details (e.g., from "chrome://version").'
+      placeholder: |
+        Browser Version: ...
+        Browser Revision: ...
+        OS: ...
+        JavaScript Version: ...
+        User Agent: ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: "What browsers are you seeing the problem on?"
+      multiple: true
+      options:
+        - Chrome
+        - Microsoft Edge
+        - Brave
+        - Firefox
+        - Safari
+        - Others (please specify in the issue details above)
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Potential Impact"
+      description: "Describe what could happen if this issue is exploited."
+      placeholder: "Example: Allows script injection, etc."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested_fix
+    attributes:
+      label: "Suggested Fix (Optional)"
+      description: "Share ideas or mitigation steps if known."
+      placeholder: "Example: Sanitize user input in component X"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: security_policy
+    attributes:
+      label: Security Policy Compliance
+      description: >-
+        Before submitting this report, confirm that you have fully reviewed and understood our [Security Policy](https://neoski.vercel.app/security).
+        This ensures reports follow the required scope, expectations, and disclosure process.
+      options:
+        - label: I have read and agree to follow the Security Policy
+          required: true
+
+  - type: checkboxes
+    id: code_of_conduct
+    attributes:
+      label: Code of Conduct Acknowledgement
+      description: >-
+        All reporters must follow our [Code of Conduct](https://neoski.vercel.app/code-of-conduct).
+        This includes respectful communication and responsible handling of sensitive information during the disclosure process.
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        Thank you for helping improve the security of this project.  
+        The maintainer will review your report as soon as possible.

@@ -94,3 +94,20 @@ export function useTheme(): "dark" | "light" {
 
   return theme;
 }
+
+/**
+ * Parse URL search parameter to determine the language.
+ *
+ * @typeParam L - A union type of the language string.
+ * @param search - URL search parameter.
+ * @param expected - An optional array of expected language strings.
+ *
+ * @returns The language string if found, or null otherwise.
+ */
+export function parseQueryLang<L extends string>(search: string, expected: readonly L[]): L | null {
+  const params = new URLSearchParams(search);
+  const q = params.get("lang")?.toLowerCase().split('-')[0];
+  if (!q) return null;
+  if (expected && !expected.includes(q as L)) return null;
+  return q as L;
+}
