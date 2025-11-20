@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { unified } from 'unified';
 import { CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useTheme } from "@/lib/utils";
-import { GradientButton, Section } from "@/lib/motion-anim";
+import { cn } from "@/lib/utils";
+import { Section } from "@/lib/motion-anim";
 import Article from "@/lib/Article";
 import FocusableCard from "@/lib/FocusableCard";
 import { unify } from "@/lib/markparser";
@@ -28,11 +26,10 @@ import homeArticle from '@/articles/home/index.md?raw';
 
 // Instagram
 import igPosts from '@/assets/ig-posts.json';
-import InstagramEmbed from "./InstagramEmbed";
+import InstagramPosts from './InstagramPosts';
 
 // Featured Articles
 import featuredArticles from '@/articles/featured-articles.json';
-import ArticleBackground from "./ArticleBackground";
 
 const ARTICLE_PROSE_CLASS =
   'prose prose-indigo dark:prose-invert ' +
@@ -109,81 +106,89 @@ function HomeArticle() {
   );
 }
 
-function InstagramPosts({ urls }: { urls: string[] }) {
-  const theme = useTheme();
-  if (urls.length === 0) return null;
-
-  return (
-    <ArticleBackground variant="geometric" containerSize="8xl" darkMode={theme === 'dark'}>
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 flex justify-center items-center gap-3 md:gap-4">
-          <Flame color="#FF4500" size="35" />
-          <span className="bg-gradient-to-r from-pink-600 to-orange-400 bg-clip-text text-transparent">
-            Instagram Post
-          </span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10 max-h-[60svh] lg:max-h-[70svh] justify-items-center sm:justify-items-between overflow-y-auto p-4 bg-white/10 rounded-md">
-          {/* Instagram Embeds */}
-          {urls.map(u => <InstagramEmbed key={u.split('/').pop()} url={u} withCaption />)}
-        </div>
-      </div>
-    </ArticleBackground>
-  );
-}
-
 export default function Home() {
-  const badgeCardHoverClass =
-    'hover:shadow-xl hover:shadow-orange-400/50 hover:ring-2 hover:ring-orange-500/40 '
-    + 'focus:shadow-xl focus:shadow-orange-400/50 focus:ring-2 focus:ring-orange-500/40 focus:outline-none'
-    + 'active:shadow-xl active:shadow-orange-400/50 active:ring-2 active:ring-orange-500/40'
-  ;
+  const badgeCardHoverClass = cn(
+    'hover:shadow-xl hover:shadow-orange-400/50 hover:ring-2 hover:ring-orange-500/40',
+    'focus:shadow-xl focus:shadow-orange-400/50 focus:ring-2 focus:ring-orange-500/40 focus:outline-none',
+    'active:shadow-xl active:shadow-orange-400/50 active:ring-2 active:ring-orange-500/40',
+    'dark:hover:shadow-xl dark:hover:shadow-orange-400/50 dark:hover:ring-2 dark:hover:ring-orange-500/40',
+    'dark:focus:shadow-xl dark:focus:shadow-orange-400/50 dark:focus:ring-2 dark:focus:ring-orange-500/40 dark:focus:outline-none',
+    'dark:active:shadow-xl dark:active:shadow-orange-400/50 dark:active:ring-2 dark:active:ring-orange-500/40'
+  );
+  const articleCardBg_light = "bg-linear-[135deg,#5B86E5_10%,#8BA8E799,#E0C2A099,#F0A23D99_80%,#FF7E0099]";
+  const articleCardBg_dark = "dark:bg-linear-[135deg,#0A1D4B,#294D7E99,#71478D99,#CC7A3399_85%,#FF950099]";
+  const articleCardBg = `${articleCardBg_light} ${articleCardBg_dark}`;
 
   return (
     <div className="bg-[#D7FFFE]/10 dark:bg-background text-gray-900 dark:text-white/80">
       <Hero />
 
       {/* Featured Articles Section */}
-      <div className="max-w-screen bg-white/90 dark:bg-[#0F1221] pb-30 pt-15 mt-0">
-        <Section id="featured-articles">
-          <div className="container px-4 mx-auto">
-            <h2 className="text-3xl text-gray-900 dark:text-white font-bold mb-8 text-center">Artikel Unggulan</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-6 justify-center">
-              {featuredArticles.map((article) => (
-                <motion.div
-                  key={article.title.replace(/\s+/g, '-').toLowerCase()}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                >
-                  <FocusableCard className={`h-full bg-gradient-to-br from-[#FFEFA0]/20 via-[#AFDFDE]/20 to-[#D7FFFE]/20 dark:from-white/10 dark:to-gray-900 shadow-lg dark:shadow-none border-none transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
-                    {/* Featured Article */}
-                    <CardContent className="p-5">
-                      {/* Category */}
-                      <div className="flex items-center mb-2">
-                        {article.category.map((cat, i) => (
-                          <Badge key={i} className="mr-2 text-white bg-orange-300/70 dark:bg-orange-400/80">
-                            {cat}
-                          </Badge>
-                        ))}
+      <div id="featured-articles" className={`max-w-screen pb-30 pt-15 mt-0 ${articleCardBg}`}>
+        <div className="group flex flex-col items-center relative pt-5">
+          <h1 className={cn(
+            "absolute text-7xl md:text-8xl uppercase text-center font-bold text-transparent select-none",
+            "[-webkit-text-stroke:2px_rgba(17,24,39,0.1)]",
+            "dark:[-webkit-text-stroke:2px_rgba(255,255,255,0.1)]"
+          )}>
+            ARTIKEL UNGGULAN
+          </h1>
+          <div className="relative flex flex-col items-center mt-10 md:mt-15">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100">Artikel Unggulan</h1>
+            <div className="w-[45%] group-hover:w-[100%] group-active:w-[100%] group-focus:w-[100%] transition-[width] duraiton-[1.2s] ease h-[4px] bg-orange-600 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <Section id="featured-articles-container">
+          <div className={cn(
+            "mx-auto lg:mx-0 mt-15 px-6 pt-10 lg:pt-0 max-w-2xl lg:max-w-none",
+            `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${featuredArticles.length < 3 ? 'lg:grid-cols-2' : ''} gap-x-8 gap-y-16`
+          )}>
+            {featuredArticles.map((article, idx) => (
+              <motion.div
+                key={article.title.replace(/\s+/g, '-').toLowerCase()}
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                className="group"
+              >
+                {/* <FocusableCard className={`h-full ${articleCardHoverClass} shadow-lg transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}> */}
+                <FocusableCard className={`h-full bg-white/1 dark:bg-gray-800/1 border-none backdrop-blur-[100px] shadow-lg transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
+                  {/* Featured Article */}
+                  <CardContent className="p-5">
+                    <article className={`flex max-w-xl flex-col items-start justify-between`}>
+                      <div className="flex items-center gap-x-4 text-xs">
+                        {/* Category */}
+                        <div className="flex items-center mb-2">
+                          {article.category.map((cat, i) => (
+                            <Badge key={i} className="mr-2 text-gray-900 font-semibold bg-gradient-to-r from-[#FF9951] via-orange-400 to-[#FF8867]">
+                              {cat}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                      {/* Title */}
-                      <h3 className="text-xl text-gray-900 dark:text-white font-semibold mb-2">{article.title}</h3>
-                      {/* Description */}
-                      <p className="text-gray-600 dark:text-white/80 text-sm mb-4">
-                        {Array.isArray(article.description)
-                          ? article.description.map(a => a.trim()).join(' ')
-                          : typeof article.description === 'string'
-                            ? (article.description as string).trim()
-                            : article.description
-                        }
-                      </p>
-                      <GradientButton className="mx-auto text-sm text-white">
-                        <Link to={article.src}>Baca Selengkapnya</Link>
-                      </GradientButton>
-                    </CardContent>
-                  </FocusableCard>
-                </motion.div>
-              ))}
-            </div>
+                      <div className="relative grow">
+                        <h3 className={cn(
+                          "mt-3 text-lg/6 font-semibold text-gray-900 dark:text-white",
+                          "group-hover:text-orange-700 dark:group-hover:text-orange-300",
+                          "group-focus:text-orange-700 dark:group-focus:text-orange-300",
+                          "group-active:text-orange-700 dark:group-active:text-orange-300",
+                        )}>
+                          <a href={article.src}>
+                            <span className="absolute inset-0"></span>
+                            {article.title}
+                          </a>
+                        </h3>
+                        <p className="mt-5 text-sm/6 text-gray-800 dark:text-white/80 md:not-group-hover:line-clamp-4">
+                          {article.description.map(a => a.trim()).join(' ')}
+                        </p>
+                      </div>
+                    </article>
+                  </CardContent>
+                </FocusableCard>
+                {idx !== featuredArticles.length - 1 && (
+                  <hr className="md:hidden mt-8 border-gray-300 dark:border-gray-700" />
+                )}
+              </motion.div>
+            ))}
           </div>
         </Section>
       </div>

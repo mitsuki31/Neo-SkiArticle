@@ -6,7 +6,7 @@ import Footer from "@/layout/Footer";
 export default function Home() {
   return (
     <RootLayout title="Beranda · NeoSKI">
-      <Header className="bg-none bg-transparent" sticky />
+      <Header className="bg-none bg-transparent" sticky scrollThreshold={0} />
       <HomeLayout />
       <Footer />
     </RootLayout>

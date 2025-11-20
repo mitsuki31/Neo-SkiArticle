@@ -7,7 +7,7 @@ type RootLayoutProps = {
   removeDefaultClass?: boolean;
 }
 
-export default function RootLayout({ children, title, className, removeDefaultClass }: RootLayoutProps) {
+export default function RootLayout({ children, title, className = '', removeDefaultClass }: RootLayoutProps) {
   title ??= 'NeoSKI';
   document.title = title;  // Fallback
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children, title, className, removeDefaultCl
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <div className={`${removeDefaultClass ? '' : 'bg-white-800 dark:bg-background text-gray-900'} ${className}`}>
+      <div className={`${removeDefaultClass ? '' : 'bg-white-800 dark:bg-background text-gray-900'} ${className}`.trim()}>
         {children}
       </div>
     </HelmetProvider>

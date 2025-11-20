@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #navbar .bg-popover {
-  @apply bg-gray-300/30 dark:bg-white/10 backdrop-blur-md border-none;
+  @apply bg-gray-300/30 dark:bg-white/20 backdrop-blur-md border-none;
 }
 
 

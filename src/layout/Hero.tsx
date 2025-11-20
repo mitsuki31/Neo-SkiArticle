@@ -4,7 +4,7 @@ import background from '@/assets/smkski-bg.jpg';
 
 export default function Hero() {
   return (
-    <section className="relative w-full pt-2 md:pt-10 overflow-hidden bg-gradient-to-b from-sky-100 to-white dark:from-background dark:to-gray-500/40">
+    <section className="relative w-full h-svh pt-2 md:pt-10 overflow-hidden bg-gradient-to-b from-sky-100 to-white dark:from-background dark:to-gray-500/40">
       {/* Background overlay */}
       <div className="absolute inset-0 z-0">
         <img
