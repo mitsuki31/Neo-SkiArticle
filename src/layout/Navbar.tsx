@@ -45,29 +45,21 @@ const menuItemTransparentBlur = cn(
 
 
 export default function Navbar() {
-  const youtubeHoverColor = cn(
-    "transition-all duration-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r",
-    "hover:from-red-500 hover:to-orange-400",
-    "focus:text-transparent focus:bg-clip-text",
-    "focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400",
+  const youtubeHoverColor =
+    "before:bg-gradient-to-r before:from-[#000000] before:via-[#FF0000] before:to-[#EE0000]";
+  const instagramHoverColor =
+    "before:bg-gradient-to-r before:from-[#F58529] before:via-[#DD2A7B] before:to-[#8134AF]";
+  const tiktokHoverColor =
+    "before:bg-gradient-to-r before:from-[#69C9D0] before:via-[#000000] before:to-[#EE1D52]";
+
+  const menuHoverClass = cn(
+    "group-hover:text-white group-hover:font-semibold",
+    "group-focus:text-white group-focus:font-semibold",
   );
-  const instagramHoverColor = cn(
-    "transition-all duration-300",
-    "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r",
-    "hover:from-pink-500 hover:via-purple-500 hover:to-yellow-500",
-    "focus:text-transparent focus:bg-clip-text focus:bg-gradient-to-r",
-    "focus:from-pink-500 focus:via-purple-500 focus:to-yellow-500",
-    "dark:hover:from-pink-400 dark:hover:via-purple-400 dark:hover:to-orange-400",
-    "dark:focus:from-pink-400 dark:focus:via-purple-400 dark:focus:to-orange-400",
-  );
-  const tiktokHoverColor = cn(
-    "transition-all duration-300",
-    "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r",
-    "hover:from-cyan-400 hover:via-fuchsia-500 hover:to-red-500",
-    "focus:text-transparent focus:bg-clip-text focus:bg-gradient-to-r",
-    "focus:from-cyan-400 focus:via-fuchsia-500 focus:to-red-500",
-    "dark:hover:from-cyan-300 dark:hover:via-pink-400 dark:hover:to-red-400",
-    "dark:focus:from-cyan-300 dark:focus:via-pink-400 dark:focus:to-red-400",
+  const animatedBg = cn(
+    "relative before:z-10",
+    "before:content-[''] before:absolute before:inset-0",
+    "before:origin-left before:scale-x-0 before:opacity-20 hover:before:opacity-100 hover:before:scale-x-100 before:transition before:duration-300",
   );
 
   return (
@@ -85,7 +77,7 @@ export default function Navbar() {
 
         {/* About */}
         <NavigationMenuItem>
-          <Link to="/about" className={cn(navMenuTriggerStyle, menuItemTransparentBlur)}>
+          <Link to={{ pathname: "/", hash: "#about" }} className={cn(navMenuTriggerStyle, menuItemTransparentBlur)}>
             <span className="inline-flex items-center gap-2">
               <Info className="w-4 h-4" />
               <span>Tentang</span>
@@ -105,23 +97,35 @@ export default function Navbar() {
           <NavigationMenuContent>
             {/* Content — plain anchor elements */}
             <div className="grid gap-1 w-[200px]">
-              <a href={instagramUrl} target="_blank" rel="noreferrer" className={cn(
-                "px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800 border-b",
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className={cn(
+                "group px-3 py-2 rounded-md block border-b",
+                animatedBg,
                 instagramHoverColor
               )}>
-                <i className="bx bxl-instagram mr-2" /> Instagram
+                <span className="relative z-10 flex items-center">
+                  <span className={menuHoverClass}><i className="bx bxl-instagram mr-2" /></span>
+                  <span className={menuHoverClass}>Instagram</span>
+                </span>
               </a>
-              <a href={youtubeUrl} target="_blank" rel="noreferrer" className={cn(
-                "px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800 border-b",
+              <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className={cn(
+                "group px-3 py-2 rounded-md blockborder-b",
+                animatedBg,
                 youtubeHoverColor
               )}>
-                <i className="bx bxl-youtube mr-2" /> YouTube
+                <span className="relative z-10 flex items-center">
+                  <span className={menuHoverClass}><i className="bx bxl-youtube mr-2" /></span>
+                  <span className={menuHoverClass}>YouTube</span>
+                </span>
               </a>
-              <a href={tiktokUrl} target="_blank" rel="noreferrer" className={cn(
-                "px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800",
+              <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className={cn(
+                "group px-3 py-2 rounded-md block",
+                animatedBg,
                 tiktokHoverColor
               )}>
-                <i className="bx bxl-tiktok mr-2" /> TikTok
+                <span className="relative z-10 flex items-center">
+                  <span className={menuHoverClass}><i className="bx bxl-tiktok mr-2" /></span>
+                  <span className={menuHoverClass}>TikTok</span>
+                </span>
               </a>
             </div>
           </NavigationMenuContent>
