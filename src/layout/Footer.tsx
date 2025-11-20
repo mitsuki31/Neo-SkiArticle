@@ -1,5 +1,6 @@
 import { addClassToSVG } from '@/lib/utils';
 import {
+  tiktok as tiktokUrl,
   instagram as instagramUrl,
   youtube as youtubeUrl,
   github_repo as githubUrl,
@@ -11,6 +12,7 @@ import {
 import logoSki from '@/assets/logo_ski.png';
 
 // Icons
+import tiktokIcon from '@icons/tiktok.svg?raw';
 import instagramIcon from '@icons/instagram.svg?raw';
 import youtubeIcon from '@icons/youtube.svg?raw';
 import githubIcon from '@icons/github.svg?raw';
@@ -18,6 +20,7 @@ import reactIcon from '@icons/react.svg?raw';
 import viteIcon from '@icons/vite.svg?raw';
 
 export default function Footer() {
+  const tiktokIconHoverClass = 'hover:text-black focus:text-black active:text-black dark:hover:text-white dark:focus:text-white dark:active:text-white';
   const instagramIconHoverClass = 'hover:text-pink-600 focus:text-pink-600 active:text-pink-600';
   const youtubeIconHoverClass = 'hover:text-red-600 focus:text-red-600 active:text-red-600';
   const githubIconHoverClass = 'hover:text-black focus:text-black active:text-black dark:hover:text-white dark:focus:text-white dark:active:text-white';
@@ -70,6 +73,10 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Ikuti Kami</h3>
           <div className="flex space-x-4">
+            {/* TikTok */}
+            <a href={tiktokUrl} aria-label="TikTok" title="TikTok SMK Sukamandi" target="_blank" rel="noopener noreferrer">
+              <span dangerouslySetInnerHTML={{ __html: addClassToSVG(tiktokIcon, `w-6 h-6 transition duration-300 text-gray-500 ${tiktokIconHoverClass}`) }} />
+            </a>
             {/* Instagram */}
             <a href={instagramUrl} aria-label="Instagram" title='Instagram SMK Sukamandi' target="_blank" rel="noopener noreferrer">
               <span dangerouslySetInnerHTML={{ __html: addClassToSVG(instagramIcon, `w-6 h-6 transition duration-300 text-gray-500 ${instagramIconHoverClass}`) }} />

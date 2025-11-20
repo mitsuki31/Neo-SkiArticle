@@ -10,29 +10,27 @@ import {
 import ThemeToggle from '@/lib/ThemeToggle';
 import {
   youtube as youtubeUrl,
-  instagram as instagramUrl
+  instagram as instagramUrl,
+  tiktok as tiktokUrl
 } from "@/assets/global-urls.json";
 import { cn } from '@/lib/utils';
 
-const navMenuTriggerStyle = `
-  group inline-flex h-9 w-max items-center justify-center rounded-md
-  bg-transparent px-4 py-2 text-sm font-medium transition-colors
-  text-gray-900 dark:text-gray-100
-  dark:hover:bg-zinc-600 dark:hover:text-orange-400
-  dark:focus-visible:bg-zinc-600 dark:focus-visible:text-orange-400
-  dark:active:bg-zinc-600 dark:active:text-orange-400
-  focus:outline-none disabled:pointer-events-none disabled:opacity-50
-`.replace(/[\s\n]+/g, ' ').trim();
+const navMenuTriggerStyle = cn(
+  "group inline-flex h-9 w-max items-center justify-center rounded-md",
+  "bg-transparent px-4 py-2 text-sm font-medium transition-colors text-gray-900 dark:text-gray-100",
+  "dark:hover:bg-zinc-600 dark:hover:text-orange-400",
+  "dark:focus-visible:bg-zinc-600 dark:focus-visible:text-orange-400",
+  "dark:active:bg-zinc-600 dark:active:text-orange-400",
+  "focus:outline-none disabled:pointer-events-none disabled:opacity-50",
+);
 
-const menuItemTransparentBlur = [
-  "transition-colors",
-  "duration-200",
-  "bg-transparent",
-  "backdrop-blur-md",
-  "hover:text-orange-600",
-  "dark:hover:text-orange-400",
-  "hover:bg-white/20",
-  "dark:hover:bg-white/10",
+const menuItemTransparentBlur = cn(
+  "rounded-full px-3 py-2 cursor-pointer",
+  "transition-colors duration-200",
+  "bg-transparent backdrop-blur-md",
+  "hover:text-orange-600 hover:bg-white/20",
+  "dark:hover:text-orange-400 dark:hover:bg-white/10",
+  // state=open
   "data-[state=open]:bg-white/20",
   "data-[state=open]:hover:bg-white/20",
   "data-[state=open]:focus:bg-white/20",
@@ -43,11 +41,7 @@ const menuItemTransparentBlur = [
   "data-[state=open]:dark:active:bg-white/20",
   "data-[state=open]:hover:text-orange-600",
   "data-[state=open]:dark:hover:text-orange-400",
-  "rounded-lg",
-  "px-3",
-  "py-2",
-  "cursor-pointer",
-].join(' ');
+);
 
 
 export default function Navbar() {
@@ -92,7 +86,6 @@ export default function Navbar() {
 
         {/* Sosial dropdown */}
         <NavigationMenuItem>
-          {/* Use the Trigger provided by the library (it renders the correct button) */}
           <NavigationMenuTrigger className={cn(navMenuTriggerStyle, menuItemTransparentBlur)}>
             <span className="inline-flex items-center gap-2">
               <Users className="w-4 h-4" />
@@ -103,11 +96,23 @@ export default function Navbar() {
           <NavigationMenuContent>
             {/* Content — plain anchor elements */}
             <div className="grid gap-1 w-[200px]">
-              <a href={instagramUrl} target="_blank" rel="noreferrer" className={cn("px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800 border-b", instagramHoverColor)}>
+              <a href={instagramUrl} target="_blank" rel="noreferrer" className={cn(
+                "px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800 border-b",
+                instagramHoverColor
+              )}>
                 <i className="bx bxl-instagram mr-2" /> Instagram
               </a>
-              <a href={youtubeUrl} target="_blank" rel="noreferrer" className={cn("px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800", youtubeHoverColor)}>
+              <a href={youtubeUrl} target="_blank" rel="noreferrer" className={cn(
+                "px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800 border-b",
+                youtubeHoverColor
+              )}>
                 <i className="bx bxl-youtube mr-2" /> YouTube
+              </a>
+              <a href={tiktokUrl} target="_blank" rel="noreferrer" className={cn(
+                "px-3 py-2 rounded-md block hover:bg-gray-100 dark:hover:bg-zinc-800",
+                tiktokHoverColor
+              )}>
+                <i className="bx bxl-tiktok mr-2" /> TikTok
               </a>
             </div>
           </NavigationMenuContent>

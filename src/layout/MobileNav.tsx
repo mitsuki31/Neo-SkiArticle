@@ -7,6 +7,7 @@ import ThemeToggle from '@/lib/ThemeToggle';
 import {
   youtube as youtubeUrl,
   instagram as instagramUrl,
+  tiktok as tiktokUrl,
 } from '@/assets/global-urls.json';
 
 const navLinks = [
@@ -19,6 +20,7 @@ const navLinks = [
     submenu: [
       { name: 'YouTube', href: youtubeUrl, logoClass: 'bx bxl-youtube', hoveredClass: 'hover:text-red-600 hover:bg-gray-300 focus-visible:text-red-600 focus-visible:bg-gray-300 active:text-red-600 active:bg-gray-300' },
       { name: 'Instagram', href: instagramUrl, logoClass: 'bx bxl-instagram-alt', hoveredClass: 'hover:text-pink-600 hover:bg-gray-300 focus-visible:text-pink-600 focus-visible:bg-gray-300 active:text-pink-600 active:bg-gray-300' },
+      { name: 'TikTok', href: tiktokUrl, logoClass: 'bx bxl-tiktok', hoveredClass: 'hover:text-black hover:bg-gray-300 focus-visible:text-black focus-visible:bg-gray-300 active:text-black active:bg-gray-300' },
     ],
   },
 ];
