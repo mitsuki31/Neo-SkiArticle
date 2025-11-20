@@ -18,6 +18,7 @@ import youtubeIcon from '@icons/youtube.svg?raw';
 import githubIcon from '@icons/github.svg?raw';
 import reactIcon from '@icons/react.svg?raw';
 import viteIcon from '@icons/vite.svg?raw';
+import tailwindCssIcon from '@icons/tailwindcss.svg?raw';
 
 export default function Footer() {
   const tiktokIconHoverClass = 'hover:text-black focus:text-black active:text-black dark:hover:text-white dark:focus:text-white dark:active:text-white';
@@ -100,9 +101,14 @@ export default function Footer() {
             <div dangerouslySetInnerHTML={{ __html: addClassToSVG(reactIcon, 'w-full h-full animate-spin-slow') }} />
           </a>
         </span>
-        <span className="inline-block w-6 h-6 text-[#646CFF]">
+        <span className="inline-block w-6 h-6">
           <a href="https://vitejs.dev/" aria-label="Vite" title='Vite' target="_blank" rel="noopener noreferrer">
             <div dangerouslySetInnerHTML={{ __html: addClassToSVG(viteIcon, 'w-full h-full') }} />
+          </a>
+        </span>
+        <span className="inline-block w-6 h-6">
+          <a href="https://tailwindcss.com//" aria-label="TailwindCSS" title='TailwindCSS' target="_blank" rel="noopener noreferrer">
+            <div dangerouslySetInnerHTML={{ __html: addClassToSVG(tailwindCssIcon, 'w-full h-full fill-sky-400') }} />
           </a>
         </span>
       </div>
