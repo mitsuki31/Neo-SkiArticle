@@ -45,21 +45,30 @@ const menuItemTransparentBlur = cn(
 
 
 export default function Navbar() {
-  const youtubeHoverColor = `
-    transition-all duration-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r
-    hover:from-red-500 hover:to-orange-400
-    focus:text-transparent focus:bg-clip-text
-    focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400
-  `.replace(/[\n\s]+/g, ' ').trim();
-  const instagramHoverColor = `
-    transition-all duration-300
-    hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r
-    hover:from-pink-500 hover:via-purple-500 hover:to-yellow-500
-    focus:text-transparent focus:bg-clip-text focus:bg-gradient-to-r
-    focus:from-pink-500 focus:via-purple-500 focus:to-yellow-500
-    dark:hover:from-pink-400 dark:hover:via-purple-400 dark:hover:to-orange-400
-    dark:focus:from-pink-400 dark:focus:via-purple-400 dark:focus:to-orange-400
-  `.replace(/[\n\s]+/g, ' ').trim();
+  const youtubeHoverColor = cn(
+    "transition-all duration-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r",
+    "hover:from-red-500 hover:to-orange-400",
+    "focus:text-transparent focus:bg-clip-text",
+    "focus:bg-gradient-to-r focus:from-red-500 focus:to-orange-400",
+  );
+  const instagramHoverColor = cn(
+    "transition-all duration-300",
+    "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r",
+    "hover:from-pink-500 hover:via-purple-500 hover:to-yellow-500",
+    "focus:text-transparent focus:bg-clip-text focus:bg-gradient-to-r",
+    "focus:from-pink-500 focus:via-purple-500 focus:to-yellow-500",
+    "dark:hover:from-pink-400 dark:hover:via-purple-400 dark:hover:to-orange-400",
+    "dark:focus:from-pink-400 dark:focus:via-purple-400 dark:focus:to-orange-400",
+  );
+  const tiktokHoverColor = cn(
+    "transition-all duration-300",
+    "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r",
+    "hover:from-cyan-400 hover:via-fuchsia-500 hover:to-red-500",
+    "focus:text-transparent focus:bg-clip-text focus:bg-gradient-to-r",
+    "focus:from-cyan-400 focus:via-fuchsia-500 focus:to-red-500",
+    "dark:hover:from-cyan-300 dark:hover:via-pink-400 dark:hover:to-red-400",
+    "dark:focus:from-cyan-300 dark:focus:via-pink-400 dark:focus:to-red-400",
+  );
 
   return (
     <NavigationMenu id="navbar">
@@ -120,14 +129,12 @@ export default function Navbar() {
 
         {/* Theme toggle — explicit entry */}
         <NavigationMenuItem>
-          <div className="px-2">
-            <ThemeToggle
-              className="mr-0 mt-0 cursor-pointer bg-inherit
-                         dark:text-gray-100 dark:bg-background
-                         border-none hover:bg-black
-                         hover:text-background dark:hover:bg-white
-                         dark:hover:text-background"
-            />
+          <div className='mr-4'>
+            <ThemeToggle className={cn(
+              "mr-0 mt-0 cursor-pointer bg-transparent border-none rounded-full",
+              "hover:bg-black hover:text-background",
+              "dark:text-gray-100 dark:hover:bg-white dark:hover:text-background",
+            )} />
           </div>
         </NavigationMenuItem>
       </NavigationMenuList>

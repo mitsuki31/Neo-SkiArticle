@@ -45,27 +45,9 @@ export default function MobileNav() {
 
     document.addEventListener('keydown', closeMobileNavWhenEsc);
 
-    // Close the mobile nav when user clicks outside of it
-    const closeMobileNavWhenClickOutside = (e: MouseEvent) => {
-      const mobileNav = document.getElementById('mobile-nav');
-      const mobileNavButton = document.getElementById('mobile-nav-button');
-      const mobileNavThemeToggler = document.getElementById('mobile-nav-theme-toggler');
-
-      if (
-        open &&
-        [mobileNav, mobileNavButton, mobileNavThemeToggler].every((el) =>
-          el && !el.contains(e.target as Node))
-      ) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener('click', closeMobileNavWhenClickOutside);
-
     // Cleanup event listener on component unmount
     return () => {
       document.removeEventListener('keydown', closeMobileNavWhenEsc);
-      document.removeEventListener('click', closeMobileNavWhenClickOutside);
     }
   });
 
