@@ -136,13 +136,6 @@ html {
   transition: background-color 0.8s ease, color 0.8s ease;
 }
 
-.external-link::after {
-  content: ' ↗'; /* External link arrow */
-  font-family: Inter, sans-serif;
-  font-weight: bold;
-  color: inherit;
-}
-
 .custom-scrollbar {
   @apply scrollbar-thin
     scrollbar-track-gray-100 dark:scrollbar-track-gray-600/70

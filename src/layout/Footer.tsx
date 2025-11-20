@@ -1,3 +1,4 @@
+import { ExternalLinkIcon } from 'lucide-react';
 import { addClassToSVG } from '@/lib/utils';
 import {
   tiktok as tiktokUrl,
@@ -58,7 +59,12 @@ export default function Footer() {
             <li><a href="/#about" className={underlineCls}>Tentang Sekolah</a></li>
             <li><a href="/a/program-keahlian" className={underlineCls}>Program Keahlian</a></li>
             <li><a href="/a/analisis-vokasi-2025" className={underlineCls}>Analisis Vokasi 2025</a></li>
-            <li><a href={mainWebUrl} target="_blank" rel="noopener noreferrer" className={underlineCls}>PPDB</a></li>
+            <li>
+              <a href={mainWebUrl} target="_blank" rel="noopener noreferrer" className={underlineCls}>
+                PPDB
+                <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -118,7 +124,10 @@ export default function Footer() {
         <br />
         <span className="text-gray-500 dark:text-gray-400 italic">
           Developed by{' '}
-          <a href="https://github.com/mitsuki31" target="_blank" rel="noopener noreferrer" className='hover:underline'>Dhefa Gusni A. (Ryuu Mitsuki)</a>
+          <a href="https://github.com/mitsuki31" target="_blank" rel="noopener noreferrer" className='hover:underline underline-offset-5'>
+            Dhefa Gusni A. (Ryuu Mitsuki)
+            <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+          </a>
         </span>
       </div>
     </footer>

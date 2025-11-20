@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ReactDOMServer from 'react-dom/server';
+import { ExternalLinkIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 import RootLayout from '@/layout/Root';
@@ -49,10 +51,31 @@ export function ArticleLoading() {
   );
 }
 
+function injectExternalLinkIcons(html: string): string {
+  const externalLinkSvgStr = ReactDOMServer.renderToStaticMarkup(
+    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+  );
+  const currentHost = window.location.hostname;
+
+  // Regex: <a ... href="http...">...</a>
+  return html.replace(
+    /<a\b([^>]+href="(https?:\/\/[^"]+)"[^>]*)>(.*?)<\/a>/gi,
+    (match, attrs, href, content) => {
+      try {
+        const url = new URL(href);
+        if (url.hostname !== currentHost) {
+          return `<a ${attrs}>${content}${externalLinkSvgStr}</a>`;
+        }
+      } catch { /* no throw */ }
+      return match; // unchanged
+    }
+  );
+}
+
 function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: Required<ParsedMarkdown<ArticleFrontMatter>> }) {
   const { data, raw, content: html } = parsedMarkdown ?? {};
   const readTime = calcReadTime(raw, 150);
-  const sections = extractSections(html);
+  const sections = extractSections(injectExternalLinkIcons(html));
 
   return (
     <>
@@ -75,7 +98,7 @@ function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: R
         <Section key={`section-${i}`} className={`bg-none py-0 ${i !== 0 ? '!pt-0' : '!pt-5'} ${i === sections.length - 1 ? 'pb-20 lg:pb-40' : ''}`}>
           <Article
             id={slug}
-            content={section || ''}
+            content={section}
             className={
               'prose prose-indigo dark:prose-invert article theme-transition '
               + 'prose-a:text-blue-700 dark:prose-a:text-blue-400 prose-a:no-underline prose-a:hover:underline prose-a:hover:underline-offset-4 '
