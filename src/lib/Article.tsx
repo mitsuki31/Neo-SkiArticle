@@ -10,6 +10,20 @@ type ArticleProps = {
 };
 
 export default function Article({ content, className = '', titleClassName = '', id = '', preserveHeading = false }: ArticleProps) {
+  const finalCn = `max-w-none sm:text-md md:text-lg sm:pr-2 leading-8 article bg-none text-gray-700 dark:text-gray-300 ${className}`;
+
+  if (preserveHeading) {
+    return (
+      <Layout>
+        <article
+          id={id}
+          className={finalCn}
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      </Layout>
+    );
+  }
+
   const parsedMarkdown = extractFirstHeading(content);
   if (!parsedMarkdown) return <></>;
 
@@ -21,8 +35,8 @@ export default function Article({ content, className = '', titleClassName = '', 
     <Layout>
       <article
         id={id}
-        className={`max-w-none sm:text-md md:text-lg sm:pr-2 leading-8 article bg-none text-gray-700 dark:text-gray-300 ${className}`}
-        dangerouslySetInnerHTML={{ __html: preserveHeading ? content : `${styledHeading}\n${html}` }}
+        className={finalCn}
+        dangerouslySetInnerHTML={{ __html: `${styledHeading}\n${html}` }}
       />
     </Layout>
   );

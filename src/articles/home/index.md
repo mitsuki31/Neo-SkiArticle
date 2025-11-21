@@ -12,7 +12,7 @@ authors:
 
 **Sekolah Menengah Kejuruan (SMK) Sukamandi** merupakan institusi pendidikan vokasi yang berfokus pada pengembangan keterampilan dan kompetensi peserta didik di berbagai bidang keahlian. Dengan komitmen yang tinggi terhadap mutu pendidikan, SMK Sukamandi menjadi tempat yang ideal bagi siswa-siswi yang ingin siap menghadapi dunia kerja maupun melanjutkan pendidikan ke jenjang yang lebih tinggi.
 
-Terletak di **Jl. Ampera Gg. 01B, Sukamandi Subang, Desa Sukamandijaya, Kecamatan Ciasem, Kabupaten Subang, Provinsi Jawa Barat**, sekolah ini telah berdiri sejak tahun **1972** dan terus berkembang menjadi salah satu pusat pendidikan kejuruan unggulan di wilayah Subang dan sekitarnya.
+Terletak di **Jl. Ampera Gg. 01B, Sukamandi Subang, Desa Sukamandijaya, Kecamatan Ciasem, Kabupaten Subang, Provinsi Jawa Barat**, sekolah ini telah berdiri sejak tahun **1964** dan terus berkembang menjadi salah satu pusat pendidikan kejuruan unggulan di wilayah Subang dan sekitarnya. Sekolah ini juga pernah dinominasikan sebagai **Sekolah Berstandar Nasional** di Kabupaten Subang.
 
 SMK Sukamandi tidak hanya menyediakan fasilitas pembelajaran yang lengkap dan modern, tetapi juga didukung oleh tenaga pengajar profesional yang berpengalaman di bidangnya. Dengan berbagai program keahlian yang ditawarkan, sekolah ini berupaya mencetak lulusan yang kompeten, berdaya saing tinggi, dan berkarakter kuat.
 
@@ -22,7 +22,7 @@ Tidak hanya itu, sekolah ini juga menjalin kerjasama erat dengan berbagai perusa
 === SECTION START ===
 # Sejarah Singkat
 
-**Pada tahun 1972**, di tengah semangat membangun masa depan bangsa, lahirlah **SMK Sukamandi** — sebuah sekolah kejuruan dengan misi mulia: memberdayakan generasi muda melalui pendidikan yang relevan dengan kebutuhan industri. Dari sebuah langkah kecil di Sukamandi, Subang, kini sekolah ini menjelma menjadi tempat tumbuhnya para profesional muda yang tangguh, kreatif, dan siap kerja. Dengan semangat inovasi yang tak pernah padam, **SMK Sukamandi** terus menorehkan prestasi dan membuktikan diri sebagai pelopor pendidikan kejuruan yang berkualitas di Indonesia.
+**Pada tahun 1964**, di tengah semangat membangun masa depan bangsa, lahirlah **SMK Sukamandi** (yang dulu sempat dikenal dengan nama **STM Dharma Winaya Sukamandi** atau **STM Sukamandi**) — sebuah sekolah kejuruan dengan misi mulia: memberdayakan generasi muda melalui pendidikan yang relevan dengan kebutuhan industri. Dari sebuah langkah kecil di Sukamandi, Subang, kini sekolah ini menjelma menjadi tempat tumbuhnya para profesional muda yang tangguh, kreatif, dan siap kerja. Dengan semangat inovasi yang tak pernah padam, **SMK Sukamandi** terus menorehkan prestasi dan membuktikan diri sebagai pelopor pendidikan kejuruan yang berkualitas di Indonesia.
 === SECTION END ===
 
 === SECTION START ===
