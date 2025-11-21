@@ -39,6 +39,20 @@ const ARTICLE_PROSE_CLASS =
   'prose-ul:text-gray-700 dark:prose-ul:text-white/80 prose-ol:text-gray-700 dark:prose-ol:text-white/80 ' +
   'prose-ol:pl-10 prose-ul:pl-10';
 
+function formatDate(input: Date | string): string {
+  const date = input instanceof Date ? input : new Date(input);
+
+  if (isNaN(date.getTime())) {
+    throw new Error("Invalid date input");
+  }
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("id-ID", { month: "short" });
+  const year = date.getFullYear();
+
+  return `${day} ${month} ${year}`;
+}
+
 function HomeArticle() {
   const [sections, setSections] = useState<string[] | null>(null);
   const [headingIds, setHeadingIds] = useState<string[]>([]);
@@ -96,6 +110,7 @@ function HomeArticle() {
         return (
           <Section
             key={id ?? `sec-${i}`}
+            id={/tentang/i.test(id) ? 'about' : undefined}
             className={`${i === 0 ? 'pt-10 lg:pt-30' : ''} ${i === sections.length - 1 ? 'pb-20 lg:pb-40' : ''}`}
           >
             <Article id={id} content={section} className={ARTICLE_PROSE_CLASS} />
@@ -119,6 +134,16 @@ export default function Home() {
   const articleCardBg_dark = "dark:bg-linear-[135deg,#0A1D4B,#294D7E99,#71478D99,#CC7A3399_85%,#FF950099]";
   const articleCardBg = `${articleCardBg_light} ${articleCardBg_dark}`;
 
+  const getColSpan = (colspan: number): `lg:col-span-${number}` => {
+    if (colspan > 3) return 'lg:col-span-3';
+    switch (colspan) {
+      case 1: return 'lg:col-span-1';
+      case 2: return 'lg:col-span-2';
+      case 3: return 'lg:col-span-3';
+      default: return 'lg:col-span-1';
+    }
+  }
+
   return (
     <div className="bg-[#D7FFFE]/10 dark:bg-background text-gray-900 dark:text-white/80">
       <Hero />
@@ -141,25 +166,25 @@ export default function Home() {
         <Section id="featured-articles-container">
           <div className={cn(
             "mx-auto lg:mx-0 mt-15 px-6 pt-10 lg:pt-0 max-w-2xl lg:max-w-none",
-            `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${featuredArticles.length < 3 ? 'lg:grid-cols-2' : ''} gap-x-8 gap-y-16`
+            `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ${featuredArticles.length < 3 ? 'lg:grid-cols-2' : ''} gap-8`
           )}>
             {featuredArticles.map((article, idx) => (
               <motion.div
                 key={article.title.replace(/\s+/g, '-').toLowerCase()}
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                className="group"
+                className={cn("group", getColSpan(article.colspan ?? 1))}
               >
-                {/* <FocusableCard className={`h-full ${articleCardHoverClass} shadow-lg transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}> */}
                 <FocusableCard className={`h-full bg-white/1 dark:bg-gray-800/1 border-none backdrop-blur-[100px] shadow-lg transition-all duration-300 ease-in-out ${badgeCardHoverClass}`}>
                   {/* Featured Article */}
                   <CardContent className="p-5">
                     <article className={`flex max-w-xl flex-col items-start justify-between`}>
-                      <div className="flex items-center gap-x-4 text-xs">
+                      <div className="flex flex-col items-center gap-x-4 gap-y-1.5 text-xs">
+                        <time dateTime={article.date} className="self-start text-gray-600 dark:text-gray-300">{formatDate(article.date)}</time>
                         {/* Category */}
-                        <div className="flex items-center mb-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           {article.category.map((cat, i) => (
-                            <Badge key={i} className="mr-2 text-gray-900 font-semibold bg-gradient-to-r from-[#FF9951] via-orange-400 to-[#FF8867]">
+                            <Badge key={i} className="text-gray-900 font-semibold bg-gradient-to-r from-[#FF9951] via-orange-400 to-[#FF8867]">
                               {cat}
                             </Badge>
                           ))}
@@ -172,7 +197,7 @@ export default function Home() {
                           "group-focus:text-orange-700 dark:group-focus:text-orange-300",
                           "group-active:text-orange-700 dark:group-active:text-orange-300",
                         )}>
-                          <a href={article.src}>
+                          <a href={article.href}>
                             <span className="absolute inset-0"></span>
                             {article.title}
                           </a>
