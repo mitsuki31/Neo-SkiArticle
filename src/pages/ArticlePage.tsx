@@ -1,17 +1,19 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import ReactDOMServer from 'react-dom/server';
+import { ExternalLinkIcon } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
+import RootLayout from '@/layout/Root';
+import Header from '@/layout/Header';
+import Footer from '@/layout/Footer';
+import Layout from '@/lib/Layout';
+import { MobileTableOfContents, TableOfContents } from '@/layout/TOC';
 import { getMarkdownContent, ParsedMarkdown } from '@/lib/markparser';
 import CreateErrorPage from '@/layout/ErrorPage';
 import Article from '@/lib/Article';
 import { Section } from '@/lib/motion-anim';
-import { Badge } from '@/components/ui/badge';
-import Header from '@/layout/Header';
-import Footer from '@/layout/Footer';
-import Layout from '@/lib/Layout';
 import { calcReadTime, extractSections, useActiveHeading } from '@/utils/article';
-import { MobileTableOfContents, TableOfContents } from '@/layout/TOC';
 
 export type ArticleFrontMatter = {
   title?: string;
@@ -49,10 +51,31 @@ export function ArticleLoading() {
   );
 }
 
+function injectExternalLinkIcons(html: string): string {
+  const externalLinkSvgStr = ReactDOMServer.renderToStaticMarkup(
+    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+  );
+  const currentHost = window.location.hostname;
+
+  // Regex: <a ... href="http...">...</a>
+  return html.replace(
+    /<a\b([^>]+href="(https?:\/\/[^"]+)"[^>]*)>(.*?)<\/a>/gi,
+    (match, attrs, href, content) => {
+      try {
+        const url = new URL(href);
+        if (url.hostname !== currentHost) {
+          return `<a ${attrs}>${content}${externalLinkSvgStr}</a>`;
+        }
+      } catch { /* no throw */ }
+      return match; // unchanged
+    }
+  );
+}
+
 function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: Required<ParsedMarkdown<ArticleFrontMatter>> }) {
   const { data, raw, content: html } = parsedMarkdown ?? {};
   const readTime = calcReadTime(raw, 150);
-  const sections = extractSections(html);
+  const sections = extractSections(injectExternalLinkIcons(html));
 
   return (
     <>
@@ -75,7 +98,7 @@ function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: R
         <Section key={`section-${i}`} className={`bg-none py-0 ${i !== 0 ? '!pt-0' : '!pt-5'} ${i === sections.length - 1 ? 'pb-20 lg:pb-40' : ''}`}>
           <Article
             id={slug}
-            content={section || ''}
+            content={section}
             className={
               'prose prose-indigo dark:prose-invert article theme-transition '
               + 'prose-a:text-blue-700 dark:prose-a:text-blue-400 prose-a:no-underline prose-a:hover:underline prose-a:hover:underline-offset-4 '
@@ -97,7 +120,7 @@ function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: R
 export default function ArticlePage() {
   const { slug } = useParams();
   const [content, setContent] = useState<Required<ParsedMarkdown<ArticleFrontMatter>> | null>(null);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState<string | null>(null);
   const [error, setError] = useState<{ errno: number; message: string } | null>(null);
   const [isClose, setIsClose] = useState(false);
   const headingsList = content?.headings.map(h => h.data?.id).filter(Boolean) ?? [];
@@ -121,10 +144,8 @@ export default function ArticlePage() {
       // Set the document title based on the article title
       if (data && Object.keys(data).length > 0 && data.title) {
         setTitle(data.title);
-        document.title = data.title + ' · NeoSKI';  // Optional fallback
       } else {
-        setTitle('');
-        document.title = 'NeoSKI';  // Optional fallback
+        setTitle(null);
       }
     }
 
@@ -132,7 +153,6 @@ export default function ArticlePage() {
       try {
         const data = await getMarkdownContent<ArticleFrontMatter>(slug!);
         setContent(data);
-        window.scrollTo(0, 0);  // Prevent page jump to the bottom on load
         updateDocumentTitle(data.data);
       } catch (err) {
         console.error(err);
@@ -162,35 +182,30 @@ export default function ArticlePage() {
   }
 
   return (
-    <>
-      <HelmetProvider>
-        <Helmet>
-          <title>{title ? title + '· NeoSKI' : 'NeoSKI'}</title>
-        </Helmet>
-        <Header className="bg-none" sticky scrollThreshold={0} />
-        <div className="flex bg-white-700 dark:bg-background text-gray-900 dark:text-white/80 pt-5">
-          <TableOfContents
-            headings={content?.headings}
-            activeId={activeId ?? headingsList[0]}
-            toggler={tocToggler}
-            isClosed={isClose}
-          />
-          <MobileTableOfContents
-            headings={content?.headings}
-            activeId={activeId ?? headingsList[0]}
-            toggler={tocMobileToggler}
-            isClosed={isMobileTocClosed}
-          />
-          {/* Main Content */}
-          <div ref={mainContentRef} className='flex-1 transition-colors duration-500'>
-            {content
-              ? <MainContent slug={slug!} parsedMarkdown={content} />
-              : <ArticleLoading />
-            }
-          </div>
+    <RootLayout title={title ? title + ' · NeoSKI' : 'NeoSKI'} removeDefaultClass>
+      <Header className="bg-none" sticky scrollThreshold={0} />
+      <div className="flex bg-white-700 dark:bg-background text-gray-900 dark:text-white/80 pt-5">
+        <TableOfContents
+          headings={content?.headings}
+          activeId={activeId ?? headingsList[0]}
+          toggler={tocToggler}
+          isClosed={isClose}
+        />
+        <MobileTableOfContents
+          headings={content?.headings}
+          activeId={activeId ?? headingsList[0]}
+          toggler={tocMobileToggler}
+          isClosed={isMobileTocClosed}
+        />
+        {/* Main Content */}
+        <div ref={mainContentRef} className='flex-1 transition-colors duration-500'>
+          {content
+            ? <MainContent slug={slug!} parsedMarkdown={content} />
+            : <ArticleLoading />
+          }
         </div>
-        <Footer />
-      </HelmetProvider>
-    </>
+      </div>
+      <Footer />
+    </RootLayout>
   );
 }

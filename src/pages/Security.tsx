@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, useLocation, useParams } from "react-router-dom";
+import { ExternalLinkIcon } from "lucide-react";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
 import {
@@ -15,8 +16,9 @@ const { security: securityReports } = reports;
 const SUPPORTED_LANG = ["en", "id"] as const;
 type Lang = (typeof SUPPORTED_LANG)[number];
 
-function Code({ children }: { children: React.ReactNode }) {
-  return <code className="bg-gray-300 dark:bg-white/10 rounded px-1.5">{children}</code>;
+function Code(_props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>) {
+  const { children, className } = _props;
+  return <code className={`bg-gray-300 dark:bg-white/10 rounded px-1.5 ${className}`}>{children}</code>;
 }
 
 const SECURITY_POLICY: Record<
@@ -108,21 +110,28 @@ const SECURITY_POLICY: Record<
         href={securityPolicy.external.en}
         target="_blank"
         rel="noreferrer"
-        className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5 external-link"
+        className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5"
       >
         Full repository Security Policy (<Code>SECURITY.md</Code>)
+        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
       </a>,
       <a href={securityReports.private} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
         Private security contact (<Code>security.txt</Code>)
       </a>,
-      <a href={securityReports.public} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5 external-link">
+      <a href={securityReports.public} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
         Open a public security issue
+        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
       </a>
     ],
     footerNotes: [
       "No bounty program is currently offered.",
       <>
-        For maintainers, please keep this page in sync with <a href={securityPolicy.external.en} target="_blank" className="text-blue-600 dark:text-blue-400"><Code>SECURITY.md</Code></a>.
+        For maintainers, please keep this page in sync with <a href={securityPolicy.external.en} target="_blank" className="text-blue-600 dark:text-blue-400">
+          <Code className="group">
+            SECURITY.md
+            <ExternalLinkIcon className="hidden group-hover:inline w-3 h-3 ml-1" />
+          </Code>
+        </a>.
         Do not publish internal runbooks or secrets here.
       </>,
     ],
@@ -190,21 +199,28 @@ const SECURITY_POLICY: Record<
         href={securityPolicy.external.en}
         target="_blank"
         rel="noreferrer"
-        className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5 external-link"
+        className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5"
       >
         Kebijakan Keamanan repositori lengkap (<Code>SECURITY.md</Code>)
+        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
       </a>,
       <a href={securityReports.private} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
         Kontak keamanan privat (<Code>security.txt</Code>)
       </a>,
-      <a href={securityReports.public} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5 external-link">
+      <a href={securityReports.public} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
         Buka issue keamanan publik
+        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
       </a>
     ],
     footerNotes: [
       "Saat ini tidak ada program bounty.",
       <>
-        Untuk maintainer, silahkan tetapkan halaman ini sesuai dengan <a href={securityPolicy.external.en} target="_blank" className="text-blue-600 dark:text-blue-400"><Code>SECURITY.md</Code></a>.
+        Untuk maintainer, silahkan tetapkan halaman ini sesuai dengan <a href={securityPolicy.external.en} target="_blank" className="text-blue-600 dark:text-blue-400">
+          <Code className="group">
+            SECURITY.md
+            <ExternalLinkIcon className="hidden group-hover:inline w-3 h-3 ml-1" />
+          </Code>
+        </a>.
         Jangan publikasikan runbook internal atau rahasia internal di sini.
       </>,
     ],
@@ -305,8 +321,9 @@ export function SecurityPage() {
                   className="inline-flex gap-2 justify-center items-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-md text-sm"
                 >
                   <i className="bx bx-bug text-2xl" />
-                  <span className="inline-block text-center whitespace-normal break-words external-link">
+                  <span className="inline-block text-center whitespace-normal break-words">
                     {t.publicReportBtn}
+                    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
                   </span>
                 </a>
               </div>
@@ -354,10 +371,11 @@ export function SecurityPage() {
                 className="inline-flex gap-2 items-center justify-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md"
               >
                 <i className="bx bx-book-open text-2xl" />
-                <span className="inline-block text-sm text-center whitespace-normal break-words external-link">
+                <span className="inline-block text-sm text-center whitespace-normal break-words">
                   {lang === "id"
                     ? <strong>Lihat Kebijakan Keamanan lengkap</strong>
                     : <strong>View the full Security Policy</strong>}
+                  <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
                 </span>
               </a>
             </div>
@@ -378,9 +396,10 @@ export function SecurityPage() {
                     href={reports.public}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-block text-sm text-center whitespace-normal break-words external-link"
+                    className="inline-block text-sm text-center whitespace-normal break-words"
                   >
                     {lang === "id" ? "Buka issue keamanan publik" : "Open a public security issue"}
+                    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
                   </a>
                 </div>
               </div>

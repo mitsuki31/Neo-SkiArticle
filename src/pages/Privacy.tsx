@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, useLocation, useParams } from "react-router-dom";
+import { ExternalLinkIcon } from "lucide-react";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
 import {
@@ -192,10 +193,11 @@ export function PrivacyPage() {
                 className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md"
               >
                 <i className="bx bx-book-open text-2xl mr-2" />
-                <span className="inline-block text-sm text-center whitespace-normal break-words external-link">
+                <span className="inline-block text-sm text-center whitespace-normal break-words">
                   {lang === "id"
                     ? <strong>Lihat Kebijakan Privasi lengkap</strong>
                     : <strong>View the full Privacy Policy</strong>}
+                  <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
                 </span>
               </a>
             </div>
@@ -219,8 +221,9 @@ export function PrivacyPage() {
                   className="inline-flex gap-2 justify-center items-center px-4 py-2 bg-transparent dark:bg-inherit border border-gray-500 dark:not-hover:border-gray-300 hover:border-orange-400 hover:text-orange-400 focus:border-2 focus:border-orange-400 focus:text-orange-400 rounded-md text-sm"
                 >
                   <i className="bx bx-bug text-2xl" />
-                  <span className="text-center whitespace-normal break-words external-link">
+                  <span className="text-center whitespace-normal break-words">
                     {lang === "id" ? "Buka issue publik" : "Open a public issue"}
+                    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
                   </span>
                 </a>
               </div>

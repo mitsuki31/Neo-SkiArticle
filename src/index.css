@@ -127,20 +127,13 @@
 /* ========= */
 
 :root {
-  --header-height: 68px;
+  --header-height: 62px;
   --scroll-margin-top: calc(var(--header-height) + 8px);
 }
 
 html {
   scroll-behavior: smooth;
   transition: background-color 0.8s ease, color 0.8s ease;
-}
-
-.external-link::after {
-  content: ' ↗'; /* External link arrow */
-  font-family: Inter, sans-serif;
-  font-weight: bold;
-  color: inherit;
 }
 
 .custom-scrollbar {
@@ -157,7 +150,11 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply scroll-mt-[--scroll-margin-top];
+  scroll-margin-top: var(--scroll-margin-top);
+}
+
+#navbar .bg-popover {
+  @apply bg-gray-300/30 dark:bg-white/20 backdrop-blur-md border-none;
 }
 
 

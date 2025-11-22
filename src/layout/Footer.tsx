@@ -1,5 +1,8 @@
+import { Link } from 'react-router-dom';
+import { ExternalLinkIcon } from 'lucide-react';
 import { addClassToSVG } from '@/lib/utils';
 import {
+  tiktok as tiktokUrl,
   instagram as instagramUrl,
   youtube as youtubeUrl,
   github_repo as githubUrl,
@@ -11,13 +14,16 @@ import {
 import logoSki from '@/assets/logo_ski.png';
 
 // Icons
+import tiktokIcon from '@icons/tiktok.svg?raw';
 import instagramIcon from '@icons/instagram.svg?raw';
 import youtubeIcon from '@icons/youtube.svg?raw';
 import githubIcon from '@icons/github.svg?raw';
 import reactIcon from '@icons/react.svg?raw';
 import viteIcon from '@icons/vite.svg?raw';
+import tailwindCssIcon from '@icons/tailwindcss.svg?raw';
 
 export default function Footer() {
+  const tiktokIconHoverClass = 'hover:text-black focus:text-black active:text-black dark:hover:text-white dark:focus:text-white dark:active:text-white';
   const instagramIconHoverClass = 'hover:text-pink-600 focus:text-pink-600 active:text-pink-600';
   const youtubeIconHoverClass = 'hover:text-red-600 focus:text-red-600 active:text-red-600';
   const githubIconHoverClass = 'hover:text-black focus:text-black active:text-black dark:hover:text-white dark:focus:text-white dark:active:text-white';
@@ -51,25 +57,34 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Navigasi</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/#about" className={underlineCls}>Tentang Sekolah</a></li>
-            <li><a href="/a/program-keahlian" className={underlineCls}>Program Keahlian</a></li>
-            <li><a href="/a/pelatihan-vokasi-2025" className={underlineCls}>Pelatihan Vokasi 2025</a></li>
-            <li><a href={mainWebUrl} target="_blank" rel="noopener noreferrer" className={underlineCls}>PPDB</a></li>
+            <li><Link to="/a/sejarah-sekolah" className={underlineCls}>Sejarah Sekolah</Link></li>
+            <li><Link to="/a/program-keahlian" className={underlineCls}>Program Keahlian</Link></li>
+            <li><Link to="/a/analisis-vokasi-2025" className={underlineCls}>Analisis Vokasi 2025</Link></li>
+            <li>
+              <a href={mainWebUrl} target="_blank" rel="noopener noreferrer" className={underlineCls}>
+                PPDB
+                <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Informasi Legal</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href={securityPolicy.internal} className={underlineCls}>Keamanan</a></li>
-            <li><a href={privacyPolicy.internal} className={underlineCls}>Kebijakan Privasi</a></li>
-            <li><a href={codeOfConduct.internal} className={underlineCls}>Kode Etik</a></li>
+            <li><Link to={securityPolicy.internal} className={underlineCls}>Keamanan</Link></li>
+            <li><Link to={privacyPolicy.internal} className={underlineCls}>Kebijakan Privasi</Link></li>
+            <li><Link to={codeOfConduct.internal} className={underlineCls}>Kode Etik</Link></li>
           </ul>
         </div>
 
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Ikuti Kami</h3>
           <div className="flex space-x-4">
+            {/* TikTok */}
+            <a href={tiktokUrl} aria-label="TikTok" title="TikTok SMK Sukamandi" target="_blank" rel="noopener noreferrer">
+              <span dangerouslySetInnerHTML={{ __html: addClassToSVG(tiktokIcon, `w-6 h-6 transition duration-300 text-gray-500 ${tiktokIconHoverClass}`) }} />
+            </a>
             {/* Instagram */}
             <a href={instagramUrl} aria-label="Instagram" title='Instagram SMK Sukamandi' target="_blank" rel="noopener noreferrer">
               <span dangerouslySetInnerHTML={{ __html: addClassToSVG(instagramIcon, `w-6 h-6 transition duration-300 text-gray-500 ${instagramIconHoverClass}`) }} />
@@ -93,9 +108,14 @@ export default function Footer() {
             <div dangerouslySetInnerHTML={{ __html: addClassToSVG(reactIcon, 'w-full h-full animate-spin-slow') }} />
           </a>
         </span>
-        <span className="inline-block w-6 h-6 text-[#646CFF]">
+        <span className="inline-block w-6 h-6">
           <a href="https://vitejs.dev/" aria-label="Vite" title='Vite' target="_blank" rel="noopener noreferrer">
             <div dangerouslySetInnerHTML={{ __html: addClassToSVG(viteIcon, 'w-full h-full') }} />
+          </a>
+        </span>
+        <span className="inline-block w-6 h-6">
+          <a href="https://tailwindcss.com//" aria-label="TailwindCSS" title='TailwindCSS' target="_blank" rel="noopener noreferrer">
+            <div dangerouslySetInnerHTML={{ __html: addClassToSVG(tailwindCssIcon, 'w-full h-full fill-sky-400') }} />
           </a>
         </span>
       </div>
@@ -105,7 +125,10 @@ export default function Footer() {
         <br />
         <span className="text-gray-500 dark:text-gray-400 italic">
           Developed by{' '}
-          <a href="https://github.com/mitsuki31" target="_blank" rel="noopener noreferrer" className='hover:underline'>Dhefa Gusni A. (Ryuu Mitsuki)</a>
+          <a href="https://github.com/mitsuki31" target="_blank" rel="noopener noreferrer" className='hover:underline underline-offset-5'>
+            Dhefa Gusni A. (Ryuu Mitsuki)
+            <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+          </a>
         </span>
       </div>
     </footer>

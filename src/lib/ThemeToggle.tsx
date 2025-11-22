@@ -27,7 +27,7 @@ export default function ThemeToggle({ size = 18, className = '', id = '' }: {
   }
 
   return (
-    <Button variant="outline" size="icon" title='Toggle theme' type='button' onClick={toggleTheme} className={className} id={id}>
+    <Button variant="outline" size="icon" title={`Ubah ke tema ${isDark ? 'terang' : 'gelap'}`} type='button' onClick={toggleTheme} className={className} id={id}>
       {isDark ? <Sun size={size} /> : <Moon size={size} />}
     </Button>
   );

@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { X, ChevronRightIcon, ListTree } from 'lucide-react';
 
 import type { Heading } from '@/lib/plugins/remark/remark-slug-from-heading';
+import { cn } from '@/lib/utils';
+import { useScrollLock } from '@/lib/hooks/scroll-lock';
 
 type TableOfContentsOptions = {
   headings?: Heading[];
@@ -35,7 +37,7 @@ function TableOfContentsLoading() {
  * Table of Contents component for desktop/mobile
  */
 export function TableOfContents({ headings, activeId, toggler, isClosed }: TableOfContentsOptions) {
-  const activeLiRef = useRef<HTMLLIElement>(null);
+  const activeLiRef = useRef<HTMLAnchorElement>(null);
 
   // Heading auto-scroll effect
   useEffect(() => {
@@ -73,32 +75,34 @@ export function TableOfContents({ headings, activeId, toggler, isClosed }: Table
             </button>
           </div>
         </div>
-        <div className="mx-6 overflow-y-auto custom-scrollbar max-h-[55vh]">
-          <ul className='list-disc' id='toc-list'>
+        <div className="overflow-y-auto custom-scrollbar max-h-[55vh]">
+          <div className='list-none pt-4 pl-3 pr-6' id='toc-list'>
             {headings ? headings.map((heading, i) => {
-              const mleft = 30;
+              const pleft = 20;
+              const isActive = activeId === (heading.data?.id ?? '');
+
               if (heading.depth > 3) return null;  // Ignore headings deeper than 3
+
               return (
-                <li
+                <a
+                  href={'#' + (heading.data?.id ?? '')}
                   ref={activeId === (heading.data?.id ?? '') ? activeLiRef : null}
                   key={`list-heading-${i + 1}`}
-                  className={`
-                    py-1 text-gray-700 dark:text-white/80 hover:font-bold
-                  `.replace(/\n/g, '').replace(/\s+/, ' ')}
+                  className={cn(
+                    'block py-1 text-gray-700 dark:text-white/80 hover:text-orange-600 dark:hover:text-orange-500',
+                    isActive ? 'font-bold bg-gray-300/20 dark:bg-gray-700/20 border-l-4 border-l-orange-600' : ''
+                  )}
                   style={{
-                    color: activeId === (heading.data?.id ?? '')
-                      ? "var(--color-orange-600)"
-                      : "",
-                    marginLeft: heading.depth > 1
-                      ? `${heading.depth * (mleft - 5)}px`
-                      : `${mleft}px`
+                    paddingLeft: heading.depth > 1
+                      ? `${heading.depth * (pleft - 5)}px`
+                      : `${pleft}px`
                   }}
                 >
-                  <a key={`heading-${i + 1}`} href={'#' + (heading.data?.id ?? '')}>{heading.value}</a>
-                </li>
+                  {heading.value}
+                </a>
               );
             }) : <TableOfContentsLoading />}
-          </ul>
+          </div>
         </div>
       </nav>
     </>
@@ -107,6 +111,7 @@ export function TableOfContents({ headings, activeId, toggler, isClosed }: Table
 
 export function MobileTableOfContents({ headings, activeId, toggler, isClosed }: TableOfContentsOptions) {
   const activeLiRef = useRef<HTMLLIElement>(null);
+  useScrollLock(!isClosed);  // Lock the body element when the menu is open
 
   // Heading auto-scroll effect (same as before)
   useEffect(() => {
@@ -177,12 +182,12 @@ export function MobileTableOfContents({ headings, activeId, toggler, isClosed }:
             </button>
           </div>
 
-          <div className="max-h-[calc(80vh-7rem)] overflow-y-auto custom-scrollbar">
-            <ul className='list-disc pl-4' id='toc-mobile-list'>
+          <div className="max-h-[95%] overflow-y-auto custom-scrollbar">
+            <ul className='list-none mb-5 pt-4 pl-4 pr-2' id='toc-mobile-list'>
               {headings ? headings.map((heading, i) => {
                 const headingId = heading.data?.id ?? '';
                 const isActive = activeId === headingId;
-                const mleft = 15; // Smaller margin for mobile
+                const pleft = 15; // Smaller for mobile
 
                 if (heading.depth > 3) return null; // Ignore deeper headings
 
@@ -190,17 +195,14 @@ export function MobileTableOfContents({ headings, activeId, toggler, isClosed }:
                   <li
                     ref={isActive ? activeLiRef : null}
                     key={`list-heading-${i + 1}`}
-                    className={`
-                      py-1 text-gray-700 dark:text-white/80 transition-colors
-                      ${isActive ? 'font-bold' : 'hover:font-medium'}
-                    `}
+                    className={cn(
+                      'py-1.25 text-gray-700 dark:text-white/80 transition-colors rounded-r-md',
+                      isActive ? 'font-bold bg-gray-300/20 dark:bg-gray-700/20 border-l-4 border-l-orange-600' : 'hover:font-medium',
+                    )}
                     style={{
-                      color: isActive
-                        ? "var(--color-orange-600)"
-                        : "",
-                      marginLeft: heading.depth > 1
-                        ? `${heading.depth * (mleft)}px`
-                        : `${mleft}px`
+                      paddingLeft: heading.depth > 1
+                        ? `${heading.depth * (pleft)}px`
+                        : `${pleft}px`
                     }}
                     onClick={toggler}
                   >

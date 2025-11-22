@@ -4,7 +4,7 @@ import background from '@/assets/smkski-bg.jpg';
 
 export default function Hero() {
   return (
-    <section className="relative w-full pt-2 md:pt-10 overflow-hidden bg-gradient-to-b from-sky-100 to-white dark:from-background dark:to-gray-500/40">
+    <section className="relative w-full h-svh pt-2 md:pt-10 overflow-hidden bg-gradient-to-b from-sky-100 to-white dark:from-background dark:to-gray-500/40">
       {/* Background overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -33,7 +33,7 @@ export default function Hero() {
             />
             <br />
             <span className="bg-gradient-to-r from-red-600 to-orange-400 bg-clip-text text-transparent">
-              Artikel SMK Sukamandi
+              Website NeoSKI
             </span>
           </h1>
 
@@ -47,14 +47,14 @@ export default function Hero() {
 
         <div className="relative hidden lg:flex-1 lg:flex items-center justify-center md:justify-end">
           {/* Gradient overlay background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-indigo-400/20 via-indigo-600/50 to-indigo-800/50 rounded-2xl" />
+          <div className="absolute inset-0 bg-gradient-to-t from-cyan-100/10 via-sky-100/40 to-sky-200/50 dark:from-gray-400/10 dark:via-gray-600/20 dark:to-gray-800/50 rounded-2xl" />
 
           {/* Content */}
           <div className="relative z-10 flex flex-col text-center lg:text-right px-6 md:px-10 py-12 w-full h-full items-center md:items-end justify-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white font-inter">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white font-inter">
               Jadilah Siswa
               yang{' '}
-              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-yellow-400 via-yellow-600 to-orange-500 bg-clip-text text-transparent">
                 <TypeAnimation
                   sequence={['Disiplin', 2000, 'Kreatif', 2000, 'Cerdas', 2000, 'Berakhlak', 2000, '']}
                   wrapper="span"
