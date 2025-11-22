@@ -58,7 +58,7 @@ export function useScrollLock(locked: boolean): void {
         // Restore scroll position exactly
         window.scrollTo({ top: scrollY, behavior: "instant" });
       }
-    }
+    };
 
     // Enter lock
     if (locked) {
