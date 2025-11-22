@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ExternalLinkIcon } from 'lucide-react';
 import { addClassToSVG } from '@/lib/utils';
 import {
@@ -56,9 +57,9 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Navigasi</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/#about" className={underlineCls}>Tentang Sekolah</a></li>
-            <li><a href="/a/program-keahlian" className={underlineCls}>Program Keahlian</a></li>
-            <li><a href="/a/analisis-vokasi-2025" className={underlineCls}>Analisis Vokasi 2025</a></li>
+            <li><Link to="/a/sejarah-sekolah" className={underlineCls}>Sejarah Sekolah</Link></li>
+            <li><Link to="/a/program-keahlian" className={underlineCls}>Program Keahlian</Link></li>
+            <li><Link to="/a/analisis-vokasi-2025" className={underlineCls}>Analisis Vokasi 2025</Link></li>
             <li>
               <a href={mainWebUrl} target="_blank" rel="noopener noreferrer" className={underlineCls}>
                 PPDB
@@ -71,9 +72,9 @@ export default function Footer() {
         <div>
           <h3 className="text-sm font-semibold uppercase mb-3">Informasi Legal</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href={securityPolicy.internal} className={underlineCls}>Keamanan</a></li>
-            <li><a href={privacyPolicy.internal} className={underlineCls}>Kebijakan Privasi</a></li>
-            <li><a href={codeOfConduct.internal} className={underlineCls}>Kode Etik</a></li>
+            <li><Link to={securityPolicy.internal} className={underlineCls}>Keamanan</Link></li>
+            <li><Link to={privacyPolicy.internal} className={underlineCls}>Kebijakan Privasi</Link></li>
+            <li><Link to={codeOfConduct.internal} className={underlineCls}>Kode Etik</Link></li>
           </ul>
         </div>
 

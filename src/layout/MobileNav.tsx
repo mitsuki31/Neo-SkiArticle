@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, type Path } from 'react-router-dom';
-import { ChevronDown, Home, Info, Menu, Users, X } from 'lucide-react';
+import { BookOpenText, ChevronDown, Home, Menu, Users, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink } from '@/components/ui/ExternalLink';
 import ThemeToggle from '@/lib/ThemeToggle';
 import { cn } from '@/lib/utils';
 import {
@@ -10,27 +11,26 @@ import {
   tiktok as tiktokUrl,
 } from '@/assets/global-urls.json';
 
-type NavLink = {
+type NavMenu = {
   name: string;
   icon?: React.ReactElement;
   logoClass?: string;
   to?: string | Partial<Path>;
-  submenu?: (Omit<NavLink, "to" | "submenu"> & {
-    to: string | Partial<Path>;
+  submenu?: (Omit<NavMenu, "to" | "submenu"> & {
+    href: string;
     hoveredClass: string;
   })[];
 };
 
-const navLinks: NavLink[] = [
+const navMenus: NavMenu[] = [
   { name: 'Beranda', to: '/', icon: <Home className="w-4 h-4" /> },
-  { name: 'Tentang', to: { pathname: '/', hash: '#about' }, icon: <Info className="w-4 h-4" /> },
   {
     name: 'Sosial',
     icon: <Users className="w-4 h-4" />,
     submenu: [
       {
         name: 'YouTube',
-        to: youtubeUrl,
+        href: youtubeUrl,
         logoClass: 'bx bxl-youtube',
         hoveredClass: cn(
           'hover:text-white hover:bg-gradient-to-r hover:from-[#000000] hover:via-[#FF0000] hover:to-[#EE0000]',
@@ -40,7 +40,7 @@ const navLinks: NavLink[] = [
       },
       {
         name: 'Instagram',
-        to: instagramUrl,
+        href: instagramUrl,
         logoClass: 'bx bxl-instagram',
         hoveredClass: cn(
           'hover:text-white hover:bg-gradient-to-r hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]',
@@ -50,7 +50,7 @@ const navLinks: NavLink[] = [
       },
       {
         name: 'TikTok',
-        to: tiktokUrl,
+        href: tiktokUrl,
         logoClass: 'bx bxl-tiktok',
         hoveredClass: cn(
           'hover:text-white hover:bg-gradient-to-r hover:from-[#69C9D0] hover:via-[#000000] hover:to-[#EE1D52]',
@@ -60,6 +60,7 @@ const navLinks: NavLink[] = [
       },
     ],
   },
+  { name: 'Histori', to: '/a/sejarah-sekolah', icon: <BookOpenText className="w-4 h-4" /> },
 ];
 
 
@@ -67,9 +68,10 @@ export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const [openedSubmenu, setOpenedSubmenu] = useState<string | null>(null);
 
-  const hoveredItemClass =
-    'hover:bg-gray-200 hover:text-orange-600 focus-visible:bg-gray-200 focus-visible:text-orange-600 active:bg-gray-200 active:text-orange-600 '
-    + 'dark:hover:bg-gray-700 dark:hover:text-orange-400 dark:focus-visible:bg-gray-700 dark:focus-visible:text-orange-400 dark:active:bg-gray-700 dark:active:text-orange-400';
+  const hoveredItemClass = cn(
+    'hover:bg-gray-200 hover:text-orange-600 focus-visible:bg-gray-200 focus-visible:text-orange-600 active:bg-gray-200 active:text-orange-600',
+    'dark:hover:bg-gray-700 dark:hover:text-orange-400 dark:focus-visible:bg-gray-700 dark:focus-visible:text-orange-400 dark:active:bg-gray-700 dark:active:text-orange-400'
+  );
   
   useEffect(() => {
     // Close the mobile nav when user press Escape key
@@ -140,7 +142,7 @@ export default function MobileNav() {
                 </button>
               </div>
               <nav className="flex flex-col p-4 space-y-2" id='mobile-nav'>
-                {navLinks.map((navEntry) => (
+                {navMenus.map((navEntry) => (
                   <div
                     key={navEntry.name}
                     className="w-full inline-block"
@@ -160,7 +162,7 @@ export default function MobileNav() {
                         >
                           {navEntry.icon
                             ? navEntry.icon
-                            : navEntry.logoClass ? <i className={`${navEntry.logoClass} text-[1.3rem]`}></i> : null}
+                            : navEntry.logoClass ? <i className={`${navEntry.logoClass} text-[1.3rem]`} /> : null}
                           {navEntry.name}
                         </Link>
                     ) : navEntry.submenu ? (
@@ -168,7 +170,10 @@ export default function MobileNav() {
                         <div
                           role="button"
                           tabIndex={0}
-                          className={`flex font-medium items-center justify-between px-3 py-[0.65rem] mb-0 rounded-lg cursor-pointer transition-all ${hoveredItemClass}`}
+                          className={cn(
+                            "flex font-medium items-center justify-between px-3 py-[0.65rem] mb-0 rounded-lg cursor-pointer transition-all",
+                            hoveredItemClass
+                          )}
                         >
                           <span className="flex gap-x-4 items-center justify-center">
                             {navEntry.icon
@@ -177,7 +182,7 @@ export default function MobileNav() {
                             {navEntry.name}
                           </span>
                           <ChevronDown
-                            className={`w-4 h-4 transition-transform ${openedSubmenu === navEntry.name ? "-rotate-180" : ""}`}
+                            className={`w-4 h-4 transition-transform ${openedSubmenu === navEntry.name ? "rotate-180" : ""}`}
                           />
                         </div>
                         <AnimatePresence>
@@ -190,19 +195,21 @@ export default function MobileNav() {
                               className="pl-4 mb-0 space-y-1 overflow-hidden"
                             >
                               {navEntry.submenu.map((subItem) => (
-                                <Link
+                                <ExternalLink
+                                  newTab
                                   key={subItem.name}
-                                  to={subItem.to}
-                                  className={`flex items-center gap-x-4 text-sm font-medium px-3 pr-2 py-[0.7rem] my-3 rounded-lg transition-all ${subItem.hoveredClass}`}
+                                  href={subItem.href}
+                                  className={cn(
+                                    "flex items-center gap-x-4 text-sm font-medium px-3 pr-2 py-[0.7rem] my-3 rounded-lg transition-all",
+                                    subItem.hoveredClass
+                                  )}
                                   onClick={() => setOpen(false)}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
                                 >
                                   {subItem.icon
                                     ? subItem.icon
-                                    : subItem.logoClass ? <i className={`${subItem.logoClass} text-[1.3rem]`}></i> : null}
+                                    : subItem.logoClass ? <i className={`${subItem.logoClass} text-[1.3rem]`} /> : null}
                                   {subItem.name}
-                                </Link>
+                                </ExternalLink>
                               ))}
                             </motion.div>
                           )}
