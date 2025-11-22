@@ -1,0 +1,76 @@
+# Neo-SkiArticle License
+
+**Version 1.0 — Custom License**
+
+Copyright © 2023-2025
+All rights reserved by Vocational High School Sukamandi & project authors.
+
+---
+
+## 1. Definitions
+
+**“Source Code”** refers to all code files in this repository, including JavaScript, TypeScript, JSX/TSX, CSS, configuration files, build files, and related scripts, written by the project authors.
+
+**“Project Content”** refers to the textual, visual, and descriptive material created specifically for this website, including but not limited to:
+school descriptions, history, article texts, program explanations, and any embedded written content produced by the project authors.
+
+**“Third-Party Assets”** refers to images, icons, fonts, libraries, or other resources sourced from external providers that include their own licenses.
+These assets **are not covered by this license**, and retain the license terms set by their original creators.
+
+---
+
+## 2. Permissions for Source Code
+
+You are permitted to:
+
+1. Use, view, and modify the Source Code.
+2. Distribute the Source Code, whether modified or unmodified, **provided that**:
+   - All copyright notices remain intact.
+   - A copy of this license is included with every distribution.
+
+Commercial and non-commercial use of the Source Code is allowed.
+
+---
+
+## 3. Restrictions for Project Content
+
+Project Content **must NOT** be:
+
+* Distributed outside this project.
+* Reused in other websites, applications, publications, or derivative projects.
+* Modified for any purpose outside this website.
+* Repurposed commercially or non-commercially, even with attribution.
+
+Project Content is **strictly bound** to this website and may only be used, displayed, or stored as part of this project.
+
+---
+
+## 4. Third-Party Assets
+
+Third-Party Assets included in this project remain under their original licenses.
+You must follow the terms defined by the respective creators.
+
+Nothing in this license overrides or replaces third-party terms.
+
+---
+
+## 5. Disclaimer
+
+The project is provided “as is,” without warranty of any kind, express or implied.
+The authors are not liable for any damages arising from using this project.
+
+---
+
+## 6. Termination
+
+Violating any section of this license will automatically terminate your rights to use, modify, or distribute the Source Code or Project Content.
+
+---
+
+## 7. Additional Notes
+
+- This license is intentionally **not OSI-approved**, due to restrictions placed on Project Content.
+- You may replace or modify this license for your own forks, but **you may not remove original copyright notices** when redistributing the Source Code.
+
+---
+
