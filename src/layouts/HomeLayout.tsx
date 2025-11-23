@@ -30,6 +30,7 @@ import InstagramPosts from '@/components/layout/InstagramPosts';
 
 // Featured Articles
 import featuredArticles from '@/articles/featured-articles.json';
+import { Link } from 'react-router-dom';
 
 const ARTICLE_PROSE_CLASS =
   'prose prose-indigo dark:prose-invert ' +
@@ -197,10 +198,10 @@ export default function Home() {
                           "group-focus:text-orange-700 dark:group-focus:text-orange-300",
                           "group-active:text-orange-700 dark:group-active:text-orange-300",
                         )}>
-                          <a href={article.href}>
+                          <Link to={article.href}>
                             <span className="absolute inset-0"></span>
                             {article.title}
-                          </a>
+                          </Link>
                         </h3>
                         <p className="mt-5 text-sm/6 text-gray-800 dark:text-white/80 md:not-group-hover:line-clamp-4">
                           {article.description.map(a => a.trim()).join(' ')}
