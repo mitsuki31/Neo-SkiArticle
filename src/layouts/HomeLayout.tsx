@@ -11,7 +11,7 @@ import { unify } from "@/lib/markparser";
 import { remarkSlugFromHeading, type Heading } from "@/lib/plugins/remark/remark-slug-from-heading";
 import { extractSections } from '@/utils/article';
 import Hero from '@/components/layout/Hero';
-import CreateErrorPage from './ErrorPage';
+import CreateErrorPage from './ErrorPageLayout';
 
 // Remark plugins
 import remarkParse from 'remark-parse';

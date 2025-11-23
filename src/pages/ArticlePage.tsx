@@ -10,7 +10,7 @@ import Footer from '@/components/layout/Footer';
 import Layout from '@/lib/Layout';
 import { MobileTableOfContents, TableOfContents } from '@/components/layout/TOC';
 import { getMarkdownContent, ParsedMarkdown } from '@/lib/markparser';
-import CreateErrorPage from '@/layout/ErrorPage';
+import CreateErrorPage from '@/layouts/ErrorPageLayout';
 import Article from '@/lib/Article';
 import { Section } from '@/lib/motion-anim';
 import { calcReadTime, extractSections, useActiveHeading } from '@/utils/article';
