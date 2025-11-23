@@ -4,7 +4,7 @@ import { X, ChevronRightIcon, ListTree } from 'lucide-react';
 
 import type { Heading } from '@/lib/plugins/remark/remark-slug-from-heading';
 import { cn } from '@/lib/utils';
-import { useScrollLock } from '@/lib/hooks/scroll-lock';
+import { useScrollLock } from '@/hooks/scroll-lock';
 
 type TableOfContentsOptions = {
   headings?: Heading[];
