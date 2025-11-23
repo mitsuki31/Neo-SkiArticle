@@ -1,5 +1,5 @@
-import { Section } from "@/lib/motion-anim";
-import Article from "@/lib/Article";
+import { Section } from "@/components/custom/ui/motion-anim";
+import Article from "@/components/layout/Article";
 import { parseMarkdown } from "@/lib/markparser";
 
 import tentangSekolah from '@articles/home/tentang-sekolah.md?raw';

@@ -1,6 +1,6 @@
 import { Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "@/lib/hooks/theme";
+import { useTheme } from "@/hooks/theme";
 import ArticleBackground from "./ArticleBackground";
 import InstagramEmbed from "./InstagramEmbed";
 

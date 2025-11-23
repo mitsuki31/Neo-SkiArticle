@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 
-import CreateErrorPage from '@/layout/ErrorPage';
+import CreateErrorPage from '@/layouts/ErrorPageLayout';
 import HomePage from '@/pages/Home';
 import ArticlePage from '@/pages/ArticlePage';
 import SecurityPage from '@/pages/Security';

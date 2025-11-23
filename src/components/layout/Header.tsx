@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import logoSki from "@/assets/logo_ski.png";
 import MobileNav from './MobileNav';
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 
 const SCROLL_THRESHOLD = 680; // px
 
@@ -48,9 +49,9 @@ export default function Header({ className = '', sticky = true, scrollThreshold 
     <header className={`bg-gradient-to-b from-sky-200 to-sky-100 dark:from-background dark:to-background md:p-2 border-none ${sticky ? stickyHeaderClass : ''} ${className}`} id="header">
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-5 mt-1 ml-8">
-          <a href="/" className="cursor-pointer">
+          <Link to="/" className="cursor-pointer">
             <img src={logoSki} alt="SMK Sukamandi Logo" className="w-10 h-10" />
-          </a>
+          </Link>
           <span className="text-xl lg:text-2xl mt-1 font-gugi font-bold tracking-[0.3rem] sm:tracking-[0.6rem] text-gray-800 dark:text-white">NeoSKI</span>
         </div>
         <Navbar />

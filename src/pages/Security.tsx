@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, useLocation, useParams } from "react-router-dom";
 import { ExternalLinkIcon } from "lucide-react";
-import Header from "@/layout/Header";
-import Footer from "@/layout/Footer";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 import {
   security_policy as securityPolicy,
   reports,
 } from "@/assets/global-urls.json";
 
-import SimpleLangSwitch from "@/components/ui/SimpleLangSwitch";
+import SimpleLangSwitch from "@/components/custom/ui/SimpleLangSwitch";
 import { parseQueryLang } from "@/lib/utils";
 
 const { security: securityReports } = reports;

@@ -1,7 +1,7 @@
-import RootLayout from "@/layout/Root";
-import HomeLayout from "@/layout/Home";
-import Header from "@/layout/Header";
-import Footer from "@/layout/Footer";
+import RootLayout from "@/components/layout/Root";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import HomeLayout from "@/layouts/HomeLayout";
 
 export default function Home() {
   return (

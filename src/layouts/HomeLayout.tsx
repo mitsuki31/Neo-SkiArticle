@@ -4,14 +4,14 @@ import { unified } from 'unified';
 import { CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Section } from "@/lib/motion-anim";
-import Article from "@/lib/Article";
-import FocusableCard from "@/lib/FocusableCard";
+import { Section } from "@/components/custom/ui/motion-anim";
+import Article from "@/components/layout/Article";
+import FocusableCard from "@/components/custom/ui/FocusableCard";
 import { unify } from "@/lib/markparser";
 import { remarkSlugFromHeading, type Heading } from "@/lib/plugins/remark/remark-slug-from-heading";
 import { extractSections } from '@/utils/article';
-import Hero from './Hero';
-import CreateErrorPage from './ErrorPage';
+import Hero from '@/components/layout/Hero';
+import CreateErrorPage from './ErrorPageLayout';
 
 // Remark plugins
 import remarkParse from 'remark-parse';
@@ -26,10 +26,11 @@ import homeArticle from '@/articles/home/index.md?raw';
 
 // Instagram
 import igPosts from '@/assets/ig-posts.json';
-import InstagramPosts from './InstagramPosts';
+import InstagramPosts from '@/components/layout/InstagramPosts';
 
 // Featured Articles
 import featuredArticles from '@/articles/featured-articles.json';
+import { Link } from 'react-router-dom';
 
 const ARTICLE_PROSE_CLASS =
   'prose prose-indigo dark:prose-invert ' +
@@ -197,10 +198,10 @@ export default function Home() {
                           "group-focus:text-orange-700 dark:group-focus:text-orange-300",
                           "group-active:text-orange-700 dark:group-active:text-orange-300",
                         )}>
-                          <a href={article.href}>
+                          <Link to={article.href}>
                             <span className="absolute inset-0"></span>
                             {article.title}
-                          </a>
+                          </Link>
                         </h3>
                         <p className="mt-5 text-sm/6 text-gray-800 dark:text-white/80 md:not-group-hover:line-clamp-4">
                           {article.description.map(a => a.trim()).join(' ')}
