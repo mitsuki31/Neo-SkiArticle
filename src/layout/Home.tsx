@@ -10,7 +10,7 @@ import FocusableCard from "@/lib/FocusableCard";
 import { unify } from "@/lib/markparser";
 import { remarkSlugFromHeading, type Heading } from "@/lib/plugins/remark/remark-slug-from-heading";
 import { extractSections } from '@/utils/article';
-import Hero from './Hero';
+import Hero from '@/components/layout/Hero';
 import CreateErrorPage from './ErrorPage';
 
 // Remark plugins
@@ -26,7 +26,7 @@ import homeArticle from '@/articles/home/index.md?raw';
 
 // Instagram
 import igPosts from '@/assets/ig-posts.json';
-import InstagramPosts from './InstagramPosts';
+import InstagramPosts from '@/components/layout/InstagramPosts';
 
 // Featured Articles
 import featuredArticles from '@/articles/featured-articles.json';

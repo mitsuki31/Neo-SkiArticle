@@ -1,8 +1,5 @@
-"use client"
-
-import type React from "react"
-import { useEffect, useState } from "react"
-import { cn } from "@/lib/utils"
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface ArticleBackgroundProps {
   children: React.ReactNode;
@@ -15,7 +12,7 @@ interface ArticleBackgroundProps {
   imageAlt?: string;
   imageCaption?: string;
   imageAspectRatio?: string;
-  containerSize?: '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | '10xl';
+  containerSize?: "4xl" | "5xl" | "6xl" | "7xl" | "8xl" | "9xl" | "10xl";
 }
 
 export default function ArticleBackground({
@@ -31,22 +28,22 @@ export default function ArticleBackground({
   imageAspectRatio = "4/3",
   containerSize = '5xl'
 }: ArticleBackgroundProps) {
-  const [mounted, setMounted] = useState(false)
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const showImage = showImageSkeleton || imageSrc
+  const [mounted, setMounted] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const showImage = showImageSkeleton || imageSrc;
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   // Reset image loaded state when image source changes
   useEffect(() => {
-    setImageLoaded(false)
-  }, [imageSrc])
+    setImageLoaded(false);
+  }, [imageSrc]);
 
   // Only render the background after mounting to avoid hydration issues
   if (!mounted) {
-    return null
+    return null;
   }
 
   return (
@@ -150,5 +147,5 @@ export default function ArticleBackground({
         </div>
       </div>
     </div>
-  )
+  );
 }
