@@ -1,5 +1,5 @@
 import Layout from "./Layout";
-import { extractFirstHeading } from "./markparser";
+import { extractFirstHeading } from "@/lib/markparser";
 
 type ArticleProps = {
   content: string;

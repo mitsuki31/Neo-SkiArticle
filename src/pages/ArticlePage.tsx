@@ -7,12 +7,12 @@ import { Badge } from '@/components/ui/badge';
 import RootLayout from '@/components/layout/Root';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import Layout from '@/lib/Layout';
+import Layout from '@/components/layout/Layout';
 import { MobileTableOfContents, TableOfContents } from '@/components/layout/TOC';
 import { getMarkdownContent, ParsedMarkdown } from '@/lib/markparser';
 import CreateErrorPage from '@/layouts/ErrorPageLayout';
-import Article from '@/lib/Article';
-import { Section } from '@/lib/motion-anim';
+import Article from '@/components/layout/Article';
+import { Section } from '@/components/custom/ui/motion-anim';
 import { calcReadTime, extractSections, useActiveHeading } from '@/utils/article';
 
 export type ArticleFrontMatter = {

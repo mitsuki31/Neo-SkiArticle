@@ -3,7 +3,7 @@ import { Link, type Path } from 'react-router-dom';
 import { BookOpenText, ChevronDown, Home, Menu, Users, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink } from '@/components/custom/ui/ExternalLink';
-import ThemeToggle from '@/lib/ThemeToggle';
+import ThemeToggle from '@/components/custom/ui/ThemeToggle';
 import { cn } from '@/lib/utils';
 import {
   youtube as youtubeUrl,

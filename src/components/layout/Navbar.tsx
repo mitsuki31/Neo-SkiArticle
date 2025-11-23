@@ -8,7 +8,7 @@ import {
   NavigationMenuContent,
 } from '@/components/ui/navigation-menu';
 import { ExternalLink } from '@/components/custom/ui/ExternalLink';
-import ThemeToggle from '@/lib/ThemeToggle';
+import ThemeToggle from '@/components/custom/ui/ThemeToggle';
 import {
   youtube as youtubeUrl,
   instagram as instagramUrl,
