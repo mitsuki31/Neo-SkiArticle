@@ -8,7 +8,7 @@ import {
   reports,
 } from "@/assets/global-urls.json";
 
-import SimpleLangSwitch from "@/components/ui/SimpleLangSwitch";
+import SimpleLangSwitch from "@/components/custom/ui/SimpleLangSwitch";
 import { parseQueryLang } from "@/lib/utils";
 
 const { security: securityReports } = reports;

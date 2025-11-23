@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
 } from '@/components/ui/navigation-menu';
-import { ExternalLink } from '@/components/ui/ExternalLink';
+import { ExternalLink } from '@/components/custom/ui/ExternalLink';
 import ThemeToggle from '@/lib/ThemeToggle';
 import {
   youtube as youtubeUrl,

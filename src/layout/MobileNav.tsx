@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, type Path } from 'react-router-dom';
 import { BookOpenText, ChevronDown, Home, Menu, Users, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink } from '@/components/ui/ExternalLink';
+import { ExternalLink } from '@/components/custom/ui/ExternalLink';
 import ThemeToggle from '@/lib/ThemeToggle';
 import { cn } from '@/lib/utils';
 import {
