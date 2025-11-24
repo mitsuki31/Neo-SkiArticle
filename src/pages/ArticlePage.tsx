@@ -171,7 +171,7 @@ export default function ArticlePage() {
   return (
     <RootLayout title={title ? title + ' · NeoSKI' : 'NeoSKI'} removeDefaultClass>
       <Header className="bg-none" sticky scrollThreshold={0} />
-      <div className="flex bg-white-700 dark:bg-background text-gray-900 dark:text-white/80 pt-5">
+      <main className="flex bg-white-700 dark:bg-background text-gray-900 dark:text-white/80 pt-5">
         <TableOfContents
           headings={content?.headings}
           activeId={activeId ?? headingsList[0]}
@@ -191,7 +191,7 @@ export default function ArticlePage() {
             : <ArticleLoading />
           }
         </div>
-      </div>
+      </main>
       <Footer />
     </RootLayout>
   );
