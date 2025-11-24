@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, useLocation, useParams } from "react-router-dom";
 import { ExternalLinkIcon } from "lucide-react";
+
+import RootLayout from "@/components/layout/Root";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import {
@@ -212,9 +214,9 @@ export function CodeOfConductPage() {
   const content = CODE_OF_CONDUCT[lang];
 
   return (
-    <>
+    <RootLayout removeDefaultClass className="bg-gray-50 dark:bg-background text-gray-800 dark:text-gray-100">
       <Header sticky scrollThreshold={0} className="bg-none bg-transparent" />
-      <main id="code-of-conduct" className="min-h-screen bg-gray-50 dark:bg-background text-gray-800 dark:text-gray-100 pt-10">
+      <main id="code-of-conduct" className="min-h-screen pt-10">
         <div className="max-w-4xl mx-auto px-8 md:px-6 lg:px-4 py-12 leading-[1.75]">
           {langParam
             ? <h1 className="text-2xl sm:text-3xl font-semibold mb-6">{content.title}</h1>
@@ -265,7 +267,7 @@ export function CodeOfConductPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </RootLayout>
   );
 }
 

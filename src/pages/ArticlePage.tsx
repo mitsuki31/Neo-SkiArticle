@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import { ExternalLinkIcon } from 'lucide-react';
@@ -121,12 +121,10 @@ export default function ArticlePage() {
   const { slug } = useParams();
   const [content, setContent] = useState<Required<ParsedMarkdown<ArticleFrontMatter>> | null>(null);
   const [title, setTitle] = useState<string | null>(null);
-  const [error, setError] = useState<{ errno: number; message: string } | null>(null);
+  const [error, setError] = useState<React.ComponentPropsWithoutRef<typeof CreateErrorPage> | null>(null);
   const [isClose, setIsClose] = useState(false);
   const headingsList = content?.headings.map(h => h.data?.id).filter(Boolean) ?? [];
   const activeId = useActiveHeading(headingsList, 68);
-  const mainContentRef = useRef<HTMLDivElement>(null);
-  const [mainContentReady, setMainContentReady] = useState<boolean>(false);
 
   const tocToggler = useCallback(() => {
     setIsClose(!isClose);
@@ -162,21 +160,10 @@ export default function ArticlePage() {
     fetchContent();
   }, [slug]);
 
-  useEffect(() => {
-    if (!mainContentReady) {
-      setMainContentReady(true);
-      const { current } = mainContentRef ?? {};
-
-      const cb = () => { window.scrollTo(0, 0) };
-      current?.addEventListener('load', cb);
-      return () => current?.removeEventListener('load', cb);
-    }
-  }, [mainContentRef, mainContentReady]);
-
   if (error) {
     return <CreateErrorPage
-      errno={error?.errno ?? 404}
-      message={error?.message ?? 'Artikel tidak ditemukan'}
+      errno={error.errno ?? 404}
+      message={error.message ?? 'Artikel tidak ditemukan'}
       description="Maaf, artikel yang Anda cari tidak ada atau telah dipindahkan."
     />;
   }
@@ -198,7 +185,7 @@ export default function ArticlePage() {
           isClosed={isMobileTocClosed}
         />
         {/* Main Content */}
-        <div ref={mainContentRef} className='flex-1 transition-colors duration-500'>
+        <div className='flex-1 transition-colors duration-500'>
           {content
             ? <MainContent slug={slug!} parsedMarkdown={content} />
             : <ArticleLoading />
