@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "preview": "vite preview",
     "build": "tsc -b && vite build",
+    "postbuild": "npm run generate:sitemap",
     "lint": "npm run lint:ts && npm run lint:md",
     "lint:ts": "eslint .",
     "lint:md": "remark src/articles",
-    "preview": "vite preview"
+    "generate:sitemap": "tsx scripts/generate-sitemap.ts"
   },
   "remarkConfig": {
     "plugins": [
@@ -74,6 +76,7 @@
     "remark-cli": "^12.0.1",
     "remark-preset-lint-recommended": "^7.0.1",
     "tailwindcss": "^4.1.4",
+    "tsx": "^4.20.6",
     "tw-animate-css": "^1.2.7",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
