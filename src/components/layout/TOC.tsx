@@ -56,7 +56,7 @@ export function TableOfContents({ headings, activeId, toggler, isClosed }: Table
     <>
       {isClosed && (
         <button
-          tabIndex={isClosed ? 0 : -1}
+          tabIndex={0}
           onClick={toggler}
           type="button"
           aria-label='Buka Menu Bagian Artikel'
@@ -82,10 +82,10 @@ export function TableOfContents({ headings, activeId, toggler, isClosed }: Table
               <button
                 id="toc-close-button"
                 type="button"
-                tabIndex={isClosed ? -1 : 0}
+                tabIndex={0}
                 onClick={toggler}
                 aria-label='Tutup Menu Bagian Artikel'
-                className={`cursor-pointer shadow-none ring-0 border-0 hover:opacity-70 ${isClosed ? '-ml-4' : ''}`}
+                className={`cursor-pointer shadow-none ring-0 border-0 hover:opacity-70`}
               >
                 <X className="cursor-pointer w-7 h-7" />
               </button>
@@ -145,7 +145,7 @@ export function MobileTableOfContents({ headings, activeId, toggler, isClosed }:
     <>
       {isClosed && (
         <button
-          tabIndex={isClosed ? 0 : -1}
+          tabIndex={0}
           type="button"
           aria-label='Buka Menu Bagian Artikel'
           className="block lg:hidden bg-white dark:bg-gray-800 shadow-black/40 shadow-md dark:shadow-none rounded-full cursor-pointer fixed bottom-[3%] left-[6%] p-2"
