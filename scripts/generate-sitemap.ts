@@ -120,7 +120,7 @@ async function main() {
     } catch (err) {
       // skip unreadable file but log a warning
       console.warn(`Warning: unable to stat article file "${full}". Skipping.`);
-      console.warn('Error message:', (err as Error).message)
+      console.warn('Error message:', (err as Error).message);
     }
   }
 
