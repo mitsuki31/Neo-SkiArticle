@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { ExternalLinkIcon } from "lucide-react";
 
 import RootLayout from "@/components/layout/Root";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { ExternalLink } from "@/components/custom/ui/ExternalLink";
 import {
   privacy_policy as privacyPolicy,
   security_policy as securityPolicy,
@@ -46,8 +47,9 @@ function getLastUpdated(lang: Lang) {
 const SUPPORTED_LANG = ["en", "id"] as const;
 type Lang = (typeof SUPPORTED_LANG)[number];
 
-function Code({ children }: { children: React.ReactNode }) {
-  return <code className="bg-gray-300 dark:bg-white/10 rounded px-1.5">{children}</code>;
+function Code(_props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>) {
+  const { children, className } = _props;
+  return <code className={`bg-gray-300 dark:bg-white/10 rounded px-1.5 ${className}`}>{children}</code>;
 }
 
 const PRIVACY_POLICY: Record<
@@ -80,7 +82,13 @@ const PRIVACY_POLICY: Record<
       For non-sensitive enquiries open a public issue (see below).
     </>,
     footer: <>
-      For full operational details see <a href={securityPolicy.external.en} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400"><Code>SECURITY.md</Code></a> in the repository.
+      For full operational details see{" "}
+      <ExternalLink newTab href={securityPolicy.external.en} className="text-blue-600 dark:text-blue-400">
+        <Code className="group inline-flex justify-center items-center gap-1">
+          SECURITY.md
+          <ExternalLinkIcon className="not-group-hover:hidden w-3 h-3" aria-hidden />
+        </Code>
+      </ExternalLink> in the repository.
     </>,
   },
   id: {
@@ -103,7 +111,13 @@ const PRIVACY_POLICY: Record<
       Untuk pertanyaan non-sensitif buka issue publik (lihat di bawah).
     </>,
     footer: <>
-      Untuk detail operasional lihat <a href={securityPolicy.external.en} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400"><Code>SECURITY.md</Code></a> di repositori.
+      Untuk detail operasional lihat{" "}
+      <ExternalLink newTab href={securityPolicy.external.en} className="text-blue-600 dark:text-blue-400">
+        <Code className="group inline-flex justify-center items-center gap-1">
+          SECURITY.md
+          <ExternalLinkIcon className="not-group-hover:hidden w-3 h-3" aria-hidden />
+        </Code>
+      </ExternalLink> di repositori.
     </>,
   },
 };
@@ -188,46 +202,44 @@ export function PrivacyPage() {
             <p>{t.contactNote}</p>
 
             <div className="mt-6 px-2 flex justify-center">
-              <a
+              <ExternalLink
+                newTab
                 href={privacyPolicy.external[lang] || privacyPolicy.external.en}
-                target="_blank"
-                rel="noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md"
               >
-                <i className="bx bx-book-open text-2xl mr-2" />
-                <span className="inline-block text-sm text-center whitespace-normal break-words">
+                <i className="bx bx-book-open text-2xl mr-2" aria-hidden />
+                <span className="inline-flex text-sm justify-center items-center gap-1 whitespace-normal break-words">
                   {lang === "id"
                     ? <strong>Lihat Kebijakan Privasi lengkap</strong>
                     : <strong>View the full Privacy Policy</strong>}
-                  <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+                  <ExternalLinkIcon className="w-3 h-3" aria-hidden />
                 </span>
-              </a>
+              </ExternalLink>
             </div>
 
             <div className="mt-5 md:mt-3 px-2 flex justify-center">
               <div className="grid gap-2 sm:gap-2 sm:grid-cols-2 justify-center max-w-full">
-                <a
-                  href={securityReports.private}
+                <Link
+                  to={securityReports.private}
                   className="inline-flex gap-2 justify-center items-center px-4 py-2 bg-transparent dark:bg-inherit border border-gray-500 dark:not-hover:border-gray-300 hover:border-orange-400 hover:text-orange-400 focus:border-2 focus:border-orange-400 focus:text-orange-400 rounded-md text-sm"
                 >
-                  <i className="bx bx-shield text-2xl" />
+                  <i className="bx bx-shield text-2xl" aria-hidden />
                   <span className="text-center whitespace-normal break-words">
                     {lang === "id" ? "Lihat" : "View"} <code>security.txt</code>
                   </span>
-                </a>
+                </Link>
 
-                <a
+                <ExternalLink
+                  newTab
                   href={reports.general}
-                  target="_blank"
-                  rel="noreferrer"
                   className="inline-flex gap-2 justify-center items-center px-4 py-2 bg-transparent dark:bg-inherit border border-gray-500 dark:not-hover:border-gray-300 hover:border-orange-400 hover:text-orange-400 focus:border-2 focus:border-orange-400 focus:text-orange-400 rounded-md text-sm"
                 >
-                  <i className="bx bx-bug text-2xl" />
-                  <span className="text-center whitespace-normal break-words">
+                  <i className="bx bx-bug text-2xl" aria-hidden />
+                  <span className="inline-flex justify-center items-center gap-1 whitespace-normal break-words">
                     {lang === "id" ? "Buka issue publik" : "Open a public issue"}
-                    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+                    <ExternalLinkIcon className="w-3 h-3" aria-hidden />
                   </span>
-                </a>
+                </ExternalLink>
               </div>
             </div>
           </section>

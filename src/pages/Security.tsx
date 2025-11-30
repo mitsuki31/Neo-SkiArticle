@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { ExternalLinkIcon } from "lucide-react";
 
 import RootLayout from "@/components/layout/Root";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { ExternalLink } from "@/components/custom/ui/ExternalLink";
 import {
   security_policy as securityPolicy,
   reports,
@@ -45,8 +46,6 @@ const SECURITY_POLICY: Record<
     responseExpectationTitle: React.ReactNode;
     responseExpectation: React.ReactNode;
     responseExpectationFooter: React.ReactNode;
-    additionalResourcesTitle: React.ReactNode;
-    additionalResources: React.ReactNode[];
     footerNotes: React.ReactNode[];
   }
 > = {
@@ -106,34 +105,16 @@ const SECURITY_POLICY: Record<
       After validation we will deploy a fix and, where appropriate,
       follow up with a disclosure describing impact and remediation.
     </>,
-    additionalResourcesTitle: "Additional Resources",
-    additionalResources: [
-      <a
-        href={securityPolicy.external.en}
-        target="_blank"
-        rel="noreferrer"
-        className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5"
-      >
-        Full repository Security Policy (<Code>SECURITY.md</Code>)
-        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
-      </a>,
-      <a href={securityReports.private} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
-        Private security contact (<Code>security.txt</Code>)
-      </a>,
-      <a href={securityReports.public} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
-        Open a public security issue
-        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
-      </a>
-    ],
     footerNotes: [
       "No bounty program is currently offered.",
       <>
-        For maintainers, please keep this page in sync with <a href={securityPolicy.external.en} target="_blank" className="text-blue-600 dark:text-blue-400">
-          <Code className="group">
+        For maintainers, please keep this page in sync with{" "}
+        <ExternalLink newTab href={securityPolicy.external.en} className="text-blue-600 dark:text-blue-400">
+          <Code className="group inline-flex justify-center items-center gap-1">
             SECURITY.md
-            <ExternalLinkIcon className="hidden group-hover:inline w-3 h-3 ml-1" />
+            <ExternalLinkIcon className="not-group-hover:hidden w-3 h-3" aria-hidden />
           </Code>
-        </a>.
+        </ExternalLink>.
         Do not publish internal runbooks or secrets here.
       </>,
     ],
@@ -195,34 +176,16 @@ const SECURITY_POLICY: Record<
       Setelah validasi, kami akan menerapkan perbaikan dan, jika diperlukan,
       melanjutkan dengan pengungkapan yang menjelaskan dampak dan tindakan perbaikan.
     </>,
-    additionalResourcesTitle: "Sumber Referensi Tambahan",
-    additionalResources: [
-      <a
-        href={securityPolicy.external.en}
-        target="_blank"
-        rel="noreferrer"
-        className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5"
-      >
-        Kebijakan Keamanan repositori lengkap (<Code>SECURITY.md</Code>)
-        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
-      </a>,
-      <a href={securityReports.private} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
-        Kontak keamanan privat (<Code>security.txt</Code>)
-      </a>,
-      <a href={securityReports.public} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
-        Buka issue keamanan publik
-        <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
-      </a>
-    ],
     footerNotes: [
       "Saat ini tidak ada program bounty.",
       <>
-        Untuk maintainer, silahkan tetapkan halaman ini sesuai dengan <a href={securityPolicy.external.en} target="_blank" className="text-blue-600 dark:text-blue-400">
-          <Code className="group">
+        Untuk maintainer, silahkan tetapkan halaman ini sesuai dengan{" "}
+        <ExternalLink newTab href={securityPolicy.external.en} className="text-blue-600 dark:text-blue-400">
+          <Code className="group inline-flex justify-center items-center gap-1">
             SECURITY.md
-            <ExternalLinkIcon className="hidden group-hover:inline w-3 h-3 ml-1" />
+            <ExternalLinkIcon className="not-group-hover:hidden w-3 h-3" aria-hidden />
           </Code>
-        </a>.
+        </ExternalLink>.
         Jangan publikasikan runbook internal atau rahasia internal di sini.
       </>,
     ],
@@ -312,41 +275,38 @@ export function SecurityPage() {
             <div className="grid gap-4 md:grid-cols-2">
               <div className="p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-200 dark:bg-gray-800">
                 <h3 className="inline-flex gap-2 justify-center items-center font-semibold mb-2">
-                  <i className="bx bxl-github text-2xl" />
+                  <i className="bx bxl-github text-2xl" aria-hidden />
                   <span>{t.publicReportTitle}</span>
                 </h3>
                 <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">{t.privateReportDesc}</p>
-                <a
+                <ExternalLink
+                  newTab
                   href={securityReports.public}
-                  target="_blank"
-                  rel="noreferrer"
                   className="inline-flex gap-2 justify-center items-center px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-md text-sm"
                 >
-                  <i className="bx bx-bug text-2xl" />
-                  <span className="inline-block text-center whitespace-normal break-words">
-                    {t.publicReportBtn}
-                    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+                  <i className="bx bx-bug text-2xl" aria-hidden />
+                  <span className="inline-flex justify-center items-center gap-1 text-center whitespace-normal break-words">
+                    <span>{t.publicReportBtn}</span>
+                    <ExternalLinkIcon className="w-3 h-3" aria-hidden />
                   </span>
-                </a>
+                </ExternalLink>
               </div>
 
               <div className="p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-200 dark:bg-gray-800">
                 <h3 className="inline-flex gap-2 justify-center items-center font-semibold mb-2">
-                  <i className="bx bx-lock-alt text-2xl" />
+                  <i className="bx bx-lock-alt text-2xl" aria-hidden />
                   <span>{t.privateReportTitle}</span>
                 </h3>
                 <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">{t.privateReportDesc}</p>
-                <a
-                  href={securityReports.private}
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  to={securityReports.private}
                   className="inline-flex gap-2 justify-center items-center px-4 py-2 bg-transparent dark:bg-inherit border border-gray-500 dark:not-hover:border-gray-300 hover:border-orange-400 hover:text-orange-400 focus:border-2 focus:border-orange-400 focus:text-orange-400 rounded-md text-sm"
                 >
-                  <i className="bx bx-shield text-2xl" />
+                  <i className="bx bx-shield text-2xl" aria-hidden />
                   <span className="inline-block text-center whitespace-normal break-words">
                     {t.privateReportBtn}
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </section>
@@ -366,20 +326,21 @@ export function SecurityPage() {
 
           <section className="mb-6 text-gray-700 dark:text-[#d1d5dc]">
             <div className="mt-6 px-2 flex justify-center">
-              <a
+              <ExternalLink
+                newTab
                 href={securityPolicy.external.en}
-                target="_blank"
-                rel="noreferrer"
                 className="inline-flex gap-2 items-center justify-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md"
               >
-                <i className="bx bx-book-open text-2xl" />
-                <span className="inline-block text-sm text-center whitespace-normal break-words">
-                  {lang === "id"
-                    ? <strong>Lihat Kebijakan Keamanan lengkap</strong>
-                    : <strong>View the full Security Policy</strong>}
-                  <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+                <i className="bx bx-book-open text-2xl" aria-hidden />
+                <span className="inline-flex justify-center items-center gap-1 text-sm text-center whitespace-normal break-words">
+                  <span>
+                    {lang === "id"
+                      ? <strong>Lihat Kebijakan Keamanan lengkap</strong>
+                      : <strong>View the full Security Policy</strong>}
+                  </span>
+                  <ExternalLinkIcon className="w-3 h-3" aria-hidden />
                 </span>
-              </a>
+              </ExternalLink>
             </div>
 
             {/* <div className="mt-5 md:mt-3 px-2 flex justify-center">

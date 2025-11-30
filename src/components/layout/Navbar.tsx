@@ -69,10 +69,10 @@ type NavMenu = {
 };
 
 const navMenus: NavMenu[] = [
-  { name: 'Beranda', to: '/', icon: <Home className="w-4 h-4" /> },
+  { name: 'Beranda', to: '/', icon: <Home className="w-4 h-4" aria-hidden /> },
   {
     name: 'Sosial',
-    icon: <Users className="w-4 h-4" />,
+    icon: <Users className="w-4 h-4" aria-hidden />,
     submenu: [
       {
         name: 'YouTube',
@@ -107,7 +107,7 @@ const navMenus: NavMenu[] = [
       },
     ],
   },
-  { name: 'Histori', to: '/a/sejarah-sekolah', icon: <BookOpenText className="w-4 h-4" /> },
+  { name: 'Histori', to: '/a/sejarah-sekolah', icon: <BookOpenText className="w-4 h-4" aria-hidden /> },
 ];
 
 
@@ -132,7 +132,7 @@ export default function Navbar() {
               <Link to={menu.to} className={cn(navMenuTriggerStyle, menuItemTransparentBlur)}>
                 <span className="inline-flex items-center gap-2">
                   {menu.icon ? menu.icon : (
-                    menu.logoClass ? <i className={cn(menu.logoClass, "text-[1.3rem]")} /> : null
+                    menu.logoClass ? <i className={cn(menu.logoClass, "text-[1.3rem]")} aria-hidden /> : null
                   )}
                   <span>{menu.name}</span>
                 </span>
@@ -142,7 +142,7 @@ export default function Navbar() {
                 <NavigationMenuTrigger className={cn(navMenuTriggerStyle, menuItemTransparentBlur)}>
                   <span className="inline-flex items-center gap-2">
                     {menu.icon ? menu.icon : (
-                      menu.logoClass ? <i className={cn(menu.logoClass, "text-[1.3rem]")} /> : null
+                      menu.logoClass ? <i className={cn(menu.logoClass, "text-[1.3rem]")} aria-hidden /> : null
                     )}
                     <span>{menu.name}</span>
                   </span>
@@ -158,7 +158,7 @@ export default function Navbar() {
                         <span className="relative z-10 flex text-base leading-0 items-center gap-x-2">
                           <span className={menuHoverClass}>
                             {subMenu.icon ? subMenu.icon : (
-                              subMenu.logoClass ? <i className={cn(subMenu.logoClass, "text-[1.2rem]")} /> : null
+                              subMenu.logoClass ? <i className={cn(subMenu.logoClass, "text-[1.2rem]")} aria-hidden /> : null
                             )}
                           </span>
                           <span className={menuHoverClass}>{subMenu.name}</span>

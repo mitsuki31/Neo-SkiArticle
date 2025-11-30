@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ExternalLinkIcon } from 'lucide-react';
-import { addClassToSVG } from '@/lib/utils';
+import { ExternalLink } from '@/components/custom/ui/ExternalLink';
+import { addClassToSVG, cn } from '@/lib/utils';
 import {
   tiktok as tiktokUrl,
   instagram as instagramUrl,
@@ -61,10 +62,10 @@ export default function Footer() {
             <li><Link to="/a/program-keahlian" className={underlineCls}>Program Keahlian</Link></li>
             <li><Link to="/a/analisis-vokasi-2025" className={underlineCls}>Analisis Vokasi 2025</Link></li>
             <li>
-              <a href={mainWebUrl} target="_blank" rel="noopener noreferrer" className={underlineCls}>
-                PPDB
-                <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
-              </a>
+              <ExternalLink href={mainWebUrl} newTab className={cn("inline-flex justify-center items-center gap-1", underlineCls)}>
+                <span>PPDB</span>
+                <ExternalLinkIcon className="inline w-3 h-3" aria-hidden />
+              </ExternalLink>
             </li>
           </ul>
         </div>
@@ -82,21 +83,21 @@ export default function Footer() {
           <h3 className="text-sm font-semibold uppercase mb-3">Ikuti Kami</h3>
           <div className="flex space-x-4">
             {/* TikTok */}
-            <a href={tiktokUrl} aria-label="TikTok" title="TikTok SMK Sukamandi" target="_blank" rel="noopener noreferrer">
+            <ExternalLink href={tiktokUrl} aria-label="TikTok" title="TikTok SMK Sukamandi" newTab>
               <span dangerouslySetInnerHTML={{ __html: addClassToSVG(tiktokIcon, `w-6 h-6 transition duration-300 text-gray-500 ${tiktokIconHoverClass}`) }} />
-            </a>
+            </ExternalLink>
             {/* Instagram */}
-            <a href={instagramUrl} aria-label="Instagram" title='Instagram SMK Sukamandi' target="_blank" rel="noopener noreferrer">
+            <ExternalLink href={instagramUrl} aria-label="Instagram" title='Instagram SMK Sukamandi' newTab>
               <span dangerouslySetInnerHTML={{ __html: addClassToSVG(instagramIcon, `w-6 h-6 transition duration-300 text-gray-500 ${instagramIconHoverClass}`) }} />
-            </a>
+            </ExternalLink>
             {/* YouTube */}
-            <a href={youtubeUrl} aria-label="YouTube" title='YouTube SMK Sukamandi' target="_blank" rel="noopener noreferrer">
+            <ExternalLink href={youtubeUrl} aria-label="YouTube" title='YouTube SMK Sukamandi' newTab>
               <span dangerouslySetInnerHTML={{ __html: addClassToSVG(youtubeIcon, `w-6 h-6 transition duration-300 text-gray-500 ${youtubeIconHoverClass}`) }} />
-            </a>
+            </ExternalLink>
             {/* GitHub */}
-            <a href={githubUrl} aria-label="GitHub" title='GitHub Repository' target="_blank" rel="noopener noreferrer">
+            <ExternalLink href={githubUrl} aria-label="GitHub" title='GitHub Repository' newTab>
               <span dangerouslySetInnerHTML={{ __html: addClassToSVG(githubIcon, `w-6 h-6 transition duration-300 text-gray-500 ${githubIconHoverClass}`) }} />
-            </a>
+            </ExternalLink>
           </div>
         </div>
       </div>
