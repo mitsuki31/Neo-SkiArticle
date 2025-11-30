@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
-import { Navigate, useLocation, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { ExternalLinkIcon } from "lucide-react";
+
+import RootLayout from "@/components/layout/Root";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { ExternalLink } from "@/components/custom/ui/ExternalLink";
 import {
   code_of_conduct as codeOfConduct,
   security_policy as securityPolicy,
@@ -42,9 +45,9 @@ const CODE_OF_CONDUCT: Record<Lang, { title: string; sections: Array<{ h: React.
           "Respect privacy and avoid sharing information about students or staff without explicit permission.",
           <>
             Report security issues responsibly following the{" "}
-            <a href={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
+            <Link to={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
               Security Policy
-            </a>.
+            </Link>.
           </>,
           "Understand that this website exists for educational purposes and school information — not for data harvesting or content redistribution.",
         ],
@@ -69,9 +72,10 @@ const CODE_OF_CONDUCT: Record<Lang, { title: string; sections: Array<{ h: React.
           </ul>
 
           <p className="mt-2">
-            For more information, please refer to the <a href={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
+            For more information, please refer to the{" "}
+            <Link to={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
               Security page
-            </a>.
+            </Link>.
           </p>
         </>
       },
@@ -113,9 +117,9 @@ const CODE_OF_CONDUCT: Record<Lang, { title: string; sections: Array<{ h: React.
           "Hormati privasi dan hindari membagikan informasi tentang siswa atau staf tanpa izin yang jelas.",
           <>
             Laporkan masalah keamanan secara bertanggung jawab sesuai dengan{" "}
-            <a href={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
+            <Link to={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
               Kebijakan Keamanan
-            </a>.
+            </Link>.
           </>,
           "Pahami bahwa situs web ini dibuat untuk tujuan pendidikan dan informasi sekolah — bukan untuk pengumpulan data atau redistribusi konten."
         ],
@@ -140,9 +144,10 @@ const CODE_OF_CONDUCT: Record<Lang, { title: string; sections: Array<{ h: React.
           </ul>
 
           <p className="mt-2">
-            Untuk informasi lebih lanjut, silakan merujuk ke halaman <a href={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
+            Untuk informasi lebih lanjut, silakan merujuk ke halaman{" "}
+            <Link to={securityPolicy.internal} className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-5">
               Keamanan
-            </a>.
+            </Link>.
           </p>
         </>
       },
@@ -212,9 +217,9 @@ export function CodeOfConductPage() {
   const content = CODE_OF_CONDUCT[lang];
 
   return (
-    <>
+    <RootLayout removeDefaultClass className="bg-gray-50 dark:bg-background text-gray-800 dark:text-gray-100">
       <Header sticky scrollThreshold={0} className="bg-none bg-transparent" />
-      <main id="code-of-conduct" className="min-h-screen bg-gray-50 dark:bg-background text-gray-800 dark:text-gray-100 pt-10">
+      <main id="code-of-conduct" className="min-h-screen pt-10">
         <div className="max-w-4xl mx-auto px-8 md:px-6 lg:px-4 py-12 leading-[1.75]">
           {langParam
             ? <h1 className="text-2xl sm:text-3xl font-semibold mb-6">{content.title}</h1>
@@ -244,20 +249,19 @@ export function CodeOfConductPage() {
 
           <section className="mb-6 text-gray-700 dark:text-[#d1d5dc]">
             <div className="mt-6 px-2 flex justify-center">
-              <a
+              <ExternalLink
+                newTab
                 href={codeOfConduct.external.en}
-                target="_blank"
-                rel="noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-md"
               >
-                <i className="bx bx-book-open text-2xl mr-2" />
+                <i className="bx bx-book-open text-2xl mr-2" aria-hidden />
                 <span className="inline-block text-sm text-center whitespace-normal break-words">
                   {lang === "id"
                     ? <strong>Lihat Kode Etik lengkap</strong>
                     : <strong>View the full Code of Conduct</strong>}
-                  <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+                  <ExternalLinkIcon className="inline w-3 h-3 ml-1" aria-hidden />
                 </span>
-              </a>
+              </ExternalLink>
             </div>
           </section>
 
@@ -265,7 +269,7 @@ export function CodeOfConductPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </RootLayout>
   );
 }
 

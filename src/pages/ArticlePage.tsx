@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactDOMServer from 'react-dom/server';
 import { ExternalLinkIcon } from 'lucide-react';
@@ -14,6 +14,7 @@ import CreateErrorPage from '@/layouts/ErrorPageLayout';
 import Article from '@/components/layout/Article';
 import { Section } from '@/components/custom/ui/motion-anim';
 import { calcReadTime, extractSections, useActiveHeading } from '@/utils/article';
+import { cn } from '@/lib/utils';
 
 export type ArticleFrontMatter = {
   title?: string;
@@ -25,13 +26,13 @@ export function ArticleLoading() {
   return (
     <>
       <Layout className='px-9 sm:px-12 lg:px-13 mt-20 animate-pulse text-transparent'>
-        <Badge className='bg-gray-300 dark:bg-white/10 w-20 h-4 mr-2'></Badge>
-        <Badge className='bg-gray-300 dark:bg-white/10 w-10 h-4 mr-2'></Badge>
-        <Badge className='bg-gray-300 dark:bg-white/10 w-15 h-4 mr-2'></Badge>
-        <Badge className='bg-gray-300 dark:bg-white/10 w-10 h-4 mr-2'></Badge>
-        <Badge className='bg-gray-300 dark:bg-white/10 w-20 h-4 mr-2'></Badge>
+        <Badge className='bg-gray-300 dark:bg-white/10 w-20 h-4 mr-2' />
+        <Badge className='bg-gray-300 dark:bg-white/10 w-10 h-4 mr-2' />
+        <Badge className='bg-gray-300 dark:bg-white/10 w-15 h-4 mr-2' />
+        <Badge className='bg-gray-300 dark:bg-white/10 w-10 h-4 mr-2' />
+        <Badge className='bg-gray-300 dark:bg-white/10 w-20 h-4 mr-2' />
       </Layout>
-      <div className="max-w-8xl mx-auto px-4 mt-12 space-y-6 animate-pulse">
+      <Layout className="max-w-8xl mx-auto px-4 mt-12 space-y-6 animate-pulse text-transparent">
         <div className="h-8 bg-gray-300 dark:bg-white/10 rounded w-full" />
         <div className="h-4 bg-gray-300 dark:bg-white/10 rounded w-full" />
         <div className="h-4 bg-gray-300 dark:bg-white/10 rounded w-full" />
@@ -46,14 +47,14 @@ export function ArticleLoading() {
         <div className="h-4 bg-gray-300 dark:bg-white/10 rounded w-3/4" />
         <div className="h-4 bg-gray-300 dark:bg-white/10 rounded w-4/5" />
         <div className="h-4 bg-gray-300 dark:bg-white/10 rounded w-2/3" />
-      </div>
+      </Layout>
     </>
   );
 }
 
 function injectExternalLinkIcons(html: string): string {
   const externalLinkSvgStr = ReactDOMServer.renderToStaticMarkup(
-    <ExternalLinkIcon className="inline w-3 h-3 ml-1" />
+    <ExternalLinkIcon className="inline w-3 h-3 ml-1 mb-1" aria-hidden focusable={false} />
   );
   const currentHost = window.location.hostname;
 
@@ -64,7 +65,7 @@ function injectExternalLinkIcons(html: string): string {
       try {
         const url = new URL(href);
         if (url.hostname !== currentHost) {
-          return `<a ${attrs}>${content}${externalLinkSvgStr}</a>`;
+          return `<a ${attrs} focusable>${content}${externalLinkSvgStr}</a>`;
         }
       } catch { /* no throw */ }
       return match; // unchanged
@@ -89,7 +90,7 @@ function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: R
       {readTime ? (
         <Layout className='px-9 sm:px-12 lg:px-13 pt-3'>
           <p className='italic text-sm pb-0 text-gray-400 dark:text-white/60'><strong>Perkiraan waktu membaca:</strong> {
-            <span className="text-cyan-600/80 dark:text-cyan-400">{`${readTime[0]} menit, ${readTime[1]} detik`}</span>
+            <span className="text-blue-500/80 dark:text-cyan-400">{`${readTime[0]} menit, ${readTime[1]} detik`}</span>
           }
           </p>
         </Layout>
@@ -99,15 +100,17 @@ function MainContent({ slug, parsedMarkdown }: { slug: string, parsedMarkdown: R
           <Article
             id={slug}
             content={section}
-            className={
-              'prose prose-indigo dark:prose-invert article theme-transition '
-              + 'prose-a:text-blue-700 dark:prose-a:text-blue-400 prose-a:no-underline prose-a:hover:underline prose-a:hover:underline-offset-4 '
-              + 'prose-ul:list-disc prose-ol:list-decimal '
-              + 'prose-ul:marker:text-gray-700 dark:prose-ul:marker:text-white/80 prose-ol:marker:text-gray-700 dark:prose-ol:marker:text-white/80 '
-              + 'prose-ul:text-gray-700 dark:prose-ul:text-white/80 prose-ol:text-gray-700 dark:prose-ol:text-white/80 '
-              + 'prose-ol:pl-10 prose-ul:pl-10 '
-              + 'prose-hr:my-8'
-            }
+            className={cn(
+              'prose prose-indigo dark:prose-invert article theme-transition',
+              'prose-a:text-blue-700 dark:prose-a:text-blue-400 prose-a:no-underline',
+              'prose-a:hover:underline prose-a:hover:underline-offset-4',
+              'prose-a:focus:outline-none prose-a:focus:underline prose-a:focus:underline-offset-4',
+              'prose-ul:list-disc prose-ol:list-decimal',
+              'prose-ul:marker:text-gray-700 dark:prose-ul:marker:text-white/80 prose-ol:marker:text-gray-700 dark:prose-ol:marker:text-white/80',
+              'prose-ul:text-gray-700 dark:prose-ul:text-white/80 prose-ol:text-gray-700 dark:prose-ol:text-white/80',
+              'prose-ol:pl-10 prose-ul:pl-10',
+              'prose-hr:my-8'
+            )}
             titleClassName='text-3xl md:text-4xl'
             preserveHeading
           />
@@ -121,21 +124,15 @@ export default function ArticlePage() {
   const { slug } = useParams();
   const [content, setContent] = useState<Required<ParsedMarkdown<ArticleFrontMatter>> | null>(null);
   const [title, setTitle] = useState<string | null>(null);
-  const [error, setError] = useState<{ errno: number; message: string } | null>(null);
-  const [isClose, setIsClose] = useState(false);
+  const [error, setError] = useState<React.ComponentPropsWithoutRef<typeof CreateErrorPage> | null>(null);
   const headingsList = content?.headings.map(h => h.data?.id).filter(Boolean) ?? [];
   const activeId = useActiveHeading(headingsList, 68);
-  const mainContentRef = useRef<HTMLDivElement>(null);
-  const [mainContentReady, setMainContentReady] = useState<boolean>(false);
 
-  const tocToggler = useCallback(() => {
-    setIsClose(!isClose);
-  }, [isClose]);
+  const [isTocClosed, setIsTocClosed] = useState(false);
+  const tocToggler = useCallback(() => setIsTocClosed(prev => !prev), []);
 
   const [isMobileTocClosed, setIsMobileTocClosed] = useState(true);
-  const tocMobileToggler = useCallback(() => {
-    setIsMobileTocClosed(!isMobileTocClosed);
-  }, [isMobileTocClosed]);
+  const tocMobileToggler = useCallback(() => setIsMobileTocClosed(prev => !prev), []);
 
   useEffect(() => {
     if (!slug) return;
@@ -162,21 +159,10 @@ export default function ArticlePage() {
     fetchContent();
   }, [slug]);
 
-  useEffect(() => {
-    if (!mainContentReady) {
-      setMainContentReady(true);
-      const { current } = mainContentRef ?? {};
-
-      const cb = () => { window.scrollTo(0, 0) };
-      current?.addEventListener('load', cb);
-      return () => current?.removeEventListener('load', cb);
-    }
-  }, [mainContentRef, mainContentReady]);
-
   if (error) {
     return <CreateErrorPage
-      errno={error?.errno ?? 404}
-      message={error?.message ?? 'Artikel tidak ditemukan'}
+      errno={error.errno ?? 404}
+      message={error.message ?? 'Artikel tidak ditemukan'}
       description="Maaf, artikel yang Anda cari tidak ada atau telah dipindahkan."
     />;
   }
@@ -184,12 +170,12 @@ export default function ArticlePage() {
   return (
     <RootLayout title={title ? title + ' · NeoSKI' : 'NeoSKI'} removeDefaultClass>
       <Header className="bg-none" sticky scrollThreshold={0} />
-      <div className="flex bg-white-700 dark:bg-background text-gray-900 dark:text-white/80 pt-5">
+      <main className="flex bg-white-700 dark:bg-background text-gray-900 dark:text-white/80 pt-5">
         <TableOfContents
           headings={content?.headings}
           activeId={activeId ?? headingsList[0]}
           toggler={tocToggler}
-          isClosed={isClose}
+          isClosed={isTocClosed}
         />
         <MobileTableOfContents
           headings={content?.headings}
@@ -198,13 +184,13 @@ export default function ArticlePage() {
           isClosed={isMobileTocClosed}
         />
         {/* Main Content */}
-        <div ref={mainContentRef} className='flex-1 transition-colors duration-500'>
+        <div className='flex-1 transition-colors duration-500'>
           {content
             ? <MainContent slug={slug!} parsedMarkdown={content} />
             : <ArticleLoading />
           }
         </div>
-      </div>
+      </main>
       <Footer />
     </RootLayout>
   );

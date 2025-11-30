@@ -23,10 +23,10 @@ type NavMenu = {
 };
 
 const navMenus: NavMenu[] = [
-  { name: 'Beranda', to: '/', icon: <Home className="w-4 h-4" /> },
+  { name: 'Beranda', to: '/', icon: <Home className="w-4 h-4" aria-hidden /> },
   {
     name: 'Sosial',
-    icon: <Users className="w-4 h-4" />,
+    icon: <Users className="w-4 h-4" aria-hidden />,
     submenu: [
       {
         name: 'YouTube',
@@ -60,7 +60,7 @@ const navMenus: NavMenu[] = [
       },
     ],
   },
-  { name: 'Histori', to: '/a/sejarah-sekolah', icon: <BookOpenText className="w-4 h-4" /> },
+  { name: 'Histori', to: '/a/sejarah-sekolah', icon: <BookOpenText className="w-4 h-4" aria-hidden /> },
 ];
 
 
@@ -106,7 +106,7 @@ export default function MobileNav() {
             animate={{ opacity: 0.4 }}
             exit={{ opacity: 0 }}
             className="absolute inset-0 h-[100vh] bg-black z-40"
-            aria-hidden="true"
+            aria-hidden
           />
         )}
       </AnimatePresence>
@@ -116,10 +116,11 @@ export default function MobileNav() {
           <button
             id="mobile-nav-button"
             type="button"
-            tabIndex={0}
+            tabIndex={open ? -1 : 0}
+            aria-hidden={open}
             onClick={() => setOpen(true)}
             aria-label="Buka Menu Navigasi"
-            className="cursor-pointer shadow-none ring-0 border-0 focus-visible:outline-none"
+            className="cursor-pointer shadow-none ring-0 border-0 p-1 rounded-md"
           >
             <Menu className="w-8 h-8 text-zinc dark:text-white" />
           </button>
@@ -137,7 +138,13 @@ export default function MobileNav() {
             >
               <div className="flex items-center justify-between p-4 border-b dark:border-neutral-700">
                 <div className="text-[1.3rem] font-major-mono font-bold dark:text-white mt-1">NeoSKI</div>
-                <button onClick={() => setOpen(false)} aria-label="Tutup Menu Navigasi" type="button" className="mr-1 mt-1">
+                <button
+                  autoFocus
+                  onClick={() => setOpen(false)}
+                  aria-label="Tutup Menu Navigasi"
+                  type="button"
+                  className="mr-1 mt-1 p-px rounded-lg"
+                >
                   <X className="cursor-pointer w-7 h-7 animate-spin-once" />
                 </button>
               </div>
@@ -162,7 +169,7 @@ export default function MobileNav() {
                         >
                           {navEntry.icon
                             ? navEntry.icon
-                            : navEntry.logoClass ? <i className={`${navEntry.logoClass} text-[1.3rem]`} /> : null}
+                            : navEntry.logoClass ? <i className={`${navEntry.logoClass} text-[1.3rem]`} aria-hidden /> : null}
                           {navEntry.name}
                         </Link>
                     ) : navEntry.submenu ? (
@@ -178,7 +185,7 @@ export default function MobileNav() {
                           <span className="flex gap-x-4 items-center justify-center">
                             {navEntry.icon
                               ? navEntry.icon
-                              : navEntry.logoClass ? <i className={`${navEntry.logoClass} text-[1.3rem]`}></i> : null}
+                              : navEntry.logoClass ? <i className={`${navEntry.logoClass} text-[1.3rem]`} aria-hidden /> : null}
                             {navEntry.name}
                           </span>
                           <ChevronDown
@@ -207,7 +214,7 @@ export default function MobileNav() {
                                 >
                                   {subItem.icon
                                     ? subItem.icon
-                                    : subItem.logoClass ? <i className={`${subItem.logoClass} text-[1.3rem]`} /> : null}
+                                    : subItem.logoClass ? <i className={`${subItem.logoClass} text-[1.3rem]`} aria-hidden /> : null}
                                   {subItem.name}
                                 </ExternalLink>
                               ))}
@@ -220,7 +227,14 @@ export default function MobileNav() {
                 ))}
               </nav>
               <div className="p-4 border-t dark:border-neutral-700">
-                <ThemeToggle id="mobile-nav-theme-toggler" className='mr-5 mt-[0.3rem] cursor-pointer border-none hover:bg-black hover:text-background dark:hover:bg-white dark:hover:text-background' />
+                <ThemeToggle
+                  id="mobile-nav-theme-toggler"
+                  className={cn(
+                    'mr-5 mt-[0.3rem] cursor-pointer border-none',
+                    'hover:bg-black hover:text-background dark:hover:bg-white dark:hover:text-background',
+                    'focus:bg-black focus:text-background dark:focus:bg-white dark:focus:text-background'
+                  )}
+                />
               </div>
             </motion.aside>
           )}

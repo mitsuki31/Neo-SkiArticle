@@ -146,7 +146,7 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-[#D7FFFE]/10 dark:bg-background text-gray-900 dark:text-white/80">
+    <main className="bg-[#D7FFFE]/10 dark:bg-background text-gray-900 dark:text-white/80">
       <Hero />
 
       {/* Featured Articles Section */}
@@ -223,6 +223,6 @@ export default function Home() {
 
       {/* Main Articles */}
       <HomeArticle />
-    </div>
+    </main>
   );
 }

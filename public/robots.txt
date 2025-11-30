@@ -1,0 +1,11 @@
+# robots.txt for NeoSKI
+
+User-agent: *
+Allow: /
+
+Disallow: /private/
+Disallow: /_internal/
+Disallow: /_src/
+
+Security: https://neoski.vercel.app/.well-known/security.txt
+Sitemap: https://neoski.vercel.app/sitemap.xml

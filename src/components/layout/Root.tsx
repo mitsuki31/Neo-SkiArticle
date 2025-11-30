@@ -1,15 +1,27 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useMetaUpdater } from "@/hooks/meta-updater";
+import { useScrollToTop } from "@/hooks/scroll-to-top";
 
 type RootLayoutProps = {
   children: React.ReactNode;
   title?: string;
   className?: string;
   removeDefaultClass?: boolean;
+  scrollToTop?: boolean;
 }
 
-export default function RootLayout({ children, title, className = '', removeDefaultClass }: RootLayoutProps) {
-  title ??= 'NeoSKI';
-  document.title = title;  // Fallback
+export default function RootLayout({
+  children,
+  title,
+  className = '',
+  removeDefaultClass = false,
+  scrollToTop = true
+}: RootLayoutProps) {
+  document.title = title ?? 'NeoSKI';  // Fallback
+
+  // Hooks
+  useMetaUpdater();
+  useScrollToTop(scrollToTop);
 
   return (
     <HelmetProvider>

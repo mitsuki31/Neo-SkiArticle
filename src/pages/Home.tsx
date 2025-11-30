@@ -5,7 +5,7 @@ import HomeLayout from "@/layouts/HomeLayout";
 
 export default function Home() {
   return (
-    <RootLayout title="Beranda · NeoSKI">
+    <RootLayout title="NeoSKI — Website Artikel Modern SMK Sukamandi">
       <Header className="bg-none bg-transparent" sticky scrollThreshold={0} />
       <HomeLayout />
       <Footer />
