@@ -1,6 +1,37 @@
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
+import { type Processor, unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypeSanitize from 'rehype-sanitize';
+import remarkHeadings from '@vcarl/remark-headings';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkGfm from 'remark-gfm';
+import rehypeStringify from 'rehype-stringify';
+import { parse as matterParse } from 'hexo-front-matter';
+import { type Heading, remarkSlugFromHeading } from './plugins/remark/remark-slug-from-heading';
+import addHeadingIds from './plugins/dom/add-heading-ids';
 import { enhanceList, enhanceTable } from './utils';
+import articles from '@/utils/articleLoader';
+import type { Compatible } from 'vfile';
+
+export type ParsedMarkdown<T> = {
+  data?: T;
+  content?: string;
+  headings?: Heading[];
+  raw: string;
+};
+
+export const markdownProcessor = unified()
+  .use(remarkParse)
+  .use(remarkGfm)
+  .use(remarkSlugFromHeading)
+  .use(remarkHeadings)
+  .use(remarkFrontmatter, { type: 'yaml', marker: '-' })
+  .use(remarkRehype, { clobberPrefix: '' })
+  .use(rehypeSanitize)
+  .use(rehypeStringify)
+;
 
 export function parseMarkdown(markdown: string, beautify: boolean = true): string {
   const rawHtml = marked.parse(markdown);
@@ -9,45 +40,54 @@ export function parseMarkdown(markdown: string, beautify: boolean = true): strin
   return beautify ? enhanceList(enhanceTable(sanitizedHtml)) : sanitizedHtml;
 }
 
-export async function getMarkdownContent(slug: string): Promise<{
-  data: Record<string, string>;
-  content: string;
-  raw: string;
-}> {
-  const filePath = `/articles/${slug}.md`;
-  const response = await fetch(filePath);
+/**
+ * Unify a markdown file into a unified processor tree.
+ *
+ * @param file - Markdown file to unify
+ * @param processor- Optional `unified` processor to use, defaults to {@link markdownProcessor}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function unify<T extends Processor<any, any, any, any, any>>(
+  file: Compatible,
+  processor?: T
+) {
+  if (!processor) processor = markdownProcessor as T;
+  return await processor.process(file);
+}
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch markdown file: ${response.statusText}`);
+export async function getMarkdownContent<T>(slug: string, rawOnly: true): Promise<Pick<ParsedMarkdown<T>, "raw">>;
+export async function getMarkdownContent<T>(slug: string, rawOnly?: false): Promise<Required<ParsedMarkdown<T>>>;
+export async function getMarkdownContent<T>(slug: string, rawOnly?: boolean): Promise<ParsedMarkdown<T>> {
+  const article = articles[slug];
+  if (!article) {
+    throw new Error(`No article found with slug ${slug}`);
   }
 
-  const raw = await response.text();
-  const frontmatterMatch = /^---\n([\s\S]*?)\n---/.exec(raw);
-  let frontmatter = {};
-  let content = raw;
+  const { content: raw } = article;
+  if (rawOnly) return { raw };
 
-  if (frontmatterMatch) {
-    const yaml = frontmatterMatch[1];
-    content = raw.slice(frontmatterMatch[0].length);
-    frontmatter = Object.fromEntries(
-      yaml.split('\n')
-        .filter(Boolean)
-        .map(line => {
-          const [key, ...rest] = line.split(':');
-          return [key.trim(), rest.join(':').trim()];
-        })
-    );
-  }
-
-  const html = marked.parse(content);
-  const sanitizedHtml = DOMPurify.sanitize(typeof html === 'string' ? html : '');
-
-  return { data: frontmatter, content: sanitizedHtml, raw };
+  // This ensure it always a new instance whenever hot reloading
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkSlugFromHeading)
+    .use(remarkHeadings)
+    .use(remarkFrontmatter, { type: 'yaml', marker: '-' })
+    .use(remarkRehype, { clobberPrefix: '' })
+    .use(rehypeSanitize)
+    .use(rehypeStringify)
+  ;
+  const file = await unify(raw, processor);
+  return {
+    data: (matterParse(raw) ?? {}) satisfies T,
+    content: addHeadingIds(String(file), (file.data.headings ?? []) as Heading[]),
+    headings: (file.data.headings ?? []) as Heading[],
+    raw,
+  } satisfies ParsedMarkdown<T>;
 }
 
 export function extractFirstHeading(html: string): { title: string, content: string } | null {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
+  const doc = new DOMParser().parseFromString(html, 'text/html');
 
   for (let i = 1; i <= 6; i++) {
     const heading = doc.body.querySelector(`h${i}`);

@@ -1,22 +1,14 @@
-import { Helmet, HelmetProvider } from "react-helmet-async";
-
-import HomeLayout from "@/layout/Home";
-import Header from "@/layout/Header";
-import Footer from "@/layout/Footer";
-import About from "@/layout/About";
+import RootLayout from "@/components/layout/Root";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import HomeLayout from "@/layouts/HomeLayout";
 
 export default function Home() {
   return (
-    <HelmetProvider>
-      <Helmet>
-        <title>Home · NeoSKI</title>
-      </Helmet>
-      <div className="bg-white-800 dark:bg-background text-gray-900">
-        <Header />
-        <HomeLayout />
-        <About />
-        <Footer />
-      </div>
-    </HelmetProvider>
+    <RootLayout title="NeoSKI — Website Artikel Modern SMK Sukamandi">
+      <Header className="bg-none bg-transparent" sticky scrollThreshold={0} />
+      <HomeLayout />
+      <Footer />
+    </RootLayout>
   );
 }

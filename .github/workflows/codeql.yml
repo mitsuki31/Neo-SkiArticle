@@ -1,0 +1,98 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+  pull_request:
+    branches: [ master, demo ]
+  schedule:
+    - cron: '* 05 * * 6'  # weekly
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: CodeQL Analyze (JS/TS)
+    runs-on: ubuntu-latest
+
+    # GitHub recommended minimal permissions for CodeQL workflows
+    permissions:
+      contents: read
+      security-events: write
+      checks: write
+      packages: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # single matrix entry: JavaScript/TypeScript is the relevant language for Vite+React
+        include:
+          - language: javascript-typescript
+            build-mode: manual
+            node-version: 22
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            yarn.lock
+            bun.lock
+            pnpm-lock.yaml
+
+      # Initialize CodeQL + specify query packs (security & quality)
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          # include standard security and quality query packs.
+          # prefix with "+" to merge with config file queries if you have one.
+          queries: security-and-quality,security-extended
+
+      # Install dependencies and build project (required for analyzing some JS codepaths)
+      - name: Install dependencies & build
+        if: matrix.build-mode == 'manual'
+        run: |
+          set -euo pipefail
+          # prefer npm ci when lockfile exists
+          if [[ -f package-lock.json || -f pnpm-lock.yaml || -f yarn.lock ]]; then
+            npm ci --legacy-peer-deps
+          else
+            npm i --legacy-peer-deps
+          fi
+
+          # build if a build script exists (Vite builds static assets)
+          if npm run | sed -n '2,$p' | grep -q " build"; then
+            npm run build
+          else
+            echo "No build script detected; continuing without build."
+          fi
+
+      # Optionally run tests (if present)
+      - name: Run tests (if present)
+        run: |
+          if npm run | sed -n '2,$p' | grep -q " test"; then
+            npm run test --if-present
+          else
+            echo "No test script found, skipping."
+          fi
+
+      # Run the analysis
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
+        # `category` provided to group results; not required but useful in dashboards
+        with:
+          category: "javascript-typescript"

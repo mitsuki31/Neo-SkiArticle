@@ -1,14 +1,35 @@
 [
   {
-    "title": "Program Keahlian",
-    "category": ["Program Keahlian", "TKJ", "TKR", "TP"],
-    "description": "Kenali berbagai jurusan unggulan yang membekali siswa dengan keterampilan siap kerja di bidang teknologi dan industri.",
-    "src": "/a/program-keahlian"
+    "title": "Sejarah Sekolah SMK Sukamandi",
+    "category": ["Sejarah Sekolah", "Arsip Sekolah"],
+    "description": [
+      "Dokumentasi sejarah SMK Sukamandi yang memaparkan asal-usul pendirian, dinamika pengelolaan lembaga,",
+      "perkembangan fasilitas, serta pencapaian akreditasi sebagai sekolah berstandar nasional."
+    ],
+    "date": "2025-11-20",
+    "href": "/a/sejarah-sekolah"
   },
   {
-    "title": "Pelatihan Vokasi 2025",
+    "title": "Program Keahlian Unggulan SMK Sukamandi",
+    "category": ["Program Keahlian", "TKJ", "TKR", "TP"],
+    "description": [
+      "Jelajahi tiga program keahlian unggulan di SMK Sukamandi: TP, TKR, dan TKJ. Dapatkan keterampilan praktis, pengetahuan",
+      "mendalam, dan sertifikasi industri yang akan membuka lebar pintu karir Anda di sektor manufaktur, otomotif modern, hingga",
+      "dunia IT dan teknologi digital yang terus berkembang. Siapkan diri menjadi tenaga ahli profesional dan siap kerja!"
+    ],
+    "date": "2023-11-30",
+    "href": "/a/program-keahlian",
+    "colspan": 2
+  },
+  {
+    "title": "Analisis Vokasi Jabar 2025: Strategi Komprehensif Menuju Tenaga Kerja Kompeten Industri 4.0",
     "category": ["Vokasi", "Keterampilan", "Industri 4.0"],
-    "description": "Dengan semangat belajar tinggi, peserta pelatihan vokasi pengelasan dan pemesinan telah menyelesaikan program ini dengan sukses. Sebuah langkah awal menuju karier gemilang!",
-    "src": "/a/pelatihan-vokasi-2025"
+    "description": [
+      "Peta jalan Vokasi Jabar 2025. Fokus pada Otomasi Industri 4.0 (Bekasi) dan Agroindustri Digital (Bandung Barat).",
+      "Disoroti sinergi Disdik dan BLK Subang dalam mencetak tenaga kerja siap rekrutmen."
+    ],
+    "date": "2025-07-21",
+    "href": "/a/analisis-vokasi-2025",
+    "colspan": 2
   }
 ]
