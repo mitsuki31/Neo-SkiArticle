@@ -1,5 +1,11 @@
 # Changelogs
 
+## [v1.2.1] (04-12-2025)
+
+- \[[NEOSKI-15]\] Split CodeQL build into dedicated job, tidy workflow
+- \[[NEOSKI-14]\] Bump mdast-util-to-hast from 13.2.0 to 13.2.1
+  - Fixes security report [CVE-2025-66400]
+
 ## [v1.2.0] (01-12-2025)
 
 ### New Features
@@ -68,12 +74,15 @@
 
 <!-- Pull Requests -->
 
-[NEOSKI-3]: https://github.com/mitsuki31/Neo-SkiArticle/pull/3
-[NEOSKI-9]: https://github.com/mitsuki31/Neo-SkiArticle/pull/9
+[NEOSKI-15]: https://github.com/mitsuki31/Neo-SkiArticle/pull/15
+[NEOSKI-14]: https://github.com/mitsuki31/Neo-SkiArticle/pull/14
 [NEOSKI-12]: https://github.com/mitsuki31/Neo-SkiArticle/pull/12
+[NEOSKI-9]: https://github.com/mitsuki31/Neo-SkiArticle/pull/9
+[NEOSKI-3]: https://github.com/mitsuki31/Neo-SkiArticle/pull/3
 
 <!-- Security Advisories -->
 
+[CVE-2025-66400]: https://github.com/advisories/GHSA-4fh9-h7wg-q85m
 [CVE-2025-64718]: https://github.com/advisories/GHSA-mh29-5h37-fv8m
 [CVE-2025-62522]: https://github.com/advisories/GHSA-93m4-6634-74q7
 [CVE-2025-58752]: https://github.com/advisories/GHSA-jqfw-vq24-v9c3
@@ -81,6 +90,7 @@
 
 <!-- Version Tags -->
 
+[v1.2.1]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.0.1...v1.2.0
 [v1.0.1]: https://github.com/mitsuki31/Neo-SkiArticle/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/mitsuki31/Neo-SkiArticle/compare/5b823de42e4cb47b0381bd68696d5debe23046dd...v1.0.0
