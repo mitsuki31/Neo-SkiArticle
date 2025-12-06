@@ -1,5 +1,18 @@
 # Changelogs
 
+## [v1.2.3] (27-02-2025)
+
+### Security
+
+- \[[NEOSKI-25]\] build(deps): Bump minimatch
+  - Fixes security report [CVE-2026-27903], [CVE-2026-27904], [CVE-2026-26996]
+- \[[NEOSKI-24]\] build(deps): Bump rollup from 4.40.0 to 4.59.0
+  - Fixes security report [CVE-2026-27606]
+- \[[NEOSKI-23]\] build(deps-dev): Bump tar from 7.4.3 to 7.5.9
+  - Fixes security report [CVE-2026-23950], [CVE-2026-23745]
+- \[[NEOSKI-19]\] build(deps): Bump react-router and react-router-dom
+  - Fixes security report [CVE-2025-59057], [CVE-2026-21884]
+
 ## [v1.2.2] (07-12-2025)
 
 ### Security
@@ -85,6 +98,10 @@
 
 <!-- Pull Requests -->
 
+[NEOSKI-25]: https://github.com/mitsuki31/Neo-SkiArticle/pull/25
+[NEOSKI-24]: https://github.com/mitsuki31/Neo-SkiArticle/pull/24
+[NEOSKI-23]: https://github.com/mitsuki31/Neo-SkiArticle/pull/23
+[NEOSKI-19]: https://github.com/mitsuki31/Neo-SkiArticle/pull/19
 [NEOSKI-17]: https://github.com/mitsuki31/Neo-SkiArticle/pull/17
 [NEOSKI-15]: https://github.com/mitsuki31/Neo-SkiArticle/pull/15
 [NEOSKI-14]: https://github.com/mitsuki31/Neo-SkiArticle/pull/14
@@ -94,6 +111,13 @@
 
 <!-- Security Advisories -->
 
+[CVE-2026-26996]: https://github.com/advisories/GHSA-3ppc-4f35-3m26
+[CVE-2026-27904]: https://github.com/advisories/GHSA-23c5-xmqv-rm74
+[CVE-2026-27903]: https://github.com/advisories/GHSA-7r86-cg39-jmmj
+[CVE-2026-23950]: https://github.com/advisories/GHSA-r6q2-hw4h-h46w
+[CVE-2026-23745]: https://github.com/advisories/GHSA-8qq5-rm4j-mr97
+[CVE-2026-21884]: https://github.com/advisories/GHSA-8v8x-cx79-35w7
+[CVE-2025-59057]: https://github.com/advisories/GHSA-3cgp-3xvw-98x8
 [CVE-2025-55182]: https://github.com/advisories/GHSA-fv66-9v8q-g76r
 [CVE-2025-66400]: https://github.com/advisories/GHSA-4fh9-h7wg-q85m
 [CVE-2025-64718]: https://github.com/advisories/GHSA-mh29-5h37-fv8m
@@ -103,6 +127,7 @@
 
 <!-- Version Tags -->
 
+[v1.2.3]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.2...v1.2.3
 [v1.2.2]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.1...v1.2.2
 [v1.2.1]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.0.1...v1.2.0
