@@ -1,4 +1,42 @@
-# Neo-SkiArticle (NeoSKI)
+<h1 align="center">Neo-SkiArticle (NeoSKI)</h1>
+
+<div align="center">
+  <a href="https://github.com/mitsuki31/Neo-SkiArticle/commits">
+    <img alt="Github last commit" src="https://img.shields.io/github/last-commit/mitsuki31/Neo-SkiArticle?style=for-the-badge&display_timestamp=author&logo=github&label=Last%20commit&labelColor=%23222222&color=cyan" />
+  </a>
+  <a href="https://github.com/mitsuki31/Neo-SkiArticle/deployments/Production">
+    <img alt="GitHub deployments" src="https://img.shields.io/github/deployments/mitsuki31/Neo-SkiArticle/Production?style=for-the-badge&logo=rocket&label=Deployment&labelColor=%23222222&color=cyan" />
+  </a>
+  <a href="https://neoski.vercel.app">
+    <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fneoski.vercel.app&up_message=Online&up_color=green&down_message=Offline&down_color=red&style=for-the-badge&logo=vercel&logoColor=white&label=NeoSKI&labelColor=%23222222&color=white" />
+  </a>
+</div>
+<div align="center">
+  <a href="./LICENSE">
+    <img alt="Project license: NeoSKI License 1.0" src="https://img.shields.io/badge/neoski_license_1.0-white?style=for-the-badge&logo=readme&logoColor=orange" />
+  </a>
+</div>
+
+<br />
+
+<div>
+  <a href="https://react.dev" target="_blank" rel="noopener noreferrer">
+    <img alt="React" src="https://img.shields.io/badge/React-white?style=for-the-badge&logo=react&logoColor=cyan&color=%23222222" />
+  </a>
+  <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">
+    <img alt="Vite" src="https://img.shields.io/badge/Vite-white?style=for-the-badge&logo=vite&logoColor=yellow&color=%23222222">
+  </a>
+  <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer">
+    <img alt="TailwindCSS" src="https://img.shields.io/badge/TailwindCSS-white?style=for-the-badge&logo=tailwindcss&logoColor=cyan&color=%23222222" />
+  </a>
+</div>
+<div>
+  <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">
+    <img alt="Powered by Vercel" src="https://img.shields.io/badge/Vercel-white?style=for-the-badge&logo=vercel&logoColor=white&label=Powered%20by&labelColor=%23222222&color=white" />
+  </a>
+</div>
+
+<br />
 
 *(Pembuatan ulang penuh dari proyek [**SkiArticle**](https://github.com/mitsuki31/SkiArticle) yang tidak lagi dikelola)*
 
