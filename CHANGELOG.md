@@ -1,6 +1,17 @@
 # Changelogs
 
-## [v1.2.3] (27-02-2025)
+## [v1.2.4] (20-03-2026)
+
+### Security
+
+- \[[NEOSKI-29]\] build(deps-dev): Bump flatted from 3.3.3 to 3.4.2
+  - Fixes security report [CVE-2026-33228], [CVE-2026-32141]
+- \[[NEOSKI-28]\] build(deps): Bump dompurify from 3.2.5 to 3.3.2
+  - Fixes security report [CVE-2026-31802], [CVE-2026-29786]
+- \[[NEOSKI-27]\] build(deps-dev): Bump tar from 7.5.9 to 7.5.11
+  - Fixes security report [CVE-2026-0540]
+
+## [v1.2.3] (27-02-2026)
 
 ### Security
 
@@ -98,6 +109,9 @@
 
 <!-- Pull Requests -->
 
+[NEOSKI-29]: https://github.com/mitsuki31/Neo-SkiArticle/pull/29
+[NEOSKI-28]: https://github.com/mitsuki31/Neo-SkiArticle/pull/28
+[NEOSKI-27]: https://github.com/mitsuki31/Neo-SkiArticle/pull/27
 [NEOSKI-25]: https://github.com/mitsuki31/Neo-SkiArticle/pull/25
 [NEOSKI-24]: https://github.com/mitsuki31/Neo-SkiArticle/pull/24
 [NEOSKI-23]: https://github.com/mitsuki31/Neo-SkiArticle/pull/23
@@ -111,6 +125,11 @@
 
 <!-- Security Advisories -->
 
+[CVE-2026-33228]: https://github.com/advisories/GHSA-rf6f-7fwh-wjgh
+[CVE-2026-32141]: https://github.com/advisories/GHSA-25h7-pfq9-p65f
+[CVE-2026-31802]: https://github.com/advisories/GHSA-9ppj-qmqm-q256
+[CVE-2026-29786]: https://github.com/advisories/GHSA-qffp-2rhf-9h96
+[CVE-2026-0540]: https://github.com/advisories/GHSA-v2wj-7wpq-c8vv
 [CVE-2026-26996]: https://github.com/advisories/GHSA-3ppc-4f35-3m26
 [CVE-2026-27904]: https://github.com/advisories/GHSA-23c5-xmqv-rm74
 [CVE-2026-27903]: https://github.com/advisories/GHSA-7r86-cg39-jmmj
@@ -127,10 +146,10 @@
 
 <!-- Version Tags -->
 
+[v1.2.4]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.3...v1.2.4
 [v1.2.3]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.2...v1.2.3
 [v1.2.2]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.1...v1.2.2
 [v1.2.1]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.0...v1.2.1
 [v1.2.0]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.0.1...v1.2.0
 [v1.0.1]: https://github.com/mitsuki31/Neo-SkiArticle/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/mitsuki31/Neo-SkiArticle/compare/5b823de42e4cb47b0381bd68696d5debe23046dd...v1.0.0
-
