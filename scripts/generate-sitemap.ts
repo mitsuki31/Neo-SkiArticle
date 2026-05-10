@@ -13,8 +13,8 @@ import { format } from "node:util";
 
 const SITE_URL = "https://neoski.vercel.app";
 const ARTICLE_URL = `${SITE_URL}/a/%s`;
-const ARTICLES_DIR = path.resolve(process.cwd(), "src/articles");
-const OUTPUT_FILE = path.resolve(process.cwd(), "public/sitemap.xml");
+const ARTICLES_DIR = path.resolve(process.cwd(), "src", "articles");
+const OUTPUT_FILE = path.resolve(process.cwd(), "public", "sitemap.xml");
 
 const STATIC_PAGES: URLEntry[] = [
   { loc: `${SITE_URL}/`, changefreq: "monthly", priority: "1.0" },
@@ -61,7 +61,7 @@ async function listArticleFiles(): Promise<string[]> {
       .map((e) => e.name)
       .filter((name) => /\.(md|mdx)$/.test(name));
   } catch (err) {
-    if ((err && err.code) === "ENOENT") {
+    if ((err instanceof Error && 'code' in err && err.code) === "ENOENT") {
       // no articles directory — return empty list (safe)
       return [];
     }
@@ -105,7 +105,7 @@ function buildXml(urls: URLEntry[]) {
 
 async function main() {
   // Collect static pages first (they will always be present)
-  const urls: URLEntry[] = [ ...STATIC_PAGES ];
+  const urls: URLEntry[] = [];
 
   console.log('Getting article slugs...');
 
@@ -123,6 +123,10 @@ async function main() {
       console.warn('Error message:', (err as Error).message);
     }
   }
+
+  // Sort the entries
+  urls.sort((a, b) => a.loc.localeCompare(b.loc));
+  urls.unshift(...STATIC_PAGES);  // Push to the beginning
 
   // Build XML and write
   const xml = buildXml(urls);
