@@ -1,5 +1,24 @@
 # Changelogs
 
+## [v1.2.5] (10-05-2026)
+
+### Security
+
+- \[[NEOSKI-35]\] build(deps): Audit and patch vulnerable dependencies
+  - Addresses security vulnerabilities: [CVE-2025-69873], [CVE-2026-33750], [CVE-2026-33532]
+- \[[NEOSKI-34]\] build(deps): Bump picomatch
+  - Addresses security vulnerabilities: [CVE-2026-33672]
+- \[[NEOSKI-33]\] build(deps-dev): Bump postcss from 8.5.3 to 8.5.14
+  - Addresses security vulnerabilities: [CVE-2026-41305]
+- \[[NEOSKI-32]\] build(deps): Bump dompurify from 3.3.2 to 3.4.0
+  - Addresses security vulnerabilities: [CVE-2026-41238], [CVE-2026-41239], [CVE-2026-41240]
+- \[[NEOSKI-31]\] build(deps-dev): Bump vite from 6.4.1 to 6.4.2
+  - Addresses security vulnerabilities: [CVE-2026-39363]
+
+### Maintenances
+
+- \[[NEOSKI-36]\] chore(sitemap): Improve sitemap generation flow
+
 ## [v1.2.4] (20-03-2026)
 
 ### Security
@@ -109,6 +128,12 @@
 
 <!-- Pull Requests -->
 
+[NEOSKI-36]: https://github.com/mitsuki31/Neo-SkiArticle/pull/36
+[NEOSKI-35]: https://github.com/mitsuki31/Neo-SkiArticle/pull/35
+[NEOSKI-34]: https://github.com/mitsuki31/Neo-SkiArticle/pull/34
+[NEOSKI-33]: https://github.com/mitsuki31/Neo-SkiArticle/pull/33
+[NEOSKI-32]: https://github.com/mitsuki31/Neo-SkiArticle/pull/32
+[NEOSKI-31]: https://github.com/mitsuki31/Neo-SkiArticle/pull/31
 [NEOSKI-29]: https://github.com/mitsuki31/Neo-SkiArticle/pull/29
 [NEOSKI-28]: https://github.com/mitsuki31/Neo-SkiArticle/pull/28
 [NEOSKI-27]: https://github.com/mitsuki31/Neo-SkiArticle/pull/27
@@ -125,6 +150,14 @@
 
 <!-- Security Advisories -->
 
+[CVE-2026-41305]: https://github.com/advisories/GHSA-qx2v-qp2m-jg93
+[CVE-2026-41240]: https://github.com/advisories/GHSA-h7mw-gpvr-xq4m
+[CVE-2026-41239]: https://github.com/advisories/GHSA-crv5-9vww-q3g8
+[CVE-2026-41238]: https://github.com/advisories/GHSA-v9jr-rg53-9pgp
+[CVE-2026-39363]: https://github.com/advisories/GHSA-p9ff-h696-f583
+[CVE-2026-33750]: https://github.com/advisories/GHSA-f886-m6hf-6m8v
+[CVE-2026-33672]: https://github.com/advisories/GHSA-3v7f-55p6-f55p
+[CVE-2026-33532]: https://github.com/advisories/GHSA-48c2-rrv3-qjmp
 [CVE-2026-33228]: https://github.com/advisories/GHSA-rf6f-7fwh-wjgh
 [CVE-2026-32141]: https://github.com/advisories/GHSA-25h7-pfq9-p65f
 [CVE-2026-31802]: https://github.com/advisories/GHSA-9ppj-qmqm-q256
@@ -136,6 +169,8 @@
 [CVE-2026-23950]: https://github.com/advisories/GHSA-r6q2-hw4h-h46w
 [CVE-2026-23745]: https://github.com/advisories/GHSA-8qq5-rm4j-mr97
 [CVE-2026-21884]: https://github.com/advisories/GHSA-8v8x-cx79-35w7
+
+[CVE-2025-69873]: https://github.com/advisories/GHSA-2g4f-4pwh-qvx6
 [CVE-2025-59057]: https://github.com/advisories/GHSA-3cgp-3xvw-98x8
 [CVE-2025-55182]: https://github.com/advisories/GHSA-fv66-9v8q-g76r
 [CVE-2025-66400]: https://github.com/advisories/GHSA-4fh9-h7wg-q85m
@@ -146,6 +181,7 @@
 
 <!-- Version Tags -->
 
+[v1.2.5]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.4...v1.2.5
 [v1.2.4]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.3...v1.2.4
 [v1.2.3]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.2...v1.2.3
 [v1.2.2]: https://github.com/mitsuki31/Neo-SKiArticle/compare/v1.2.1...v1.2.2

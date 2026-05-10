@@ -1,7 +1,7 @@
 {
   "name": "neoski",
   "private": true,
-  "version": "1.2.4",
+  "version": "1.2.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -28,10 +28,10 @@
     "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dompurify": "^3.3.2",
+    "dompurify": "^3.4.0",
     "framer-motion": "^12.7.4",
     "github-slugger": "^2.0.0",
-    "hexo-front-matter": "^5.0.0",
+    "hexo-front-matter": "^4.2.1",
     "jsdom": "^27.0.1",
     "lucide-react": "^0.501.0",
     "marked": "^15.0.9",
@@ -69,7 +69,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.14",
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^7.12.0",
     "react-type-animation": "^3.2.0",
@@ -80,6 +80,6 @@
     "tw-animate-css": "^1.2.7",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
-    "vite": "^6.4.1"
+    "vite": "^6.4.2"
   }
 }
