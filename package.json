@@ -31,7 +31,7 @@
     "dompurify": "^3.4.0",
     "framer-motion": "^12.7.4",
     "github-slugger": "^2.0.0",
-    "hexo-front-matter": "^5.0.0",
+    "hexo-front-matter": "github:hexojs/hexo-front-matter#93b29c70d4189ad588d76d1a6bf9fc04ebb13e3c",
     "jsdom": "^27.0.1",
     "lucide-react": "^0.501.0",
     "marked": "^15.0.9",
